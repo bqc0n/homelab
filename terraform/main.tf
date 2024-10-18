@@ -7,9 +7,7 @@ terraform {
   }
 }
 
-provider "proxmox" {
-  pm_api_url = "https://192.168.1.10:8006/api2/json"
-}
+provider "proxmox" {}
 
 resource "proxmox_lxc" "core" {
   target_node  = "pve02"
@@ -26,7 +24,11 @@ resource "proxmox_lxc" "core" {
     size    = "16G"
   }
 
-  nameserver = "192.168.1.1"
+  nameserver = "127.0.0.1"
+
+  ssh_public_keys = <<EOT
+  ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE65lCWo/lvkIpk2NEnXuOdmruKsPOZyzgndg7y/0Kgr
+  EOT
 
   network {
     name   = "eth0"
