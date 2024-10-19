@@ -1,0 +1,13 @@
+---
+- name: Provision Resources with Terraform
+  hosts: localhost
+  gather_facts: no
+  tasks:
+  - name: Terrafrorm Apply
+    community.general.terraform:
+      project_path: ~/homelab/terraform
+      state: present
+      workspace: default
+      force_init: yes
+      force_apply: no
+

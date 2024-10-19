@@ -1,0 +1,6 @@
+---
+- name: Setup a Homelab
+  tasks:
+  - name: Provision Resources
+    roles:
+    - terraform
