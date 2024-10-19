@@ -1,33 +1,46 @@
-- name: Setup Core Services Server
-  hosts: core
+# Required variables:
+# - initial_nameserver
+# - resolv_conf_path
+---
+- name: Wait for boot
+  ansible.builtin.wait_for_connection:
+- name: Set nameserver to {{ initial_nameserver }}
+  ansible.builtin.lineinfile:
+    path: "{{ resolv_conf_path }}"
+    regexp: "^nameserver"
+    line: "nameserver {{ initial_nameserver }}"
+    state: present
+- name: Install Dnsmasq
+  ansible.builtin.apt:
+    name: dnsmasq
+    state: latest # breaks idempotency, but always latest is fine imo
+- name: Deploy dnsmasq.conf
+  ansible.builtin.copy:
+    src: ./dnsmasq.conf
+    dest: /etc/dnsmasq.conf
+    mode: "0644"
+- name: Deploy trust_anchors.conf
+  ansible.builtin.copy:
+    src: ./trust_anchors.conf
+    dest: /usr/share/dnsmasq/trust-anchors.conf
+- name: Deploy hosts
+  ansible.builtin.copy:
+    src: ./hosts_dnsmasq
+    dest: /etc/hosts-dnsmasq
 
-  tasks:
-    - name: Install Dnsmasq
-      ansible.builtin.apt:
-        name: dnsmasq
-        state: latest # breaks idempotency, but always latest is fine imo
-    - name: Deploy dnsmasq.conf
-      ansible.builtin.copy:
-        src: ./dnsmasq.conf
-        dest: /etc/dnsmasq.conf
-        mode: "0644"
-    - name: Deploy trust_anchors.conf
-      ansible.builtin.copy:
-        src: ./trust_anchors.conf
-        dest: /usr/share/dnsmasq/trust-anchors.conf
-    - name: Deploy hosts
-      ansible.builtin.copy:
-        src: ./hosts_dnsmasq
-        dest: /etc/hosts-dnsmasq
-
-    - name: disable systemd-resolved
-      ansible.builtin.service:
-        name: systemd-resolved
-        enabled: false
-        state: stopped
-    - name: start dnsmasq
-      ansible.builtin.service:
-        name: dnsmasq
-        enabled: true
-        state: started
-
+- name: disable systemd-resolved
+  ansible.builtin.service:
+    name: systemd-resolved
+    enabled: false
+    state: stopped
+- name: start dnsmasq
+  ansible.builtin.service:
+    name: dnsmasq
+    enabled: true
+    state: started
+- name: Set nameserver to 127.0.0.1
+  ansible.builtin.lineinfile:
+    path: "{{ resolv_conf_path }}"
+    regexp: "^nameserver"
+    line: "nameserver 127.0.0.1"
+    state: present

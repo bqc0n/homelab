@@ -1,6 +1,18 @@
 ---
-- name: Setup a Homelab
+- name: Provision Resources with Terraform
+  hosts: localhost
+  gather_facts: false
   tasks:
-  - name: Provision Resources
-    roles:
-    - terraform
+  - name: Terraform Apply
+    community.general.terraform:
+      project_path: ../terraform
+      state: present
+      force_init: yes
+
+- name: Dnsmasq
+  hosts: dnsmasq
+  roles:
+    - role: dnsmasq
+      vars:
+        initial_nameserver: 192.168.1.1
+        resolv_conf_path: /etc/resolv.conf
