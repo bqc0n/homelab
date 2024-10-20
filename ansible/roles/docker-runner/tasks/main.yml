@@ -39,3 +39,13 @@
       - docker-buildx-plugin
       - docker-compose-plugin
     state: latest
+- name: Deploy compose
+  ansible.builtin.copy:
+      src: ./compose.yml
+      dest: ~/compose.yml
+      mode: 0755
+- name: Homepage
+  ansible.builtin.import_tasks: homepage.yml
+- name: Docker Compose
+  become: yes
+  ansible.builtin.shell: docker compose -f /home/ubuntu/compose.yml up -d

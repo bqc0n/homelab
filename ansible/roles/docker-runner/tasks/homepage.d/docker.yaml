@@ -1,0 +1,3 @@
+my-remote-docker:
+  host: 192.168.1.20
+  port: 3000

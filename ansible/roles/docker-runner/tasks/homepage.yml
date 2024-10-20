@@ -1,0 +1,9 @@
+---
+- name: Deploy Config Directory
+  become: yes
+  ansible.builtin.copy:
+    src: ./homepage.d
+    dest: /etc/homepage.d
+    directory_mode: 0755
+    mode: 0755
+
