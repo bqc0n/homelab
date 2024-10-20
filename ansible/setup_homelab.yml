@@ -11,8 +11,15 @@
 
 - name: Dnsmasq
   hosts: dnsmasq
+  gather_facts: false
   roles:
     - role: dnsmasq
       vars:
         initial_nameserver: 192.168.1.1
         resolv_conf_path: /etc/resolv.conf
+
+- name: Docker Runner
+  hosts: docker-runner
+  gather_facts: false
+  roles:
+    - role: docker-runner

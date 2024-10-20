@@ -59,6 +59,7 @@ resource "proxmox_vm_qemu" "docker_runner" {
   nameserver = "192.168.1.2"
 
   ipconfig0 = "ip=192.168.1.3/24,gw=192.168.1.1"
+  sshkeys = local.ssh_public_keys
 
   scsihw = "virtio-scsi-pci"
   disks {

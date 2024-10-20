@@ -4,6 +4,8 @@
 ---
 - name: Wait for boot
   ansible.builtin.wait_for_connection:
+- name: Gather Facts
+  ansible.builtin.setup:
 - name: Set nameserver to {{ initial_nameserver }}
   ansible.builtin.lineinfile:
     path: "{{ resolv_conf_path }}"
