@@ -1,3 +1,4 @@
+---
 services:
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
@@ -5,5 +6,5 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - /etc/homepage.d:/app/config # Make sure your local config directory exists
+      - /etc/homepage:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations

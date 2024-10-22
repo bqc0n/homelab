@@ -81,7 +81,7 @@ resource "proxmox_vm_qemu" "docker_runner" {
   }
 
   vga {
-    type = "serial0"
+    type = "std"
   }
 
   network {
