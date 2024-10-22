@@ -4,8 +4,10 @@
 ---
 - name: Wait for boot
   ansible.builtin.wait_for_connection:
-- name: Gather Facts
-  ansible.builtin.setup:
+- name: Tokyo Timezone
+  become: yes
+  ansible.builtin.timezone:
+    name: Asia/Tokyo
 - name: Set nameserver to {{ initial_nameserver }}
   ansible.builtin.lineinfile:
     path: "{{ resolv_conf_path }}"

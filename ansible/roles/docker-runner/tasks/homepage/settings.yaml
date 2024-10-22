@@ -1,2 +1,13 @@
 title: Homepage
-background: https://raw.githubusercontent.com/fexli/ArknightsResource/main/avgs/49_i22.png
+background:
+  image: https://raw.githubusercontent.com/fexli/ArknightsResource/main/avgs/49_i22.png
+  blur: sm
+  opacity: 50
+
+layout:
+  Overview:
+    style: row
+    columns: 1
+  Machine Details:
+    style: column
+    rows: 3

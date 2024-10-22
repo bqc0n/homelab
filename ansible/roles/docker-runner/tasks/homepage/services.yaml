@@ -1,13 +1,32 @@
-- Group A:
-    - Service A:
-        href: http://localhost/
+---
+- Overview:
+    - Proxmox:
+        icon: proxmox.png
+        widget:
+          type: proxmox
+          url: https://pve01.home:8006
+          username: homepage@pve!homepage
+          password: 7330a6b3-faeb-4867-8807-5c815c360a24 # very low permissions, only for monitoring
 
-    - Service B:
-        href: http://localhost/
+- Machine Details:
+    - Intel PC (i3-8100):
+        icon: proxmox.png
+        href: https://pve01.home:8006/
+        description: i3-8100 24GB RAM
+        widget:
+          type: proxmox
+          url: https://pve01.home:8006
+          username: homepage@pve!homepage
+          password: 7330a6b3-faeb-4867-8807-5c815c360a24 # very low permissions, only for monitoring
+          node: pve01
 
-    - Service C:
-        href: http://localhost/
-
-- Group B:
-    - Service D:
-        href: http://localhost/
+    - HPE ML110-G10:
+        icon: proxmox.png
+        href: https://pve02.home:8006/
+        description: Xeon Silver 4108 64GB RAM
+        widget:
+          type: proxmox
+          url: https://pve01.home:8006
+          username: homepage@pve!homepage
+          password: 7330a6b3-faeb-4867-8807-5c815c360a24 # very low permissions, only for monitoring
+          node: pve02
