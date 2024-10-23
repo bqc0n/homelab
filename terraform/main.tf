@@ -50,16 +50,16 @@ resource "proxmox_vm_qemu" "docker_runner" {
   name        = "docker-runner"
   vm_state    = "running"
 
-  clone = "ubuntu-24.04-template"
+  clone   = "ubuntu-24.04-template"
   os_type = "cloud-init"
-  boot = "order=scsi0"
+  boot    = "order=scsi0"
 
   cores      = 8
   memory     = 16384
   nameserver = "192.168.1.2"
 
   ipconfig0 = "ip=192.168.1.3/24,gw=192.168.1.1"
-  sshkeys = local.ssh_public_keys
+  sshkeys   = local.ssh_public_keys
 
   scsihw = "virtio-scsi-pci"
   disks {
@@ -85,7 +85,7 @@ resource "proxmox_vm_qemu" "docker_runner" {
   }
 
   network {
-    model = "virtio"
+    model  = "virtio"
     bridge = "vmbr0"
   }
 }

@@ -7,7 +7,6 @@ background:
 layout:
   Overview:
     style: row
-    columns: 1
   Machine Details:
-    style: column
-    rows: 3
+    style: row
+    columns: 4

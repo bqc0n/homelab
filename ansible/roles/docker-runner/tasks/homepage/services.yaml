@@ -19,6 +19,24 @@
           username: homepage@pve!homepage
           password: 7330a6b3-faeb-4867-8807-5c815c360a24 # very low permissions, only for monitoring
           node: pve01
+    - Information:
+        widget:
+          type: glances
+          version: 4
+          url: http://pve01.home:61208
+          metric: info
+    - Network Usage:
+        widget:
+          type: glances
+          version: 4
+          url: http://pve01.home:61208
+          metric: network:enp0s31f6
+    - CPU Temperature:
+        widget:
+          type: glances
+          version: 4
+          url: http://pve01.home:61208
+          metric: sensor:Package id 0
 
     - HPE ML110-G10:
         icon: proxmox.png
@@ -30,3 +48,5 @@
           username: homepage@pve!homepage
           password: 7330a6b3-faeb-4867-8807-5c815c360a24 # very low permissions, only for monitoring
           node: pve02
+
+
