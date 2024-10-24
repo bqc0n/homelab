@@ -1,5 +1,4 @@
 # Required variables:
-# - initial_nameserver
 # - resolv_conf_path
 ---
 - name: Wait for boot
@@ -8,12 +7,6 @@
   become: yes
   ansible.builtin.timezone:
     name: Asia/Tokyo
-- name: Set nameserver to {{ initial_nameserver }}
-  ansible.builtin.lineinfile:
-    path: "{{ resolv_conf_path }}"
-    regexp: "^nameserver"
-    line: "nameserver {{ initial_nameserver }}"
-    state: present
 - name: Install Dnsmasq
   ansible.builtin.apt:
     name: dnsmasq

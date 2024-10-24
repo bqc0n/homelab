@@ -7,17 +7,6 @@
   become: yes
   ansible.builtin.timezone:
     name: Asia/Tokyo
-- name: Apt Update
-  become: yes
-  ansible.builtin.apt:
-    update_cache: yes
-- name: Install Required Packages
-  become: yes
-  ansible.builtin.apt:
-    name:
-      - ca-certificates
-      - curl
-    state: latest
 - name: Install Docker GPG Key
   become: yes
   ansible.builtin.get_url:
@@ -33,6 +22,13 @@
   become: yes
   ansible.builtin.apt:
     update_cache: yes
+- name: Install Required Packages
+  become: yes
+  ansible.builtin.apt:
+    name:
+      - ca-certificates
+      - curl
+    state: latest
 - name: Install Docker
   become: yes
   ansible.builtin.apt:
