@@ -8,7 +8,7 @@
           username: homepage@pve!homepage
           password: 7330a6b3-faeb-4867-8807-5c815c360a24 # very low permissions, only for monitoring
 
-- Machine Details:
+- MachineDetailsInternal1:
     - Intel PC (i3-8100):
         icon: proxmox.png
         href: https://pve01.home:8006/
@@ -19,7 +19,7 @@
           username: homepage@pve!homepage
           password: 7330a6b3-faeb-4867-8807-5c815c360a24 # very low permissions, only for monitoring
           node: pve01
-    - Information:
+    - Info:
         widget:
           type: glances
           version: 4
@@ -38,15 +38,34 @@
           url: http://pve01.home:61208
           metric: sensor:Package id 0
 
+- MachineDetailsInternal2:
     - HPE ML110-G10:
         icon: proxmox.png
         href: https://pve02.home:8006/
         description: Xeon Silver 4108 64GB RAM
         widget:
           type: proxmox
-          url: https://pve01.home:8006
+          url: https://pve02.home:8006
           username: homepage@pve!homepage
           password: 7330a6b3-faeb-4867-8807-5c815c360a24 # very low permissions, only for monitoring
           node: pve02
+    - Info:
+        widget:
+          type: glances
+          version: 4
+          url: http://pve02.home:61208
+          metric: info
+    - Network Usage:
+        widget:
+          type: glances
+          version: 4
+          url: http://pve02.home:61208
+          metric: network:eno1
+    - CPU Temperature:
+        widget:
+          type: glances
+          version: 4
+          url: http://pve02.home:61208
+          metric: sensor:Package id 0
 
 

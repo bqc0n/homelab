@@ -7,6 +7,11 @@ background:
 layout:
   Overview:
     style: row
-  Machine Details:
+  MachineDetailsInternal1:
+    header: false
+    style: row
+    columns: 4
+  MachineDetailsInternal2:
+    header: false
     style: row
     columns: 4
