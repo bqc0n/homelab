@@ -1,9 +1,8 @@
 ---
-- name: Deploy Homepage Config Directory
+- name: Deploy HA Proxy Config Directory
   become: yes
   ansible.builtin.copy:
-    src: ./homepage
+    src: ./haproxy
     dest: /etc
     directory_mode: 0755
     mode: 0755
-

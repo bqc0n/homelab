@@ -46,6 +46,10 @@
       mode: 0755
 - name: Homepage
   ansible.builtin.import_tasks: homepage.yml
+- name: HAProxy
+  ansible.builtin.import_tasks: haproxy.yml
 - name: Docker Compose
   become: yes
-  ansible.builtin.shell: docker compose -f /home/ubuntu/compose.yml up -d
+  community.docker.docker_compose_v2:
+    project_src: /home/ubuntu
+    state: restarted
