@@ -17,3 +17,30 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/haproxy:/usr/local/etc/haproxy
+  influxdb2:
+    image: influxdb:2
+    container_name: influxdb2
+    ports:
+      - "8086:8086"
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: bqc0n
+      DOCKER_INFLUXDB_INIT_PASSWORD: test1234
+      DOCKER_INFLUXDB_INIT_ORG: home
+      DOCKER_INFLUXDB_INIT_BUCKET: proxmox
+    volumes:
+      - influxdb2-data:/var/lib/influxdb2
+      - /etc/influxdb2:/etc/influxdb2
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    depends_on:
+      - influxdb2
+    ports:
+      - "3001:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+
+volumes:
+  influxdb2-data:
+  grafana-data:

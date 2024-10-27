@@ -1,0 +1,13 @@
+---
+- name: Create /var/lib/influxdb2
+  become: yes
+  ansible.builtin.file:
+    path: /var/lib/influxdb2
+    state: directory
+    mode: 0755
+- name: deploy config
+  become: yes
+  ansible.builtin.copy:
+    src: ./influxdb
+    dest: /etc/
+    mode: 0755

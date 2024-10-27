@@ -1,0 +1,7 @@
+---
+- name: Create ~/grafana
+  become: yes
+  ansible.builtin.file:
+    path: ~/grafana
+    state: directory
+    mode: 0755

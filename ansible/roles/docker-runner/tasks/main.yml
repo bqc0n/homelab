@@ -48,7 +48,16 @@
   ansible.builtin.import_tasks: homepage.yml
 - name: HAProxy
   ansible.builtin.import_tasks: haproxy.yml
-- name: Docker Compose
+- name: InfluxDB
+  ansible.builtin.import_tasks: influxdb.yml
+- name: Grafana
+  ansible.builtin.import_tasks: grafana.yml
+- name: Docker Compose Up
+  become: yes
+  community.docker.docker_compose_v2:
+    project_src: /home/ubuntu
+    state: present
+- name: Docker Compose Restart
   become: yes
   community.docker.docker_compose_v2:
     project_src: /home/ubuntu
