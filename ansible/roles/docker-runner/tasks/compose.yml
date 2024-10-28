@@ -28,6 +28,8 @@ services:
       DOCKER_INFLUXDB_INIT_PASSWORD: test1234
       DOCKER_INFLUXDB_INIT_ORG: home
       DOCKER_INFLUXDB_INIT_BUCKET: proxmox
+      DOCKER_INFLUXDB_INIT_CLI_CONFIG_NAME: proxmox
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: /run/secrets/influxdb2-admin-token
     volumes:
       - influxdb2-data:/var/lib/influxdb2
       - /etc/influxdb2:/etc/influxdb2
@@ -40,6 +42,10 @@ services:
       - "3001:3000"
     volumes:
       - grafana-data:/var/lib/grafana
+
+secrets:
+  influxdb2-admin-token:
+    file: ./.secrets/influxdb2-admin-token
 
 volumes:
   influxdb2-data:

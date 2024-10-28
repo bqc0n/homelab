@@ -44,6 +44,11 @@
       src: ./compose.yml
       dest: /home/ubuntu/compose.yml
       mode: 0755
+- name: Deploy secrets
+  ansible.builtin.copy:
+      src: ./.secrets
+      dest: /home/ubuntu/.secrets
+      mode: 0755
 - name: Homepage
   ansible.builtin.import_tasks: homepage.yml
 - name: HAProxy
