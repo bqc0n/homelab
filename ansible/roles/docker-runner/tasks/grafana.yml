@@ -5,3 +5,26 @@
     path: ~/grafana
     state: directory
     mode: 0755
+- name: Create config directories (for j2 templating)
+  become: yes
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+  loop:
+    - /etc/grafana
+    - /etc/grafana/provisioning
+    - /etc/grafana/provisioning/datasources
+    - /etc/grafana/provisioning/dashboards
+- name: Grafana Configuration & static files
+  become: yes
+  ansible.builtin.copy:
+    src: ./grafana
+    dest: /etc
+    directory_mode: 0755
+- name: Provision Datasources
+  become: yes
+  ansible.builtin.template:
+    src: grafana/influxdb.yaml.j2
+    dest: /etc/grafana/provisioning/datasources/influxdb.yaml
+    mode: 0644

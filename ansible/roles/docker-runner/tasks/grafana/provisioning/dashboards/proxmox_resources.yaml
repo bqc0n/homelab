@@ -1,0 +1,7 @@
+apiVersion: 1
+
+providers:
+  - name: proxmox-resources
+    type: file
+    options:
+      path: /etc/grafana/provisioning/dashboards/proxmox_resources.json

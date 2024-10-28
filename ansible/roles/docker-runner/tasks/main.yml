@@ -49,13 +49,13 @@
       src: ./.secrets
       dest: /home/ubuntu/.secrets
       mode: 0755
-- name: Homepage
+- name: Homepage Configuration
   ansible.builtin.import_tasks: homepage.yml
-- name: HAProxy
+- name: HAProxy Configuration
   ansible.builtin.import_tasks: haproxy.yml
-- name: InfluxDB
+- name: InfluxDB Configuration
   ansible.builtin.import_tasks: influxdb.yml
-- name: Grafana
+- name: Grafana Configuration
   ansible.builtin.import_tasks: grafana.yml
 - name: Docker Compose Up
   become: yes
@@ -67,3 +67,4 @@
   community.docker.docker_compose_v2:
     project_src: /home/ubuntu
     state: restarted
+

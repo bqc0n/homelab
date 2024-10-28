@@ -1,0 +1,16 @@
+# https://grafana.com/docs/grafana-cloud/connect-externally-hosted/data-sources/influxdb/#provision-the-data-source visited at 2024-10-28
+apiVersion: 1
+prune: true
+
+datasources:
+  - name: InfluxDb2
+    type: influxdb
+    access: proxy
+    url: http://influxdb.bqc0n.home:8086
+    jsonData:
+      version: Flux
+      organization: home
+      defaultBucket: proxmox
+      tlsSkipVerify: true
+    secureJsonData:
+      token: "{{ influxdb2_admin_token }}"

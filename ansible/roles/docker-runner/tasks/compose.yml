@@ -42,6 +42,7 @@ services:
       - "3001:3000"
     volumes:
       - grafana-data:/var/lib/grafana
+      - /etc/grafana:/etc/grafana
 
 secrets:
   influxdb2-admin-token:
