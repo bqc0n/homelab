@@ -25,7 +25,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 3,
+  "id": 4,
   "links": [],
   "liveNow": true,
   "panels": [
@@ -1141,7 +1141,7 @@
               "mode": "off"
             }
           },
-          "displayName": "${__field.labels.host} ${__field.labels.nodename}",
+          "displayName": "${__field.labels.nodename}: ${__field.labels.host}",
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1155,7 +1155,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "percentunit"
         },
         "overrides": []
       },
@@ -1237,6 +1238,7 @@
               "mode": "off"
             }
           },
+          "displayName": "${__field.labels.nodename}: ${__field.labels.host}",
           "mappings": [],
           "max": 100,
           "thresholds": {
@@ -2337,8 +2339,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Proxmox Cluster [Flux]",
-  "uid": "IfgdXjtnk",
-  "version": 3,
+  "title": "Proxmox Cluster [Flux] Editting",
+  "uid": "prmx-importing",
+  "version": 5,
   "weekStart": ""
 }
