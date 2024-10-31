@@ -43,6 +43,31 @@ services:
     volumes:
       - grafana-data:/var/lib/grafana
       - /etc/grafana:/etc/grafana
+  webdav:
+    image: bytemark/webdav
+    restart: always
+    ports:
+      - "3002:80"
+    environment:
+      AUTH_TYPE: Digest
+      # Auth is already performed if a user gets here, so the weakest password is fine
+      USERNAME: user
+      PASSWORD: aaaa
+    volumes:
+      - ./mc_tob/data/plugins:/var/lib/dav/data
+  mc_tob:
+    image: itzg/minecraft-server:java8-graalvm-ce
+    tty: true
+    stdin_open: true
+    ports:
+      - "25565:25565"
+    env_file:
+      - ./mc_tob/mc-tob.env
+    environment:
+      RCON_CMDS_STARTUP:  |-
+        op bqc0n
+    volumes:
+      - ./mc_tob/data:/data
 
 secrets:
   influxdb2-admin-token:

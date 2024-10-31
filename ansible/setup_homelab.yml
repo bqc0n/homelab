@@ -2,12 +2,16 @@
 - name: Provision Resources with Terraform
   hosts: localhost
   gather_facts: false
+  vars_files:
+    - ./vars/main.yml
   tasks:
   - name: Terraform Apply
     community.general.terraform:
       project_path: ../terraform
       state: present
       force_init: yes
+      variables:
+        dnsmasq_ipv6: "{{ tf_dnsmasq_ipv6 }}"
 
 - name: Dnsmasq
   hosts: dnsmasq

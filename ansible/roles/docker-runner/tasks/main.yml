@@ -57,6 +57,8 @@
   ansible.builtin.import_tasks: influxdb.yml
 - name: Grafana Configuration
   ansible.builtin.import_tasks: grafana.yml
+- name: Minecraft Tower of Babel
+  ansible.builtin.import_tasks: mc_tob.yml
 - name: Docker Compose Up
   become: yes
   community.docker.docker_compose_v2:

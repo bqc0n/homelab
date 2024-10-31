@@ -15,3 +15,6 @@ layout:
     header: false
     style: row
     columns: 4
+  Utils:
+    style: row
+    columns: 2

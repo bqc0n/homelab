@@ -17,6 +17,8 @@ locals {
   EOT
 }
 
+variable "dnsmasq_ipv6" {}
+
 resource "proxmox_lxc" "dnsmasq" {
   vmid         = 201
   target_node  = "pve02"
@@ -40,7 +42,9 @@ resource "proxmox_lxc" "dnsmasq" {
     name   = "eth0"
     bridge = "vmbr0"
     ip     = "192.168.1.2/24"
+    ip6 = var.dnsmasq_ipv6
     gw     = "192.168.1.1"
+    gw6 = "fe80::9203:25ff:fe35:3eef"
   }
 }
 
@@ -87,5 +91,9 @@ resource "proxmox_vm_qemu" "docker_runner" {
   network {
     model  = "virtio"
     bridge = "vmbr0"
+  }
+
+  lifecycle {
+    prevent_destroy = true
   }
 }

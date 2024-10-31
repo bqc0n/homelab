@@ -1,0 +1,9 @@
+---
+- name: mc-tob directory
+  ansible.builtin.copy:
+    src: ./mc_tob
+    dest: /home/{{ ansible_user }}/
+- name: Download heightmap
+  ansible.builtin.get_url:
+    url: https://github.com/IntellectualSites/HeightMap/archive/main.zip
+    dest: /home/{{ ansible_user }}/mc_tob/
