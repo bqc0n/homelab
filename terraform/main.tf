@@ -4,11 +4,17 @@ terraform {
       source  = "Telmate/proxmox"
       version = "3.0.1-rc4"
     }
+    sops = {
+      source = "carlpett/sops"
+      version = "1.1.1"
+    }
   }
 }
 
 provider "proxmox" {
   pm_api_url = "https://192.168.1.10:8006/api2/json"
+  pm_api_token_id = data.sops_file.secrets.data["proxmox.user_id"]
+  pm_api_token_secret = data.sops_file.secrets.data["proxmox.token"]
 }
 
 locals {
@@ -16,8 +22,6 @@ locals {
   ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE65lCWo/lvkIpk2NEnXuOdmruKsPOZyzgndg7y/0Kgr
   EOT
 }
-
-variable "dnsmasq_ipv6" {}
 
 resource "proxmox_lxc" "dnsmasq" {
   vmid         = 201
@@ -42,7 +46,7 @@ resource "proxmox_lxc" "dnsmasq" {
     name   = "eth0"
     bridge = "vmbr0"
     ip     = "192.168.1.2/24"
-    ip6 = var.dnsmasq_ipv6
+    ip6 = data.sops_file.secrets.data["machines.primary_dns.ipv6"]
     gw     = "192.168.1.1"
     gw6 = "fe80::9203:25ff:fe35:3eef"
   }
