@@ -10,11 +10,11 @@
       project_path: ../terraform
       state: present
       force_init: yes
-      variables:
-        dnsmasq_ipv6: "{{ tf_dnsmasq_ipv6 }}"
 
-- name: Dnsmasq
-  hosts: dnsmasq
+- name: DNS
+  hosts:
+  - dnsmasq
+  - secondary_dns
   gather_facts: false
   roles:
     - role: dnsmasq

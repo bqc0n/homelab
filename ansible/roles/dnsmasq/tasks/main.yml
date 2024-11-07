@@ -7,6 +7,12 @@
   become: yes
   ansible.builtin.timezone:
     name: Asia/Tokyo
+- name: Set nameserver to 192.168.1.1 for setup
+  ansible.builtin.lineinfile:
+    path: "{{ resolv_conf_path }}"
+    regexp: "^nameserver"
+    line: "nameserver 192.168.1.1"
+    state: present
 - name: Install Dnsmasq
   ansible.builtin.apt:
     name: dnsmasq

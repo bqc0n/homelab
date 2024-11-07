@@ -12,9 +12,9 @@ terraform {
 }
 
 provider "proxmox" {
-  pm_api_url = "https://192.168.1.10:8006/api2/json"
-  pm_api_token_id = data.sops_file.secrets.data["proxmox.user_id"]
-  pm_api_token_secret = data.sops_file.secrets.data["proxmox.token"]
+  pm_api_url = data.sops_file.secrets.data["proxmox.api_url"]
+  pm_api_token_id = data.sops_file.secrets.data["proxmox.token_id"]
+  pm_api_token_secret = data.sops_file.secrets.data["proxmox.token_secret"]
 }
 
 locals {
@@ -23,7 +23,7 @@ locals {
   EOT
 }
 
-resource "proxmox_lxc" "dnsmasq" {
+resource "proxmox_lxc" "primary_dns" {
   vmid         = 201
   target_node  = "pve02"
   hostname     = "dnsmasq"
@@ -47,6 +47,36 @@ resource "proxmox_lxc" "dnsmasq" {
     bridge = "vmbr0"
     ip     = "192.168.1.2/24"
     ip6 = data.sops_file.secrets.data["machines.primary_dns.ipv6"]
+    gw     = "192.168.1.1"
+    gw6 = "fe80::9203:25ff:fe35:3eef"
+  }
+}
+
+resource "proxmox_lxc" "secondary_dns" {
+  vmid = 301
+  target_node = "pve01"
+  hostname = "dns2"
+  ostemplate   = "local:vztmpl/ubuntu-24.04-2_amd64.tar.zst"
+  password = data.sops_file.secrets.data["machines.secondary_dns.password"]
+
+  start        = true
+  unprivileged = true
+
+  memory = 2048
+
+  // Terraform will crash without rootfs defined
+  rootfs {
+    storage = "local-lvm"
+    size    = "8G"
+  }
+
+  ssh_public_keys = local.ssh_public_keys
+
+  network {
+    name   = "eth0"
+    bridge = "vmbr0"
+    ip     = "192.168.1.22/24"
+    ip6 = data.sops_file.secrets.data["machines.secondary_dns.ipv6"]
     gw     = "192.168.1.1"
     gw6 = "fe80::9203:25ff:fe35:3eef"
   }
