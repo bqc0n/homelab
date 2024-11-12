@@ -1,4 +1,12 @@
 ---
+- name: Include sops secrets
+  community.sops.load_vars:
+    file: "secrets.sops.yml"
+    name: sops
+    expressions: ignore
+- name: test
+  ansible.builtin.debug:
+      msg: "{{ sops.smb_bqc0n_password }}"
 - name: Wait for boot
   ansible.builtin.wait_for_connection:
 - name: Gather Facts
@@ -11,40 +19,39 @@
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
-    mode: 2777
+    mode: 0777
   loop:
     - /var/log/samba
     - /srv/shares/testshare
-- name: Samba - Create Guest User
-  ansible.builtin.user:
-    name: testanon
-    password: testanon
-    state: present
-    shell: /bin/bash
+    - /Shared/bqc0n
 - name: Samba - Create Guest User
   ansible.builtin.user:
     name: bqc0n
-    password: bqc0n
+    password: "{{ sops.smb_bqc0n_password }}"
     state: present
     shell: /bin/bash
+- name: Group
+  ansible.builtin.group:
+    name: sftpusers
+    state: present
 - name: Samba Server Role
   ansible.builtin.include_role:
     name: vladgh.samba.server
   vars:
     samba_log: /var/log/samba/samba.log
-    samba_log_level: 3
-    samba_guest_account: testanon
+    samba_log_level: 1
+    samba_global_include: global-include.conf
     samba_users:
-      - name: testanon
-        password: testanon
       - name: bqc0n
-        password: bqc0n
+        password: "{{ sops.smb_bqc0n_password }}"
     samba_shares:
-      - name: testshare
-        read_only: false
-        guest_ok: true
-        writable: true
-        browseable: true
+      - name: bqc0n
+        owner: bqc0n
         create_mode: 0777
         directory_mode: 0777
-        public: true
+        read_only: false
+        writable: true
+        write_list: bqc0n
+        valid_users: bqc0n
+        browseable: true
+        path: /Shared/bqc0n

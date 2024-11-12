@@ -27,6 +27,14 @@
   roles:
     - role: docker-runner
 
+- name: Bind mount
+  hosts: pve
+  tasks:
+    - name: Bind mount
+      ansible.builtin.lineinfile:
+        line: "mp0: /shared/Shared,mp=/Shared"
+        path: /etc/pve/lxc/1001.conf
+        state: present
 - name: File Server
   hosts: file_server
   gather_facts: false
