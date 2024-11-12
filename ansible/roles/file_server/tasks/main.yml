@@ -1,0 +1,50 @@
+---
+- name: Wait for boot
+  ansible.builtin.wait_for_connection:
+- name: Gather Facts
+  ansible.builtin.setup:
+- name: Tokyo Timezone
+  become: yes
+  ansible.builtin.timezone:
+    name: Asia/Tokyo
+- name: Directory
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: 2777
+  loop:
+    - /var/log/samba
+    - /srv/shares/testshare
+- name: Samba - Create Guest User
+  ansible.builtin.user:
+    name: testanon
+    password: testanon
+    state: present
+    shell: /bin/bash
+- name: Samba - Create Guest User
+  ansible.builtin.user:
+    name: bqc0n
+    password: bqc0n
+    state: present
+    shell: /bin/bash
+- name: Samba Server Role
+  ansible.builtin.include_role:
+    name: vladgh.samba.server
+  vars:
+    samba_log: /var/log/samba/samba.log
+    samba_log_level: 3
+    samba_guest_account: testanon
+    samba_users:
+      - name: testanon
+        password: testanon
+      - name: bqc0n
+        password: bqc0n
+    samba_shares:
+      - name: testshare
+        read_only: false
+        guest_ok: true
+        writable: true
+        browseable: true
+        create_mode: 0777
+        directory_mode: 0777
+        public: true

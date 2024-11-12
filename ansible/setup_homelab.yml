@@ -26,3 +26,9 @@
   gather_facts: false
   roles:
     - role: docker-runner
+
+- name: File Server
+  hosts: file_server
+  gather_facts: false
+  roles:
+    - role: file_server
