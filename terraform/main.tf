@@ -21,6 +21,7 @@ locals {
   ssh_public_keys = <<-EOT
   ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE65lCWo/lvkIpk2NEnXuOdmruKsPOZyzgndg7y/0Kgr
   EOT
+  ipv6_gw = "fe80::9203:25ff:fe35:3eef"
 }
 
 resource "proxmox_lxc" "file_server" {
@@ -60,7 +61,6 @@ resource "proxmox_lxc" "primary_dns" {
 
   memory = 4096
 
-  // Terraform will crash without rootfs defined
   rootfs {
     storage = "local-lvm"
     size    = "16G"
@@ -74,7 +74,7 @@ resource "proxmox_lxc" "primary_dns" {
     ip     = "192.168.1.2/24"
     ip6 = data.sops_file.secrets.data["machines.primary_dns.ipv6"]
     gw     = "192.168.1.1"
-    gw6 = "fe80::9203:25ff:fe35:3eef"
+    gw6 = local.ipv6_gw
   }
 }
 
@@ -104,7 +104,7 @@ resource "proxmox_lxc" "secondary_dns" {
     ip     = "192.168.1.22/24"
     ip6 = data.sops_file.secrets.data["machines.secondary_dns.ipv6"]
     gw     = "192.168.1.1"
-    gw6 = "fe80::9203:25ff:fe35:3eef"
+    gw6 = local.ipv6_gw
   }
 }
 
