@@ -1,22 +1,3 @@
-terraform {
-  required_providers {
-    proxmox = {
-      source  = "Telmate/proxmox"
-      version = "3.0.1-rc4"
-    }
-    sops = {
-      source = "carlpett/sops"
-      version = "1.1.1"
-    }
-  }
-}
-
-provider "proxmox" {
-  pm_api_url = data.sops_file.secrets.data["proxmox.api_url"]
-  pm_api_token_id = data.sops_file.secrets.data["proxmox.token_id"]
-  pm_api_token_secret = data.sops_file.secrets.data["proxmox.token_secret"]
-}
-
 locals {
   ssh_public_keys = <<-EOT
   ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE65lCWo/lvkIpk2NEnXuOdmruKsPOZyzgndg7y/0Kgr
