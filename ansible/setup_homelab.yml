@@ -1,4 +1,12 @@
 ---
+- name: Install roles & collections
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Install roles & collections
+      community.general.ansible_galaxy_install:
+        requirements_file: requirements.yml
+        type: both
 - name: Provision Resources with Terraform
   hosts: localhost
   gather_facts: false
@@ -26,15 +34,16 @@
   gather_facts: false
   roles:
     - role: docker-runner
+  vars:
+    dns_server: "192.168.1.2"
+    nfs_server: "192.168.1.10"
 
 - name: Bind mount
   hosts: pve
   tasks:
     - name: Bind mount
-      ansible.builtin.lineinfile:
-        line: "mp0: /shared/Shared,mp=/Shared"
-        path: /etc/pve/lxc/1001.conf
-        state: present
+      ansible.builtin.shell:
+        cmd: "pct set 1001 -mp0 /shared/Shared,mp=/Shared"
 - name: File Server
   hosts: file_server
   gather_facts: false

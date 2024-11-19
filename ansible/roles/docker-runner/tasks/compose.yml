@@ -33,6 +33,7 @@ services:
     volumes:
       - influxdb2-data:/var/lib/influxdb2
       - /etc/influxdb2:/etc/influxdb2
+      - /mnt/nfs/influxdb:/nfs/influxdb
   grafana:
     image: grafana/grafana
     container_name: grafana

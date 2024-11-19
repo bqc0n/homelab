@@ -15,6 +15,7 @@
   become: yes
   ansible.builtin.timezone:
     name: Asia/Tokyo
+
 - name: Directory
   ansible.builtin.file:
     path: "{{ item }}"
@@ -24,6 +25,7 @@
     - /var/log/samba
     - /srv/shares/testshare
     - /Shared/bqc0n
+
 - name: Samba - Create Guest User
   ansible.builtin.user:
     name: bqc0n

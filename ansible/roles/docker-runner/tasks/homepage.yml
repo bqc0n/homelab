@@ -1,9 +1,7 @@
 ---
 - name: Deploy Homepage Config Directory
   become: yes
-  ansible.builtin.copy:
+  ansible.posix.synchronize:
     src: ./homepage
     dest: /etc
-    directory_mode: 0755
-    mode: 0755
 

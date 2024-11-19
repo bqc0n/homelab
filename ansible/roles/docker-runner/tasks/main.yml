@@ -7,48 +7,42 @@
   become: yes
   ansible.builtin.timezone:
     name: Asia/Tokyo
-- name: Install Docker GPG Key
+
+- name: Change DNS Server
   become: yes
-  ansible.builtin.get_url:
-    url: https://download.docker.com/linux/ubuntu/gpg
-    dest: /etc/apt/keyrings/docker.asc
-    mode: a+r
-- name: Add Docker Repository
-  become: yes
-  ansible.builtin.apt_repository:
-      repo: deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/resolved.conf
+    regexp: "DNS="
+    line: "DNS={{ dns_server }}"
+  notify: restart systemd-resolved
+
+- name: Create Docker User
+  become: true
+  ansible.builtin.user:
+      name: docker
+      uid: 1001
       state: present
-- name: Apt Update
-  become: yes
-  ansible.builtin.apt:
-    update_cache: yes
-- name: Install Required Packages
-  become: yes
-  ansible.builtin.apt:
-    name:
-      - ca-certificates
-      - curl
-    state: latest
-- name: Install Docker
-  become: yes
-  ansible.builtin.apt:
-    name:
-      - docker-ce
-      - docker-ce-cli
-      - containerd.io
-      - docker-buildx-plugin
-      - docker-compose-plugin
-    state: latest
-- name: Deploy compose
-  ansible.builtin.copy:
-      src: ./compose.yml
-      dest: /home/ubuntu/compose.yml
-      mode: 0755
-- name: Deploy secrets
-  ansible.builtin.copy:
-      src: ./.secrets
-      dest: /home/ubuntu/.secrets
-      mode: 0755
+      shell: /bin/bash
+      create_home: true
+- name: Create Directories
+  become: true
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - /mnt/nfs/influxdb
+    - /mnt/nfs/minecraft
+
+- name: Create NFS mount
+  become: true
+  ansible.posix.mount:
+    path: /mnt/nfs
+    fstype: nfs
+    src: "{{ nfs_server }}:/shared/nfs"
+    state: mounted
+- name: Setup Docker
+  ansible.builtin.import_tasks: setup_docker.yml
+
 - name: Homepage Configuration
   ansible.builtin.import_tasks: homepage.yml
 - name: HAProxy Configuration

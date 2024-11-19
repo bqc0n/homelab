@@ -7,6 +7,7 @@
   become: yes
   ansible.builtin.timezone:
     name: Asia/Tokyo
+
 - name: Set nameserver to 192.168.1.1 for setup
   ansible.builtin.lineinfile:
     path: "{{ resolv_conf_path }}"
@@ -18,16 +19,15 @@
     name: dnsmasq
     state: latest # breaks idempotency, but always latest is fine imo
 - name: Deploy dnsmasq.conf
-  ansible.builtin.copy:
+  ansible.posix.synchronize:
     src: ./dnsmasq.conf
     dest: /etc/dnsmasq.conf
-    mode: "0644"
 - name: Deploy trust_anchors.conf
-  ansible.builtin.copy:
+  ansible.posix.synchronize:
     src: ./trust_anchors.conf
     dest: /usr/share/dnsmasq/trust-anchors.conf
 - name: Deploy hosts
-  ansible.builtin.copy:
+  ansible.posix.synchronize:
     src: ./hosts_dnsmasq
     dest: /etc/hosts-dnsmasq
 

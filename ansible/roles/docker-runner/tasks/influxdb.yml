@@ -7,7 +7,6 @@
     mode: 0755
 - name: deploy config
   become: yes
-  ansible.builtin.copy:
+  ansible.posix.synchronize:
     src: ./influxdb
     dest: /etc/
-    mode: 0755

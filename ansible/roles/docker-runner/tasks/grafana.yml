@@ -18,10 +18,9 @@
     - /etc/grafana/provisioning/dashboards
 - name: Grafana Configuration & static files
   become: yes
-  ansible.builtin.copy:
+  ansible.posix.synchronize:
     src: ./grafana
     dest: /etc
-    directory_mode: 0755
 - name: Provision Datasources
   become: yes
   ansible.builtin.template:

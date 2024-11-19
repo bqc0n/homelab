@@ -18,6 +18,10 @@ resource "proxmox_lxc" "file_server" {
 
   memory = 1024
 
+  features {
+    nesting = true
+  }
+
   rootfs {
     storage = "local-lvm"
     size    = "8G"
