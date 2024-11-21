@@ -39,3 +39,4 @@
   ansible.posix.synchronize:
     src: ./.secrets
     dest: /home/ubuntu/.secrets
+    recursive: true

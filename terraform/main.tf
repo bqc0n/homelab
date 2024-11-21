@@ -33,6 +33,10 @@ resource "proxmox_lxc" "file_server" {
     ip     = "192.168.1.5/24"
     gw     = "192.168.1.1"
   }
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "proxmox_lxc" "primary_dns" {

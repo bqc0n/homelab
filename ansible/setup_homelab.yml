@@ -1,5 +1,5 @@
 ---
-- name: Install roles & collections
+- name: Localhost
   hosts: localhost
   gather_facts: false
   tasks:
@@ -7,17 +7,11 @@
       community.general.ansible_galaxy_install:
         requirements_file: requirements.yml
         type: both
-- name: Provision Resources with Terraform
-  hosts: localhost
-  gather_facts: false
-  vars_files:
-    - ./vars/main.yml
-  tasks:
-  - name: Terraform Apply
-    community.general.terraform:
-      project_path: ../terraform
-      state: present
-      force_init: yes
+    - name: Terraform Apply
+      community.general.terraform:
+        project_path: ../terraform
+        state: present
+        force_init: yes
 
 - name: DNS
   hosts:
@@ -39,7 +33,7 @@
     nfs_server: "192.168.1.10"
 
 - name: Bind mount
-  hosts: pve
+  hosts: pve01
   tasks:
     - name: Bind mount
       ansible.builtin.shell:

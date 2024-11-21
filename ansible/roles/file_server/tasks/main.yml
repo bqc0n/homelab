@@ -1,12 +1,4 @@
 ---
-- name: Include sops secrets
-  community.sops.load_vars:
-    file: "secrets.sops.yml"
-    name: sops
-    expressions: ignore
-- name: test
-  ansible.builtin.debug:
-      msg: "{{ sops.smb_bqc0n_password }}"
 - name: Wait for boot
   ansible.builtin.wait_for_connection:
 - name: Gather Facts
@@ -15,6 +7,11 @@
   become: yes
   ansible.builtin.timezone:
     name: Asia/Tokyo
+- name: Include sops secrets
+  community.sops.load_vars:
+    file: "secrets.sops.yml"
+    name: sops
+    expressions: ignore
 
 - name: Directory
   ansible.builtin.file:

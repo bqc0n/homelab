@@ -13,4 +13,4 @@ datasources:
       defaultBucket: proxmox
       tlsSkipVerify: true
     secureJsonData:
-      token: "{{ influxdb2_admin_token }}"
+      token: "{{ sops.influxdb2_admin_token }}"

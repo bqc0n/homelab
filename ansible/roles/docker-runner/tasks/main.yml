@@ -7,6 +7,11 @@
   become: yes
   ansible.builtin.timezone:
     name: Asia/Tokyo
+- name: Include sops secrets
+  community.sops.load_vars:
+    file: "secrets.sops.yml"
+    name: sops
+    expressions: ignore
 
 - name: Change DNS Server
   become: yes
@@ -32,6 +37,12 @@
   loop:
     - /mnt/nfs/influxdb
     - /mnt/nfs/minecraft
+
+- name: Install NFS Client
+  become: true
+  ansible.builtin.apt:
+    name: nfs-common
+    state: latest
 
 - name: Create NFS mount
   become: true
