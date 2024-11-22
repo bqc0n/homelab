@@ -2340,8 +2340,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Proxmox Cluster [Flux] Editting",
-  "uid": "prmx-importing",
+  "title": "Proxmox Cluster [Flux]",
+  "uid": "proxmox-cluster-flux",
   "version": 11,
   "weekStart": ""
 }

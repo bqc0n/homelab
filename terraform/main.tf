@@ -2,19 +2,19 @@ locals {
   ssh_public_keys = <<-EOT
   ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE65lCWo/lvkIpk2NEnXuOdmruKsPOZyzgndg7y/0Kgr
   EOT
-  ipv6_gw = "fe80::9203:25ff:fe35:3eef"
+  ipv6_gw         = "fe80::9203:25ff:fe35:3eef"
 }
 
 resource "proxmox_lxc" "file_server" {
-  vmid = 1001
-  target_node = "pve01"
-  hostname = "FileServer"
-  ostemplate   = "local:vztmpl/ubuntu-24.04-2_amd64.tar.zst"
-  password     = data.sops_file.secrets.data["password.myself"]
+  vmid            = 1001
+  target_node     = "pve01"
+  hostname        = "FileServer"
+  ostemplate      = "local:vztmpl/ubuntu-24.04-2_amd64.tar.zst"
+  password        = data.sops_file.secrets.data["password.myself"]
   ssh_public_keys = local.ssh_public_keys
-  start        = true
-  unprivileged = true
-  nameserver = "192.168.1.2"
+  start           = true
+  unprivileged    = true
+  nameserver      = "192.168.1.2"
 
   memory = 1024
 
@@ -61,18 +61,18 @@ resource "proxmox_lxc" "primary_dns" {
     name   = "eth0"
     bridge = "vmbr0"
     ip     = "192.168.1.2/24"
-    ip6 = data.sops_file.secrets.data["machines.primary_dns.ipv6"]
+    ip6    = data.sops_file.secrets.data["machines.primary_dns.ipv6"]
     gw     = "192.168.1.1"
-    gw6 = local.ipv6_gw
+    gw6    = local.ipv6_gw
   }
 }
 
 resource "proxmox_lxc" "secondary_dns" {
-  vmid = 301
+  vmid        = 301
   target_node = "pve01"
-  hostname = "dns2"
-  ostemplate   = "local:vztmpl/ubuntu-24.04-2_amd64.tar.zst"
-  password = data.sops_file.secrets.data["machines.secondary_dns.password"]
+  hostname    = "dns2"
+  ostemplate  = "local:vztmpl/ubuntu-24.04-2_amd64.tar.zst"
+  password    = data.sops_file.secrets.data["machines.secondary_dns.password"]
 
   start        = true
   unprivileged = true
@@ -91,9 +91,9 @@ resource "proxmox_lxc" "secondary_dns" {
     name   = "eth0"
     bridge = "vmbr0"
     ip     = "192.168.1.22/24"
-    ip6 = data.sops_file.secrets.data["machines.secondary_dns.ipv6"]
+    ip6    = data.sops_file.secrets.data["machines.secondary_dns.ipv6"]
     gw     = "192.168.1.1"
-    gw6 = local.ipv6_gw
+    gw6    = local.ipv6_gw
   }
 }
 
