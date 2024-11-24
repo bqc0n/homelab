@@ -4,6 +4,7 @@ prune: true
 
 datasources:
   - name: InfluxDb2
+    uid: proxmox_influxdb2
     type: influxdb
     access: proxy
     url: http://influxdb.bqc0n.home:8086

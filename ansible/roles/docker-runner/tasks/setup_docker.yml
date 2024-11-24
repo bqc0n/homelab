@@ -38,5 +38,5 @@
 - name: Deploy secrets
   ansible.posix.synchronize:
     src: ./.secrets
-    dest: /home/ubuntu/.secrets
+    dest: /home/ubuntu/
     recursive: true

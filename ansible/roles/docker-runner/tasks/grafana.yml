@@ -24,6 +24,6 @@
 - name: Provision Datasources
   become: yes
   ansible.builtin.template:
-    src: grafana/influxdb.yaml.j2
+    src: grafana/influxdb.j2.yaml
     dest: /etc/grafana/provisioning/datasources/influxdb.yaml
     mode: 0644

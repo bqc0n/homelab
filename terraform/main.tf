@@ -115,6 +115,7 @@ resource "proxmox_vm_qemu" "docker_runner" {
   sshkeys   = local.ssh_public_keys
 
   scsihw = "virtio-scsi-pci"
+
   disks {
     ide {
       ide2 {

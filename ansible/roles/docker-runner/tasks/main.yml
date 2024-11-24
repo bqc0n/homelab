@@ -37,6 +37,7 @@
   loop:
     - /mnt/nfs/influxdb
     - /mnt/nfs/minecraft
+    - /mnt/nfs/restic
 
 - name: Install NFS Client
   become: true
