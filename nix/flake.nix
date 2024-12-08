@@ -32,7 +32,7 @@
 
       host-b = {
         deployment = {
-          targetHost = "192.168.1.54";
+          targetHost = "192.168.1.55";
           targetUser = "nixos";
           buildOnTarget = true;
         };
