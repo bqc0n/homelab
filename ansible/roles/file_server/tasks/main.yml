@@ -13,15 +13,11 @@
     name: sops
     expressions: ignore
 
-- name: Directory
+- name: Create Share Directory
   ansible.builtin.file:
-    path: "{{ item }}"
+    path: "/mnt/bqc0n"
     state: directory
-    mode: 0777
-  loop:
-    - /var/log/samba
-    - /srv/shares/testshare
-    - /Shared/bqc0n
+    mode: 0700
 
 - name: Samba - Create Guest User
   ansible.builtin.user:
@@ -53,4 +49,4 @@
         write_list: bqc0n
         valid_users: bqc0n
         browseable: true
-        path: /Shared/bqc0n
+        path: "/mnt/bqc0n"

@@ -41,9 +41,3 @@
     name: dnsmasq
     enabled: true
     state: restarted
-- name: Set nameserver to 127.0.0.1
-  ansible.builtin.lineinfile:
-    path: "{{ resolv_conf_path }}"
-    regexp: "^nameserver"
-    line: "nameserver 127.0.0.1"
-    state: present

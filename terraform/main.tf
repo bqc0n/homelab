@@ -16,7 +16,8 @@ resource "proxmox_lxc" "file_server" {
   unprivileged    = true
   nameserver      = "192.168.1.2"
 
-  memory = 1024
+  cores = 4
+  memory = 8192
 
   features {
     nesting = true
