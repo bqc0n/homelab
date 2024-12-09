@@ -30,25 +30,43 @@
         };
       };
 
-      host-b = {
+#      host-b = {
+#        deployment = {
+#          targetHost = "192.168.1.55";
+#          targetUser = "nixos";
+#          buildOnTarget = true;
+#        };
+#        boot.isContainer = true;
+#        time.timeZone = "Asia/Tokyo";
+#        nix = {
+#          settings = {
+#            experimental-features = ["nix-command" "flakes"];
+#          };
+#        };
+#
+#        systemd.suppressedSystemUnits = [
+#          "sys-fs-fuse-connections.mount"
+#          "sys-kernel-debug.mount"
+#          "dev-mqueue.mount"
+#        ];
+#      };
+      nixos-vm = {
         deployment = {
-          targetHost = "192.168.1.55";
+          targetHost = "192.168.1.173";
           targetUser = "nixos";
           buildOnTarget = true;
         };
-        boot.isContainer = true;
         time.timeZone = "Asia/Tokyo";
         nix = {
           settings = {
             experimental-features = ["nix-command" "flakes"];
           };
         };
-
-        systemd.suppressedSystemUnits = [
-          "sys-fs-fuse-connections.mount"
-          "sys-kernel-debug.mount"
-          "dev-mqueue.mount"
-        ];
+        boot.loader.grub.device = "/dev/sda";
+        fileSystems."/" = {
+          device = "/dev/sda";
+          fsType = "ext4";
+        };
       };
     };
     nixosConfigurations =

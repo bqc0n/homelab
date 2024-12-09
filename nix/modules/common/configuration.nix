@@ -58,15 +58,12 @@
     };
 
     environment.systemPackages = with pkgs; [
-      bind
       eza
       htop-vim
       inetutils
-      lsof
-      ncdu
+      lsof # list open files
+      ncdu # NCurses Disk Usag
       ripgrep
-      tmux
-      neovim
     ];
 
 # Todo
