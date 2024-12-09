@@ -9,6 +9,7 @@
         type: both
     - name: Terraform Apply
       community.general.terraform:
+        binary_path: ~/.nix-profile/bin/tofu
         project_path: ../terraform/main
         state: present
         force_init: yes
