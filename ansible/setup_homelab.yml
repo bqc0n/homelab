@@ -9,7 +9,7 @@
         type: both
     - name: Terraform Apply
       community.general.terraform:
-        project_path: ../terraform
+        project_path: ../terraform/main
         state: present
         force_init: yes
 

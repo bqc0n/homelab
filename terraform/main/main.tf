@@ -6,7 +6,7 @@ locals {
 }
 
 resource "proxmox_lxc" "file_server" {
-  vmid            = 1001
+  vmid            = 302
   target_node     = "pve01"
   hostname        = "FileServer"
   ostemplate      = "local:vztmpl/ubuntu-24.04-2_amd64.tar.zst"
@@ -33,10 +33,6 @@ resource "proxmox_lxc" "file_server" {
     bridge = "vmbr0"
     ip     = "192.168.1.5/24"
     gw     = "192.168.1.1"
-  }
-
-  lifecycle {
-    prevent_destroy = true
   }
 }
 
@@ -140,6 +136,7 @@ resource "proxmox_vm_qemu" "docker_runner" {
   }
 
   network {
+    id = 0
     model  = "virtio"
     bridge = "vmbr0"
   }
