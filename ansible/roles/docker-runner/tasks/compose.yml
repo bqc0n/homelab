@@ -33,7 +33,7 @@ services:
     secrets:
       - influxdb2-admin-token
     volumes:
-      - influxdb-data:/var/lib/influxdb2
+      - influxdb2-data:/var/lib/influxdb2
       - /etc/influxdb2:/etc/influxdb2
   grafana:
     image: grafana/grafana
@@ -76,9 +76,11 @@ secrets:
     file: ./.secrets/influxdb2-admin-token
 
 volumes:
-  influxdb-data:
+  # changing name is maybe required if nfs export is changed
+  # 変えないとno such file or directoryになる。
+  influxdb2-data:
     driver_opts:
       type: nfs
       o: "addr=192.168.1.10,rw,soft,nfsvers=4"
-      device: ":/shared/nfs/influxdb-data"
+      device: ":/influxdb-data/"
   grafana-data:

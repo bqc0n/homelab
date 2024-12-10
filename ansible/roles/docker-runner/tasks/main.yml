@@ -45,16 +45,6 @@
     name: nfs-common
     state: latest
 
-- name: Create NFS mount
-  become: true
-  ansible.posix.mount:
-    path: /mnt/nfs
-    fstype: nfs
-    src: "{{ nfs_server }}:/shared/nfs"
-    state: mounted
-- name: Setup Docker
-  ansible.builtin.import_tasks: setup_docker.yml
-
 - name: Homepage Configuration
   ansible.builtin.import_tasks: homepage.yml
 - name: HAProxy Configuration

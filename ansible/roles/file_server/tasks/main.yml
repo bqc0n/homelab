@@ -12,6 +12,10 @@
     file: "secrets.sops.yml"
     name: sops
     expressions: ignore
+- name: apt update
+  become: true
+  ansible.builtin.apt:
+    update_cache: yes
 
 - name: Create Share Directory
   ansible.builtin.file:

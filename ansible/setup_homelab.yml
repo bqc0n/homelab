@@ -38,7 +38,8 @@
   tasks:
     - name: Bind mount
       ansible.builtin.shell:
-        cmd: "pct set 1001 -mp0 /shared/Shared,mp=/mnt/shared"
+        # todo: vmid
+        cmd: "pct set 302 -mp0 /shared/Shared,mp=/mnt/shared"
 - name: File Server
   hosts: file_server
   gather_facts: false
