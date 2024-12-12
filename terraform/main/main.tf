@@ -136,7 +136,7 @@ resource "proxmox_vm_qemu" "docker_runner" {
   }
 
   network {
-    id = 0
+    # id = 0
     model  = "virtio"
     bridge = "vmbr0"
   }

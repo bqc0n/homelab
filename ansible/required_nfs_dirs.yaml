@@ -1,0 +1,17 @@
+---
+- name: Create Required dirs in nfs exports
+  hosts: nfs_server
+  gather_facts: false
+  tasks:
+    - name: Create Directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - /shared/nfs/influxdb-data
+        # Misskey
+        - /shared/nfs/k8s/misskey/db
+        - /shared/nfs/k8s/misskey/redis
+        - /shared/nfs/k8s/misskey/config
+        - /shared/nfs/k8s/misskey/files
+

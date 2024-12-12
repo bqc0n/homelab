@@ -2,7 +2,7 @@ terraform {
   required_providers {
     proxmox = {
       source  = "telmate/proxmox"
-      version = "3.0.1-rc6"
+      version = "3.0.1-rc4"
     }
   }
 }
@@ -26,6 +26,8 @@ resource "proxmox_vm_qemu" "k8s_node" {
   scsihw  = "virtio-scsi-pci"
 
   clone   = var.template
+  os_type = "cloud-init"
+  boot    = "order=scsi0"
 
   nameserver = var.nameserver
   ipconfig0 = "ip=${var.hosts[count.index].ipv4}/24,gw=${var.gateway}"
@@ -58,7 +60,7 @@ resource "proxmox_vm_qemu" "k8s_node" {
   }
 
   network {
-    id      = 0
+    # id      = 0
     model   = "virtio"
     bridge  = var.specs.bridge
   }
