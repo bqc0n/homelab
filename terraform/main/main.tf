@@ -12,11 +12,13 @@ resource "proxmox_lxc" "file_server" {
   ostemplate      = "local:vztmpl/ubuntu-24.04-2_amd64.tar.zst"
   password        = data.sops_file.secrets.data["password.myself"]
   ssh_public_keys = local.ssh_public_keys
-  start           = true
   unprivileged    = true
   nameserver      = "192.168.1.2"
 
-  cores = 4
+  onboot = true
+  start  = true
+
+  cores  = 4
   memory = 8192
 
   features {
@@ -42,8 +44,10 @@ resource "proxmox_lxc" "primary_dns" {
   hostname     = "dnsmasq"
   ostemplate   = "local:vztmpl/ubuntu-24.04-2_amd64.tar.zst"
   password     = data.sops_file.secrets.data["password.myself"]
-  start        = true
   unprivileged = true
+
+  onboot = true
+  start  = true
 
   memory = 4096
 
@@ -71,7 +75,9 @@ resource "proxmox_lxc" "secondary_dns" {
   ostemplate  = "local:vztmpl/ubuntu-24.04-2_amd64.tar.zst"
   password    = data.sops_file.secrets.data["machines.secondary_dns.password"]
 
-  start        = true
+  onboot = true
+  start  = true
+
   unprivileged = true
 
   memory = 2048
@@ -99,6 +105,7 @@ resource "proxmox_vm_qemu" "docker_runner" {
   target_node = "pve02"
   name        = "docker-runner"
   vm_state    = "running"
+  onboot      = true
 
   clone   = "ubuntu-24.04-template"
   os_type = "cloud-init"
