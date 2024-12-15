@@ -1,0 +1,6 @@
+---
+- name: K8s thingy
+  hosts: k8s-controller
+  gather_facts: false
+  roles:
+    - role: k8s

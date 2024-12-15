@@ -19,5 +19,8 @@ all:
       # いまのところ、pve01のZFSそのまま
       ansible_host: 192.168.1.10
       ansible_user: root
+    k8s-controller:
+      ansible_host: 192.168.1.60
+      ansible_user: ubuntu
 
 
