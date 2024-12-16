@@ -45,6 +45,9 @@
     name: nfs-common
     state: latest
 
+- name: setup docker
+  ansible.builtin.import_tasks: setup_docker.yml
+
 - name: Homepage Configuration
   ansible.builtin.import_tasks: homepage.yml
 - name: HAProxy Configuration
