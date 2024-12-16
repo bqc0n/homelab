@@ -39,7 +39,7 @@ ZFSのdatasetをNFSでexportするようにする. 使えるoptionは `/etc/expo
 
 [source, shell]
 ----
-sudo zfs set sharenfs="rw=@192.168.1.0/24,fsid=0,sync,no_subtree_check,no_root_squash" shared/nfs
+sudo zfs set sharenfs="rw=@192.168.1.0/24,fsid=0,async,no_subtree_check,no_root_squash" shared/nfs
 ----
 
 == 参考

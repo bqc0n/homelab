@@ -32,3 +32,8 @@ cloud initのイメージを作る時は、boot diskの大きさは最低限に�
 | Name | License |
 | :---: | :---: |
 | [geraldwuhoo/homelab-iac](https://github.com/geraldwuhoo/homelab-iac) | [MIT](https://github.com/geraldwuhoo/homelab-iac/blob/master/LICENSE) |
+
+# TODO
+- [ ] ディレクトリ構造の整理
+- [ ] ドキュメントの整理
+- [ ] 1つのtemplateから複数nodeにVMをdeployする方法
