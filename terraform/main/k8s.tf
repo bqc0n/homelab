@@ -19,12 +19,12 @@ locals {
       ipv4     = "192.168.1.62",
       cores    = 16,
     },
-    # {
-    #   hostname = "k8s-worker-03",
-    #   node     = "pve03",
-    #   ipv4     = "192.168.1.63",
-    #   cores    = 6,
-    # },
+    {
+      hostname = "k8s-worker-03",
+      node     = "pve03",
+      ipv4     = "192.168.1.63",
+      cores    = 6,
+    },
   ]
 }
 
