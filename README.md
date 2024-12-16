@@ -20,6 +20,11 @@ ansible-playbook required_nfs_dirs.yml
 ## Remotely managed cloudflare tunnelの作成
 [このガイド](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/get-started/create-remote-tunnel/)に従い、Remotely managed cloudflare tunnelを作成する。
 
+## kubespray
+```shell
+ansible-playbook -i hosts.yml cluster.yml -e kube_network_plugin=cilium -b --become-user=root --flush-cache
+```
+
 # 注意事項
 
 ## CI Template
