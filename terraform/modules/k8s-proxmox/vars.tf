@@ -8,15 +8,15 @@ variable "ssh_keys" {
 
 variable "hosts" {
   type = list(object({
-    hostname    = string,
-    node        = string,
-    ipv4        = string,
+    cores    = number,
+    hostname = string,
+    node     = string,
+    ipv4     = string,
   }))
 }
 
 variable "specs" {
   type = object({
-    cores   = number,
     sockets = number,
     memory  = number,
     storage = string,

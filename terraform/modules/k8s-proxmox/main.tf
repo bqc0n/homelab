@@ -13,16 +13,16 @@ resource "proxmox_vm_qemu" "k8s_node" {
   vmid = var.vmid_start + count.index
   name = var.hosts[count.index].hostname
   vm_state = "running"
+  agent = 0
 
   target_node      = var.hosts[count.index].node
   onboot           = true
   automatic_reboot = true
 
-  cores   = var.specs.cores
+  cores   = var.hosts[count.index].cores
   sockets = var.specs.sockets
   memory  = var.specs.memory
   tablet  = false
-  agent   = 1
   scsihw  = "virtio-scsi-pci"
 
   clone   = var.template

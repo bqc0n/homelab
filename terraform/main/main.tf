@@ -105,6 +105,7 @@ resource "proxmox_vm_qemu" "docker_runner" {
   target_node = "pve02"
   name        = "docker-runner"
   vm_state    = "running"
+  agent = 1
   onboot      = true
 
   clone   = "ubuntu-24.04-template"

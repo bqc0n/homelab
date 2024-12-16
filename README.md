@@ -20,6 +20,14 @@ ansible-playbook required_nfs_dirs.yml
 ## Remotely managed cloudflare tunnelの作成
 [このガイド](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/get-started/create-remote-tunnel/)に従い、Remotely managed cloudflare tunnelを作成する。
 
+# 注意事項
+
+## CI Template
+cloud initのイメージを作る時は、boot diskの大きさは最低限にすること。大きすぎると、migrateに無駄な時間を要する。
+
+## 仮想化
+新しいNodeを追加する時は、BIOSで仮想化を有効にすること。
+
 # Credits
 | Name | License |
 | :---: | :---: |

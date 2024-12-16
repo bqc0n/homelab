@@ -5,21 +5,25 @@ locals {
       hostname = "k8s-master",
       node     = "pve02",
       ipv4     = "192.168.1.60",
+      cores    = 4,
     },
     {
       hostname = "k8s-worker-01",
-      node     = "pve02",
+      node     = "pve01",
       ipv4     = "192.168.1.61",
+      cores    = 4,
+    },
+    {
+      hostname = "k8s-worker-02",
+      node     = "pve02",
+      ipv4     = "192.168.1.62",
+      cores    = 16,
     },
     # {
-    #   hostname = "k8s-worker-02",
-    #   node     = "pve02",
-    #   ipv4     = "192.168.1.62",
-    # },
-    # {
     #   hostname = "k8s-worker-03",
-    #   node     = "pve01",
+    #   node     = "pve03",
     #   ipv4     = "192.168.1.63",
+    #   cores    = 6,
     # },
   ]
 }
@@ -35,9 +39,8 @@ module "k8s" {
   hosts = local.hosts
   vmid_start = 1000
   specs = {
-    cores = 4,
     sockets = 1,
-    memory = 8192,
+    memory = 16384, #MiB
     storage = "local-lvm",
     size = "32G",
     bridge = "vmbr0",
