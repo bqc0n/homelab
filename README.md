@@ -49,6 +49,9 @@ cloud initのイメージを作る時は、boot diskの大きさは最低限に�
 ## 仮想化
 新しいNodeを追加する時は、BIOSで仮想化を有効にすること。
 
+## nfs-common
+nfsをmountする時は、`nfs-common`をインストールすること。
+
 # Credits
 | Name | License |
 | :---: | :---: |

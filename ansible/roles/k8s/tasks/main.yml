@@ -17,7 +17,7 @@
 - name: deploy manifests
   ansible.posix.synchronize:
     src: "./manifests"
-    dest: "~/manifests"
+    dest: "~/"
 - name: deploy cf token
   ansible.builtin.template:
     src: cloudflare-tunnel-token.j2.yml
