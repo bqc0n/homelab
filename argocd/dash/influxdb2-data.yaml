@@ -5,7 +5,7 @@ metadata:
   name: influxdb2-data
   namespace: dash
 spec:
-  storageClassName: nfs-client
+  storageClassName: nfs-ssd-1
   accessModes:
     - ReadWriteMany
   resources:

@@ -20,6 +20,10 @@ spec:
           value: 192.168.1.10
         - name: nfs.path
           value: /k8s
+        - name: storageClass.name
+          value: nfs-hdd-1
+        - name: storageClass.provisionerName
+          value: k8s.io/k8s-sigs.io/nfs-hdd-1
   sources: []
   project: default
   syncPolicy:
