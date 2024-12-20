@@ -23,7 +23,7 @@ spec:
         - name: storageClass.name
           value: nfs-ssd-1
         - name: storageClass.provisionerName
-          value: k8s.io/k8s-sigs.io/nfs-ssd-1
+          value: k8s-sigs.io/nfs-ssd-1
   sources: []
   project: default
   syncPolicy:
