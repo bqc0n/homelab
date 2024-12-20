@@ -6,13 +6,13 @@ metadata:
 spec:
   destination:
     name: ''
-    namespace: nfs-subdir-external-provisioner
+    namespace: nfs-provisioner-hdd-1
     server: https://kubernetes.default.svc
   source:
     path: ''
     repoURL: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
     targetRevision: 4.0.18
-    chart: nfs-subdir-external-provisioner
+    chart: nfs-provisioner-hdd-1
     helm:
       releaseName: nfs-subdir-external-provisioner
       parameters:
