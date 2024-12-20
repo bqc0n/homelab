@@ -5,7 +5,7 @@ metadata:
   name: misskey-config
   namespace: misskey
 data:
-  default.yaml: |
+  default.yml: |
     setupPassword: test!1234
     url: https://misskey.bqc0n.com/
     port: 3000
