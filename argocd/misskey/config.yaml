@@ -1,0 +1,27 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: misskey-config
+  namespace: misskey
+data:
+  default.yaml: |
+    setupPassword: test!1234
+    url: https://misskey.bqc0n.com/
+    port: 3000
+    db:
+      host: db-svc
+      port: 5432
+    dbReplications: false
+    redis:
+      host: redis-svc
+      port: 6379
+    id: 'aidx'
+    proxyBypassHosts:
+      - api.deepl.com
+      - api-free.deepl.com
+      - www.recaptcha.net
+      - hcaptcha.com
+      - challenges.cloudflare.com
+    proxyRemoteFiles: true
+    signToActivityPubGet: true
