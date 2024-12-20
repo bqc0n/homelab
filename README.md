@@ -61,8 +61,8 @@ cloud initのイメージを作る時は、boot diskの大きさは最低限に�
 nfsをmountする時は、`nfs-common`をインストールすること。
 
 # Credits
-| Name | License |
-| :---: | :---: |
+|                                 Name                                  |                                License                                |
+|:---------------------------------------------------------------------:|:---------------------------------------------------------------------:|
 | [geraldwuhoo/homelab-iac](https://github.com/geraldwuhoo/homelab-iac) | [MIT](https://github.com/geraldwuhoo/homelab-iac/blob/master/LICENSE) |
 
 # TODO
