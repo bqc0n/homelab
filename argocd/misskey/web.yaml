@@ -70,7 +70,7 @@ spec:
           volumeMounts:
             - mountPath: /misskey/files
               name: misskey-files
-            - mountPath: /misskey/config
+            - mountPath: /misskey/.config
               name: misskey-config
           ports:
             - containerPort: 3000
