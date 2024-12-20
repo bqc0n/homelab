@@ -12,9 +12,9 @@ spec:
     path: ''
     repoURL: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
     targetRevision: 4.0.18
-    chart: nfs-provisioner-hdd-1
+    chart: nfs-subdir-external-provisioner
     helm:
-      releaseName: nfs-subdir-external-provisioner
+      releaseName: nfs-provisioner-hdd-1
       parameters:
         - name: nfs.server
           value: 192.168.1.10
