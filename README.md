@@ -41,6 +41,14 @@ python3 -m pip install -r requirements.txt
 ansible-playbook -i hosts.yml cluster.yml -e kube_network_plugin=cilium -b --become-user=root --flush-cache
 ```
 
+## `kubectl` without sudo
+
+```shell
+mkdir -p /home/$USER/.kube
+cp -i /etc/kubernetes/admin.conf /home/$USER/.kube/config
+chown $USER:$USER /home/$USER/.kube/config
+```
+
 # 注意事項
 
 ## CI Template
@@ -61,3 +69,4 @@ nfsをmountする時は、`nfs-common`をインストールすること。
 - [ ] ディレクトリ構造の整理
 - [ ] ドキュメントの整理
 - [ ] 1つのtemplateから複数nodeにVMをdeployする方法
+- kubesealを試す https://developer.mamezou-tech.com/blogs/2022/06/05/introduce-sealedsecrets/

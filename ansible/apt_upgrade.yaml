@@ -1,0 +1,11 @@
+- name: Upgrade packages
+  hosts: all
+  tasks:
+    - name: Wait for boot
+      ansible.builtin.wait_for_connection:
+    - name: apt upgrade
+      become: true
+      ansible.builtin.apt:
+        upgrade: full
+        update_cache: true
+        cache_valid_time: 3600

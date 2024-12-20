@@ -1,8 +1,21 @@
-all:
+pves:
   hosts:
     pve01:
       ansible_host: 192.168.1.10
       ansible_user: root
+    pve02:
+      ansible_host: 192.168.1.11
+      ansible_user: root
+    pve03:
+      ansible_host: 192.168.1.12
+      ansible_user: root
+
+nfs_server:
+  hosts:
+    pve01:
+
+ansible_managed:
+  hosts:
     file_server:
       ansible_host: 192.168.1.5
       ansible_user: root
@@ -15,10 +28,6 @@ all:
     docker-runner:
       ansible_host: 192.168.1.3
       ansible_user: ubuntu
-    nfs_server:
-      # いまのところ、pve01のZFSそのまま
-      ansible_host: 192.168.1.10
-      ansible_user: root
 
 kube_control_plane:
   hosts:
