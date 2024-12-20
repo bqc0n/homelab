@@ -11,6 +11,5 @@
         - /shared/nfs/influxdb-data
         # Misskey
         - /shared/nfs/k8s/misskey/db
-        - /shared/nfs/k8s/misskey/config
         - /shared/nfs/k8s/misskey/files
 
