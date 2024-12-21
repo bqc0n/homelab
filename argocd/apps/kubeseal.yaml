@@ -17,7 +17,9 @@ spec:
       releaseName: sealed-secrets
       parameters:
         - name: fullnameOverride
-          value: sealed-secrets-controller
+          value: "sealed-secrets-controller"
+        - name: keyrenewperiod
+          value: "0"
   sources: []
   project: default
   syncPolicy:
