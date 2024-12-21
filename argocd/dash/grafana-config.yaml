@@ -6,4 +6,4 @@ metadata:
 data:
   grafana.ini: |
     [path]
-    provisioning = /var/lib/grafana-provisioning
+    provisioning = /etc/grafana/provisioning
