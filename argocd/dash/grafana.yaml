@@ -52,7 +52,7 @@ spec:
           volumeMounts:
             - mountPath: /etc/grafana
               name: grafana-config
-            - mountPath: /etc/grafana-provisioning
+            - mountPath: /var/lib/grafana-provisioning
               name: grafana-provisioning
           ports:
             - containerPort: 3000
