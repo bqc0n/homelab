@@ -1,0 +1,66 @@
+# TODO: Migrate to helm chart
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: influxdb-data
+  namespace: dash
+spec:
+  storageClassName: nfs-ssd-1
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 50Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: influxdb-svc
+  namespace: dash
+spec:
+  type: NodePort
+  selector:
+    app: influxdb
+  ports:
+    - targetPort: 8086
+      port: 8086
+      nodePort: 30001
+      protocol: TCP
+      name: http
+  externalTrafficPolicy: Local
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: influxdb
+  name: influxdb-deployment
+  namespace: dash
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: influxdb
+  template:
+    metadata:
+        labels:
+          app: influxdb
+    spec:
+      containers:
+        - name: influxdb
+          image: influxdb:2
+          volumeMounts:
+            - mountPath: /var/lib/influxdb
+              name: influxdb-data
+          ports:
+            - containerPort: 8086
+          envFrom:
+            - configMapRef:
+                name: influxdb-config
+            - secretRef:
+                name: influxdb-auth
+      volumes:
+        - name: influxdb-data
+          persistentVolumeClaim:
+            claimName: influxdb-data
