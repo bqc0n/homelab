@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-config
+  namespace: dash
+data:
+  grafana.ini: |
+    [path]
+    provisioning = /var/lib/grafana-provisioning
