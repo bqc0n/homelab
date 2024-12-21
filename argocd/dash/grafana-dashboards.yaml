@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: grafana-provisioning
+  name: grafana-dashboards
   namespace: dash
 data:
   proxmox_resources.yaml: |

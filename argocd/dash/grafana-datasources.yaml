@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-datasources
+  namespace: dash
+data:
+  influxdb.yaml: |
+    apiVersion: 1
+    prune: true
+
+    datasources:
+      - name: InfluxDb2
+        uid: proxmox_influxdb2
+        type: influxdb
+        access: proxy
+        url: http://influxdb.bqc0n.home:8086
+        jsonData:
+          version: Flux
+          organization: home
+          defaultBucket: proxmox
+          tlsSkipVerify: true
+        secureJsonData:
+          token: $INFLUXDB2_ADMIN_TOKEN

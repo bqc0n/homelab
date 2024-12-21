@@ -53,13 +53,29 @@ spec:
             - mountPath: /etc/grafana
               name: grafana-config
             - mountPath: /etc/grafana/provisioning/dashboards
-              name: grafana-provisioning
+              name: grafana-dashboards
+            - mountPath: /etc/grafana/provisioning/datasources
+              name: grafana-datasources
+            - mountPath: /var/lib/grafana
+              name: grafana-data
           ports:
             - containerPort: 3000
+          env:
+            - name: INFLUXDB2_ADMIN_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: influxdb-auth
+                  key: admin-token
       volumes:
         - name: grafana-config
           configMap:
             name: grafana-config
-        - name: grafana-provisioning
+        - name: grafana-dashboards
           configMap:
-            name: grafana-provisioning
+            name: grafana-dashboards
+        - name: grafana-datasources
+          configMap:
+              name: grafana-datasources
+        - name: grafana-data
+          persistentVolumeClaim:
+              claimName: grafana-data
