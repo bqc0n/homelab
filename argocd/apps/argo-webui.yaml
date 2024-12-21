@@ -15,5 +15,5 @@ spec:
       port: 8080
       protocol: TCP
       targetPort: 8080
-      nodePort: 12345
+      nodePort: 30000
   type: NodePort
