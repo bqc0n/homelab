@@ -13,7 +13,7 @@ data:
         uid: proxmox_influxdb2
         type: influxdb
         access: proxy
-        url: http://influxdb.bqc0n.home:8086
+        url: http://influxdb-svc:8086
         jsonData:
           version: Flux
           organization: home
