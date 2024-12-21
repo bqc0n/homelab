@@ -55,11 +55,20 @@ spec:
               name: influxdb-data
           ports:
             - containerPort: 8086
+          env:
+            - name: DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: influxdb-auth
+                  key: admin-token
+            - name: DOCKER_INFLUXDB_INIT_PASSWORD
+              valueFrom:
+                  secretKeyRef:
+                    name: influxdb-auth
+                    key: admin-password
           envFrom:
             - configMapRef:
                 name: influxdb-config
-            - secretRef:
-                name: influxdb-auth
       volumes:
         - name: influxdb-data
           persistentVolumeClaim:

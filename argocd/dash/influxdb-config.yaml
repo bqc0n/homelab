@@ -9,4 +9,3 @@ data:
   DOCKER_INFLUXDB_INIT_ORG: "home"
   DOCKER_INFLUXDB_INIT_BUCKET: "proxmox"
   DOCKER_INFLUXDB_INIT_CLI_CONFIG_NAME: "proxmox"
-  DOCKER_INFLUXDB_INIT_ADMIN_TOKEN_FILE: "/run/secrets/influxdb2-admin-token"
