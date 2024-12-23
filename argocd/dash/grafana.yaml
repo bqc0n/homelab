@@ -52,10 +52,13 @@ spec:
           volumeMounts:
             - mountPath: /etc/grafana
               name: grafana-config
+              readOnly: true
             - mountPath: /etc/grafana/provisioning/dashboards
               name: grafana-dashboards
+              readOnly: true
             - mountPath: /etc/grafana/provisioning/datasources
               name: grafana-datasources
+              readOnly: true
             - mountPath: /var/lib/grafana
               name: grafana-data
           ports:

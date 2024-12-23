@@ -71,6 +71,7 @@ spec:
             - mountPath: /misskey/files
               name: misskey-files
             - mountPath: /misskey/.config
+              readOnly: true
               name: misskey-config
           ports:
             - containerPort: 3000
