@@ -1,38 +1,38 @@
-#apiVersion: argoproj.io/v1alpha1
-#kind: Application
-#metadata:
-#  name: nfs-provisioner-hdd-1
-#  namespace: argocd
-#spec:
-#  destination:
-#    name: ''
-#    namespace: nfs-provisioner-hdd-1
-#    server: https://kubernetes.default.svc
-#  source:
-#    path: ''
-#    repoURL: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
-#    targetRevision: 4.0.18
-#    chart: nfs-subdir-external-provisioner
-#    helm:
-#      releaseName: nfs-provisioner-hdd-1
-#      parameters:
-#        - name: nfs.server
-#          value: 192.168.1.10
-#        - name: nfs.path
-#          value: /k8s
-#        - name: storageClass.name
-#          value: nfs-hdd-1
-#        - name: storageClass.provisionerName
-#          value: k8s-sigs.io/nfs-hdd-1
-#        - name: storageClass.reclaimPolicy
-#          value: Retain
-#        - name: storageClass.pathPattern
-#          value: "${.PVC.namespace}-${.PVC.name}"
-#  sources: []
-#  project: default
-#  syncPolicy:
-#    automated:
-#      prune: true
-#      selfHeal: true
-#    syncOptions:
-#      - CreateNamespace=true
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nfs-provisioner-hdd-1
+  namespace: argocd
+spec:
+  destination:
+    name: ''
+    namespace: nfs-provisioner-hdd-1
+    server: https://kubernetes.default.svc
+  source:
+    path: ''
+    repoURL: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
+    targetRevision: 4.0.18
+    chart: nfs-subdir-external-provisioner
+    helm:
+      releaseName: nfs-provisioner-hdd-1
+      parameters:
+        - name: nfs.server
+          value: 192.168.1.10
+        - name: nfs.path
+          value: /k8s
+        - name: storageClass.name
+          value: nfs-hdd-1
+        - name: storageClass.provisionerName
+          value: k8s-sigs.io/nfs-hdd-1
+        - name: storageClass.reclaimPolicy
+          value: Retain
+        - name: storageClass.pathPattern
+          value: "$${.PVC.namespace}/$${.PVC.name}"
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

@@ -27,7 +27,7 @@ spec:
         - name: storageClass.reclaimPolicy
           value: Retain
         - name: storageClass.pathPattern
-          value: "$${.PVC.namespace}-$${.PVC.name}"
+          value: "$${.PVC.namespace}/$${.PVC.name}"
   sources: []
   project: default
   syncPolicy:
