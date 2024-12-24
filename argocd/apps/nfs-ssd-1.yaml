@@ -24,6 +24,8 @@ spec:
           value: nfs-ssd-1
         - name: storageClass.provisionerName
           value: k8s-sigs.io/nfs-ssd-1
+        - name: storageClass.reclaimPolicy
+          value: Retain
   sources: []
   project: default
   syncPolicy:
