@@ -26,8 +26,8 @@ spec:
           value: k8s-sigs.io/nfs-ssd-1
         - name: storageClass.reclaimPolicy
           value: Retain
-        - name: pathPattern
-          value: "${.PVC.namespace}-${.PVC.name}"
+        - name: storageClass.pathPattern
+          value: "${.PVC.namespace}/${.PVC.name}"
   sources: []
   project: default
   syncPolicy:
