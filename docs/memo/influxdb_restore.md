@@ -7,7 +7,7 @@
 influx backup <backup_name> -t <token>
 ```
 これで<backup_name>というディレクトリが作成され、それがバックアップである。
-適当に`tar -cfvz`で圧縮しておく。
+適当に`tar -cf`で圧縮しておく。
 
 
 ### Restore

@@ -1,24 +1,24 @@
-#apiVersion: argoproj.io/v1alpha1
-#kind: Application
-#metadata:
-#  name: dash
-#spec:
-#  destination:
-#    name: ''
-#    namespace: dash
-#    server: https://kubernetes.default.svc
-#  source:
-#    path: argocd/dash
-#    repoURL: git@github.com:bqc0n/homelab.git
-#    targetRevision: HEAD
-#    directory:
-#      recurse: true
-#  sources: []
-#  project: default
-#  syncPolicy:
-#    automated:
-#      prune: true
-#      selfHeal: true
-#    syncOptions:
-#      - PrunePropagationPolicy=foreground
-#      - CreateNamespace=true
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dash
+spec:
+  destination:
+    name: ''
+    namespace: dash
+    server: https://kubernetes.default.svc
+  source:
+    path: argocd/dash
+    repoURL: git@github.com:bqc0n/homelab.git
+    targetRevision: HEAD
+    directory:
+      recurse: true
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - PrunePropagationPolicy=foreground
+      - CreateNamespace=true
