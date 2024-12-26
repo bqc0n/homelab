@@ -10,13 +10,6 @@
 ## `/docs`に書いてあることをやる
 ZFSプールの作成、NFS Exportなど。
 
-## `required_nfs_dirs`を実行
-`ansible` ディレクトリに行って、
-```shell
-ansible-playbook required_nfs_dirs.yml
-```
-を実行する。
-
 ## Remotely managed cloudflare tunnelの作成
 [このガイド](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/get-started/create-remote-tunnel/)に従い、Remotely managed cloudflare tunnelを作成する。
 
