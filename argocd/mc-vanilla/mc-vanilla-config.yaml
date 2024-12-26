@@ -5,7 +5,7 @@ metadata:
   namespace: mc-vanilla
 data:
   EULA: "true"
-  MEMORY: "3G"
+  MEMORY: "2G"
   PVP: "false"
   TZ: "Asia/Tokyo"
   USE_AIKAR_FLAGS: "true"
