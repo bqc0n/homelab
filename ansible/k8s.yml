@@ -1,4 +1,0 @@
----
-- name: kubernetes
-  import_playbook: ./playbooks/k8s/k8s.yml
-
