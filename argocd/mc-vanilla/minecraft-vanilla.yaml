@@ -46,7 +46,7 @@ spec:
     spec:
       containers:
       - name: mc-vanilla-server
-        image: itzg/mc-server:latest
+        image: itzg/minecraft-server:latest
         volumeMounts:
           - mountPath: /data
             name: mc-vanilla-data
