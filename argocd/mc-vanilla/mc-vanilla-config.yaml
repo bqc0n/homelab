@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mc-vanilla-config
+  namespace: mc-vanilla
+data:
+  EULA: "true"
+  MEMORY: "3G"
+  PVP: "false"
+  TZ: "JST"
+  USE_AIKAR_FLAGS: "true"
+  LOG_TIMESTAMP: "true"
+  SPAWN_PROTECTION: "0"

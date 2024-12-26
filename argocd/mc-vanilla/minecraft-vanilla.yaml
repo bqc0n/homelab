@@ -1,0 +1,61 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: mc-vanilla
+  name: mc-vanilla-svc
+spec:
+  selector:
+      app: mc-vanilla-server
+  ports:
+    - protocol: TCP
+      port: 25565
+      targetPort: 25565
+      nodePort: 32000
+  type: NodePort
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mc-vanilla-data
+  namespace: mc-vanilla
+spec:
+  storageClassName: nfs-ssd-1
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: mc-vanilla
+  name: mc-vanilla-server
+spec:
+  podManagementPolicy: OrderedReady
+  selector:
+    matchLabels:
+      app: mc-vanilla-server
+  serviceName: mc-vanilla-server
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mc-vanilla-server
+    spec:
+      containers:
+      - name: mc-vanilla-server
+        image: itzg/mc-server:latest
+        volumeMounts:
+          - mountPath: /data
+            name: mc-vanilla-data
+        ports:
+        - containerPort: 25565
+        envFrom:
+          - configMapRef:
+              name: mc-vanilla-config
+      volumes:
+        - name: mc-vanilla-data
+          persistentVolumeClaim:
+            claimName: mc-vanilla-data
