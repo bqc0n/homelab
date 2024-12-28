@@ -55,6 +55,8 @@ spec:
         envFrom:
           - configMapRef:
               name: mc-vanilla-config
+          - secretRef:
+              name: mc-vanilla-whitelist
       volumes:
         - name: mc-vanilla-data
           persistentVolumeClaim:

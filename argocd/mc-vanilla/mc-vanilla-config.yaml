@@ -12,3 +12,4 @@ data:
   LOG_TIMESTAMP: "true"
   SPAWN_PROTECTION: "0"
   OPS: "bqc0n"
+  OVERRIDE_WHITELIST: "true"
