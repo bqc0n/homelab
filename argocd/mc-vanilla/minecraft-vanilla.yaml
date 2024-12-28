@@ -47,6 +47,9 @@ spec:
       containers:
       - name: mc-vanilla-server
         image: itzg/minecraft-server:java17-graalvm
+        resources:
+          requests:
+            memory: "3Gi"
         volumeMounts:
           - mountPath: /data
             name: mc-vanilla-data
