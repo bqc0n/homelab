@@ -54,3 +54,7 @@ spec:
         volumeMounts:
           - mountPath: /config
             name: wireguard-config
+      volumes:
+        - name: wireguard-config
+          persistentVolumeClaim:
+            claimName: wireguard-config
