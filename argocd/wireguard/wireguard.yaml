@@ -1,0 +1,56 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: wireguard
+  name: wireguard-config
+spec:
+  storageClassName: nfs-hdd-1
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Ki
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: wireguard
+  name: wireguard-configmap
+data:
+  PUID: "1000"
+  PGID: "1000"
+  TZ: "Asia/Tokyo"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: wireguard
+  name: wireguard-client
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: wireguard-client
+  template:
+    metadata:
+      labels:
+        app: wireguard-client
+    spec:
+      containers:
+      - name: wireguard-client
+        image: linuxserver/wireguard:latest
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          capabilities:
+            add:
+              - NET_ADMIN
+              - SYS_MODULE
+        envFrom:
+          - configMapRef:
+              name: wireguard-configmap
+        volumeMounts:
+          - mountPath: /config
+            name: wireguard-config
