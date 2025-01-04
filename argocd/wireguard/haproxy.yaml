@@ -35,7 +35,7 @@ data:
       maxconn                 3000
     
     frontend minecraft
-      bind 10.1.2.3:27135
+      bind *:27135
       mode tcp
       default_backend vanilla_minecraft
     
