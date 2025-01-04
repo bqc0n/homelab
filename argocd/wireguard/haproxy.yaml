@@ -4,7 +4,7 @@ metadata:
   namespace: wireguard
   name: haproxy-config
 data:
-  haproxy-mc.yaml: |
+  haproxy.cfg: |
     global
       chroot      /var/lib/haproxy
       pidfile     /var/run/haproxy.pid
