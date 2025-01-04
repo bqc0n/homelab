@@ -48,7 +48,12 @@ spec:
             add:
               - NET_ADMIN
               - SYS_MODULE
-        command: ["/init", "apk add --no-cache haproxy && haproxy -f /haproxy-config/haproxy.cfg -db && tail -f /dev/null"]
+        command: ["/bin/sh", "-c"]
+        args:
+          - /init
+          - apk add --no-cache haproxy
+          - haproxy -f /haproxy-config/haproxy.cfg -db
+          - tail -f /dev/null
         envFrom:
           - configMapRef:
               name: wireguard-configmap
