@@ -1,4 +1,5 @@
 kube_network_plugin: cilium
+enable_dual_stack_networks: true
 cilium_enable_ipv6: true
 cilium_enable_hubble: true ## enable support hubble in cilium
 cilium_hubble_install: true ## install hubble-relay, hubble-ui

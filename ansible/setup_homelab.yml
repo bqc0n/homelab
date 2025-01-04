@@ -26,3 +26,15 @@
   gather_facts: false
   roles:
     - role: file_server
+
+- name: kubernetes worker nodes
+  hosts: kube_node
+  gather_facts: false
+  tasks:
+    - name: Install nfs-common
+      become: true
+      ansible.builtin.apt:
+        update_cache: yes
+        cache_valid_time: 3600
+        name: nfs-common
+        state: latest

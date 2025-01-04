@@ -19,15 +19,6 @@ ansible_managed:
     file_server:
       ansible_host: 192.168.1.5
       ansible_user: root
-    dnsmasq:
-      ansible_host: 192.168.1.2
-      ansible_user: root
-    secondary_dns:
-      ansible_host: 192.168.1.22
-      ansible_user: root
-    docker-runner:
-      ansible_host: 192.168.1.3
-      ansible_user: ubuntu
 
 kube_control_plane:
   hosts:

@@ -38,9 +38,20 @@ ansible-playbook -i hosts.yml -e "@../kubespray-vars.yaml" cluster.yml -b --beco
 
 ```shell
 mkdir -p /home/$USER/.kube
-cp -i /etc/kubernetes/admin.conf /home/$USER/.kube/config
-chown $USER:$USER /home/$USER/.kube/config
+sudo cp -i /etc/kubernetes/admin.conf /home/$USER/.kube/config
+sudo chown $USER:$USER /home/$USER/.kube/config
 ```
+
+## ArgoCD & SealedSecrets
+暗号鍵の入ったファイルを用意して、`kubectl apply -f key.yaml`を実行する。
+Sealed SecretsそのものはArgoCDでDeployする。
+https://argo-cd.readthedocs.io/en/stable/ をみながらArgoCDをDeployする。
+```shell
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+できたら、argocd/argo-webui.yamlを適用してweb UIにアクセスする。
+Settings/Repositoriesでこのリポジトリを追加し、app-of-appsをDeployして作業完了。
 
 # 注意事項
 

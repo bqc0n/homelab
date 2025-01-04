@@ -21,7 +21,7 @@ resource "proxmox_vm_qemu" "k8s_node" {
 
   cores   = var.hosts[count.index].cores
   sockets = var.specs.sockets
-  memory  = var.specs.memory
+  memory  = var.hosts[count.index].memoryMi
   tablet  = false
   scsihw  = "virtio-scsi-pci"
 
