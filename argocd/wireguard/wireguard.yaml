@@ -49,11 +49,11 @@ spec:
               - NET_ADMIN
               - SYS_MODULE
         command: ["/bin/sh", "-c"]
-        args:
-          - /init
-          - apk add --no-cache haproxy
-          - haproxy -f /haproxy-config/haproxy.cfg -db
-          - tail -f /dev/null
+        args: ["wg-quick up wg0 && apk add --no-cache haproxy && haproxy -f /haproxy-config/haproxy.cfg -db && tail -f /dev/null"]
+#          - /init
+#          - apk add --no-cache haproxy
+#          - haproxy -f /haproxy-config/haproxy.cfg -db
+#          - tail -f /dev/null
         envFrom:
           - configMapRef:
               name: wireguard-configmap
