@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: wireguard
+  name: haproxy-config
+data:
+  haproxy-mc.yaml: |
+    global
+      chroot      /var/lib/haproxy
+      pidfile     /var/run/haproxy.pid
+      maxconn     4000
+      user        haproxy
+      group       haproxy
+      daemon
+      
+      # turn on stats unix socket
+      stats socket /var/lib/haproxy/stats
+    
+    defaults
+      mode                    tcp
+      log                     global
+      option                  httplog
+      option                  dontlognull
+      option http-server-close
+      option forwardfor       except 127.0.0.0/8
+      option                  redispatch
+      retries                 3
+      timeout http-request    10s
+      timeout queue           1m
+      timeout connect         10s
+      timeout client          1m
+      timeout server          1m
+      timeout http-keep-alive 10s
+      timeout check           10s
+      maxconn                 3000
+    
+    frontend minecraft
+      bind 10.1.2.3:27135
+      mode tcp
+      default_backend vanilla_minecraft
+    
+    backend vanilla_minecraft
+      mode tcp
+      server mc-vanilla mc-vanilla-svc.mc-vanilla:25565
