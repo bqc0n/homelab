@@ -50,7 +50,6 @@ spec:
               - SYS_MODULE
         command: ["/bin/sh", "-c"]
         args:
-          - "wg-quick up wg0"
           - "apk add -no-cache haproxy"
           - "haproxy -f /haproxy-config/haproxy.cfg -db"
           - "tail -f /dev/null"
