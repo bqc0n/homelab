@@ -1,0 +1,13 @@
+kube_network_plugin: cilium
+cilium_enable_ipv6: true
+cilium_enable_hubble: true ## enable support hubble in cilium
+cilium_hubble_install: true ## install hubble-relay, hubble-ui
+cilium_hubble_tls_generate: true ## install hubble-certgen and generate certificates
+cilium_enable_hubble_metrics: true
+cilium_hubble_metrics:
+  - dns
+  - drop
+  - tcp
+  - flow
+  - icmp
+  - http

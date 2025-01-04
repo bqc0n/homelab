@@ -31,7 +31,7 @@ python3 -m pip install -r requirements.txt
 ```
 
 ```shell
-ansible-playbook -i hosts.yml cluster.yml -e kube_network_plugin=cilium -b --become-user=root --flush-cache
+ansible-playbook -i hosts.yml -e "@../kubespray-vars.yaml" cluster.yml -b --become-user=root --flush-cache
 ```
 
 ## `kubectl` without sudo
