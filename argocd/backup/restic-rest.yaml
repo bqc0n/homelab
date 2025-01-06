@@ -4,6 +4,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: restic-rest-data
   namespace: backup
+  annotations:
+    k8up.io.backup: "false"
 spec:
   storageClassName: nfs-hdd-1
   accessModes:
@@ -24,7 +26,6 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 8000
-
 ---
 apiVersion: apps/v1
 kind: Deployment
