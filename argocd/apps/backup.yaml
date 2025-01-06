@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: backup
+spec:
+  destination:
+    name: ''
+    namespace: backup
+    server: https://kubernetes.default.svc
+  source:
+    path: argocd/backup
+    repoURL: git@github.com:bqc0n/homelab.git
+    targetRevision: HEAD
+    directory:
+      recurse: true
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - PrunePropagationPolicy=foreground
+      - CreateNamespace=true

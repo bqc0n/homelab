@@ -1,0 +1,56 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: restic-rest-data
+  namespace: backup
+spec:
+  storageClassName: nfs-hdd-1
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: restic-rest
+  namespace: backup
+spec:
+  selector:
+    app: restic-rest
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: restic-rest
+  namespace: backup
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: restic-rest
+  template:
+    metadata:
+      labels:
+        app: restic-rest
+    spec:
+      containers:
+        - name: restic-rest
+          image: restic/rest-server:latest
+          env:
+            - name: DISABLE_AUTHENTICATION
+              value: "true"
+          volumeMounts:
+            - mountPath: /data
+              name: restic-rest-data
+      volumes:
+        - name: restic-rest-data
+          persistentVolumeClaim:
+            claimName: restic-rest-data
