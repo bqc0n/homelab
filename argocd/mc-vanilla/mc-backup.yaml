@@ -23,7 +23,7 @@ spec:
     failedJobsHistoryLimit: 2
     successfulJobsHistoryLimit: 2
   prune:
-    schedule: @weekly
+    schedule: "@weekly"
     activeDeadlineSeconds: 7200
     retention:
       keepDaily: 14
