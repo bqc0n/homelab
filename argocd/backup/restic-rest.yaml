@@ -27,6 +27,16 @@ spec:
       port: 80
       targetPort: 8000
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: restic-auth
+  namespace: backup
+data:
+  # k8up seems to require a password
+  .htaccess: |
+    admin:noauth
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -46,12 +56,17 @@ spec:
         - name: restic-rest
           image: restic/rest-server:latest
           env:
-            - name: DISABLE_AUTHENTICATION
-              value: "true"
+            - name: PASSWORD_FILE
+              value: "/restic-auth/.htaccess"
           volumeMounts:
             - mountPath: /data
               name: restic-rest-data
+            - mountPath: /restic-auth
+              name: restic-auth
       volumes:
         - name: restic-rest-data
           persistentVolumeClaim:
             claimName: restic-rest-data
+        - name: restic-auth
+          configMap:
+            name: restic-auth
