@@ -25,33 +25,12 @@ spec:
       port: 5432
 ---
 apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: pv-misskey-db
-  namespace: misskey
-spec:
-  storageClassName: misskey-db
-  capacity:
-    storage: 16Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  mountOptions:
-    - soft
-    - rw
-    - nfsvers=4
-  nfs:
-    server: 192.168.1.10
-    path: "/k8s/misskey/db"
----
-apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: pvc-misskey-db
   namespace: misskey
 spec:
-  storageClassName: misskey-db
+  storageClassName: nfs-ssd-1
   accessModes:
   - ReadWriteOnce
   resources:
