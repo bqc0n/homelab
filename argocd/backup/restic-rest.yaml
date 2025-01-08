@@ -35,7 +35,7 @@ metadata:
 data:
   # k8up seems to require a password
   .htaccess: |
-    admin:noauth
+    :
 ---
 apiVersion: apps/v1
 kind: Deployment
