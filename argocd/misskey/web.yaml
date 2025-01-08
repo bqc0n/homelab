@@ -1,26 +1,11 @@
 ---
 apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: pv-misskey-files
-  namespace: misskey
-spec:
-  storageClassName: misskey-files
-  capacity:
-    storage: 20Gi
-  accessModes:
-    - ReadWriteOnce
-  nfs:
-    server: 192.168.1.10
-    path: "/k8s/misskey/files"
----
-apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: pvc-misskey-files
   namespace: misskey
 spec:
-  storageClassName: misskey-files
+  storageClassName: nfs-ssd-1
   accessModes:
     - ReadWriteOnce
   resources:
@@ -50,7 +35,7 @@ metadata:
   name: web-deployment
   namespace: misskey
 spec:
-  replicas: 2
+  replicas: 0
   strategy:
     type: RollingUpdate
     rollingUpdate:
