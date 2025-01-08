@@ -37,31 +37,38 @@ spec:
     requests:
       storage: 16Gi
 ---
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: misskey-db
   namespace: misskey
-  labels:
-    app: misskey-db
 spec:
-  restartPolicy: Always
-  containers:
-    - name: psql
-      image: postgres:latest
-      volumeMounts:
-        - mountPath: /var/lib/postgresql/data
-          name: db-volume
-      envFrom:
-        - secretRef:
-            name: postgres-secret
-      resources:
-        limits:
-          memory: "1Gi"
-          cpu: "1"
-      ports:
-        - containerPort: 5432
-  volumes:
-    - name: db-volume
-      persistentVolumeClaim:
-        claimName: pvc-misskey-db
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgresql
+  template:
+    metadata:
+      labels:
+        app: postgresql
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: psql
+          image: postgres:latest
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: db-volume
+          envFrom:
+            - secretRef:
+                name: postgres-secret
+          resources:
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+          ports:
+            - containerPort: 5432
+      volumes:
+        - name: db-volume
+          persistentVolumeClaim:
+            claimName: pvc-misskey-db
