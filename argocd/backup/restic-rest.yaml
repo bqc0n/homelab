@@ -58,6 +58,8 @@ spec:
           env:
             - name: PASSWORD_FILE
               value: "/restic-auth/.htaccess"
+            - name: DISABLE_AUTHENTICATION
+              value: "true"
           volumeMounts:
             - mountPath: /data
               name: restic-rest-data
