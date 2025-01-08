@@ -31,7 +31,7 @@ spec:
       keepYearly: 100
   backend:
     rest:
-      url: "http://admin:noauth@restic-rest.backup/mc-vanilla/backup"
+      url: "http://restic-rest.backup/mc-vanilla/backup"
     repoPasswordSecretRef:
       name: restic-repo-password
       key: PASSWORD
