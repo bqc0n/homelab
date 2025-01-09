@@ -39,7 +39,7 @@ module "k8s" {
   ssh_keys = local.ssh_public_keys
 
   gateway    = "192.168.1.1"
-  nameserver = "192.168.1.2"
+  nameserver = "192.168.1.1"
   hosts      = local.hosts
   vmid_start = 1000
   specs = {
