@@ -15,14 +15,14 @@ spec:
               service:
                 name: argocd
                 port:
-                  number: 8080
+                  name: https
             pathType: Prefix
           - path: /grafana
             backend:
               service:
                 name: grafana
                 port:
-                  number: 3000
+                  name: http
             pathType: Prefix
 ---
 apiVersion: v1
@@ -32,7 +32,7 @@ metadata:
   namespace: ingresses
 spec:
   type: ExternalName
-  externalName: argocd-server-nodeport.argocd.svc.cluster.local
+  externalName: argocd-server-nodeport.argocd.svc.cluster.local.
 ---
 apiVersion: v1
 kind: Service
@@ -41,5 +41,5 @@ metadata:
   namespace: ingresses
 spec:
   type: ExternalName
-  externalName: grafana-svc.grafana.svc.cluster.local
+  externalName: grafana-svc.grafana.svc.cluster.local.
 ---
