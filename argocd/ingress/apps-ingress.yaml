@@ -41,5 +41,5 @@ metadata:
   namespace: ingresses
 spec:
   type: ExternalName
-  externalName: grafana-svc.grafana.svc.cluster.local.
+  externalName: grafana-svc.dash.svc.cluster.local.
 ---
