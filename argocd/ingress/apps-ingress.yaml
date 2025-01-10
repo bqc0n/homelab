@@ -4,26 +4,26 @@ metadata:
   name: apps-ingress
   namespace: ingresses
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
   rules:
     - http:
         paths:
-          - path: /argocd
+          - path: /argocd(/|$)(.*)
             backend:
               service:
                 name: argocd
                 port:
                   number: 8080
-            pathType: Prefix
-          - path: /grafana
+            pathType: ImplementationSpecific
+          - path: /grafana(/|$)(.*)
             backend:
               service:
                 name: grafana
                 port:
                   number: 3000
-            pathType: Prefix
+            pathType: ImplementationSpecific
 ---
 apiVersion: v1
 kind: Service
