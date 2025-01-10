@@ -15,14 +15,14 @@ spec:
               service:
                 name: argocd
                 port:
-                  name: https
+                  number: 8080
             pathType: Prefix
           - path: /grafana
             backend:
               service:
                 name: grafana
                 port:
-                  name: http
+                  number: 3000
             pathType: Prefix
 ---
 apiVersion: v1
