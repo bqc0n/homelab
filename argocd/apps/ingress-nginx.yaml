@@ -21,3 +21,29 @@ spec:
       selfHeal: false
     syncOptions:
       - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingresses
+  namespace: argocd
+spec:
+  destination:
+    name: ''
+    namespace: ingresses
+    server: https://kubernetes.default.svc
+  source:
+    path: argocd/ingress
+    repoURL: git@github.com:bqc0n/homelab.git
+    targetRevision: HEAD
+    directory:
+      recurse: true
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - PrunePropagationPolicy=foreground
+      - CreateNamespace=true
