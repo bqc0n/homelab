@@ -1,0 +1,6 @@
+# k8upのrestoreでの注意点
+
+1つのrestic repositoryに複数のPVCのBackupを詰め込んでいる場合、単にRestoreを書くだけだとうまくいかないので、注意が必要である。
+snapshotを明示的に指定しない限り、k8upは最新のsnapshotをrestoreする。そのため、最新のsnapshotがrestoreしたいpvcのものではない場合、別のpvcのsnapshotからrestoreされてしまう。
+
+このような場合には、snapshotを明示的に指定するとうまく動く。
