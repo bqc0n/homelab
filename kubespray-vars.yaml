@@ -1,5 +1,11 @@
 kube_network_plugin: cilium
 enable_dual_stack_networks: true
+cilium_config_extra_vars:
+  enable-l2-announcements: true
+cilium_loadbalancer_ip_pools:
+  - name: "node-net-pool"
+    cidrs:
+      - "192.168.1.240/28" # 240 – 255
 cilium_enable_ipv6: true
 cilium_enable_hubble: true ## enable support hubble in cilium
 cilium_hubble_install: true ## install hubble-relay, hubble-ui
@@ -12,3 +18,6 @@ cilium_hubble_metrics:
   - flow
   - icmp
   - http
+
+kubeconfig_localhost: true
+
