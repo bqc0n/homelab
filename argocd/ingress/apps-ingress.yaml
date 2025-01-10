@@ -8,22 +8,26 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - http:
+    - host: argocd.home
+      http:
         paths:
-          - path: /argocd(/|$)(.*)
+          - path: /
             backend:
               service:
                 name: argocd
                 port:
                   number: 8080
-            pathType: ImplementationSpecific
-          - path: /grafana(/|$)(.*)
+            pathType: Prefix
+    - host: grafana.home
+      http:
+        paths:
+          - path: /
             backend:
               service:
                 name: grafana
                 port:
                   number: 3000
-            pathType: ImplementationSpecific
+            pathType: Prefix
 ---
 apiVersion: v1
 kind: Service
