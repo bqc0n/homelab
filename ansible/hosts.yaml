@@ -36,6 +36,13 @@ kube_node:
     k8s-worker-03:
       ansible_host: 192.168.1.63
       ansible_user: ubuntu
+
 etcd:
   children:
     kube_control_plane:
+
+kube_cluster:
+  children:
+    kube_control_plane:
+    kube_node:
+

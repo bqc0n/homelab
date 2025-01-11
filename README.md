@@ -31,16 +31,13 @@ python3 -m pip install -r requirements.txt
 ```
 
 ```shell
-ansible-playbook -i hosts.yml -e "@../kubespray-vars.yaml" cluster.yml -b --become-user=root --flush-cache
+ansible-playbook -i "../ansible/hosts.yaml" -e "@../kubespray-vars.yaml" kubespray.yaml -b --become-user=root --flush-cache
 ```
 
-## `kubectl` without sudo
-
-```shell
-mkdir -p /home/$USER/.kube
-sudo cp -i /etc/kubernetes/admin.conf /home/$USER/.kube/config
-sudo chown $USER:$USER /home/$USER/.kube/config
-```
+## NodeLocal DNS
+[Ciliumの公式ドキュメント](https://docs.cilium.io/en/stable/network/kubernetes/local-redirect-policy/#node-local-dns-cache)に従って作業する。
+ただし、dnsのsvc名は`kube-dns`ではなく`coredns`であることに注意。
+LocalRedirectPolicyも`coredns`にすること。
 
 ## ArgoCD & SealedSecrets
 暗号鍵の入ったファイルを用意して、`kubectl apply -f key.yaml`を実行する。

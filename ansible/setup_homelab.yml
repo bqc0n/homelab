@@ -14,6 +14,9 @@
         state: present
         force_init: yes
 
+- name: Update pkgs
+  import_playbook: apt_upgrade.yaml
+
 - name: Bind mount
   hosts: pve01
   tasks:
@@ -28,10 +31,10 @@
     - role: file_server
 
 - name: kubernetes worker nodes
-  hosts: kube_node
+  hosts: kube_worker_node
   gather_facts: false
   tasks:
-    - name: Install nfs-common
+    - name: K8s Worker | Install nfs-common
       become: true
       ansible.builtin.apt:
         update_cache: yes
