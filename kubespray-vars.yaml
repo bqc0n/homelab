@@ -9,7 +9,9 @@ cilium_loadbalancer_ip_pools:
       - "192.168.1.240/28" # 240 – 255
 cilium_version: v1.16.5
 cilium_kube_proxy_replacement: true
+enable_nodelocaldns: false
 cilium_enable_ipv6: true
+
 cilium_enable_hubble: true
 cilium_hubble_install: true
 cilium_hubble_tls_generate: true
@@ -22,5 +24,5 @@ cilium_hubble_metrics:
   - icmp
   - http
 
+kubectl_localhost: true
 kubeconfig_localhost: true
-
