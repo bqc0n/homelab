@@ -1,17 +1,25 @@
-kube_network_plugin: cilium
+
 enable_dual_stack_networks: true
-cilium_config_extra_vars:
-  enable-l2-announcements: true
-  enable-local-redirect-policy: true
+kube_network_plugin: cilium
+# Nodelocaldns is deployed separately
+enable_nodelocaldns: false
+# Cilium Settings
+# Ref. https://github.com/kubernetes-sigs/kubespray/blob/master/roles/network_plugin/cilium/defaults/main.yml
+cilium_version: v1.16.5
+cilium_enable_ipv6: true
+
+cilium_kube_proxy_replacement: strict
+cilium_enable_host_legacy_routing: false
+cilium_enable_bpf_masquerade: true
+cilium_l2announcements: true
+cilium_enable_portmap: true
+
 cilium_loadbalancer_ip_pools:
   - name: "node-net-pool"
     cidrs:
       - "192.168.1.240/28" # 240 – 255
-cilium_version: v1.16.5
-cilium_kube_proxy_replacement: true
-enable_nodelocaldns: false
-cilium_enable_ipv6: true
-
+cilium_config_extra_vars:
+  enable-local-redirect-policy: true
 cilium_enable_hubble: true
 cilium_hubble_install: true
 cilium_hubble_tls_generate: true

@@ -1,7 +1,7 @@
 > [!NOTE]
 > 工事中 | Under Construction
 
-# Pre-deployment steps
+# Deployment
 
 ## Create custom LXC template
 `ubuntu-24.04-2_amd64.tar.zst`の名前で作成する。
@@ -13,15 +13,17 @@ ZFSプールの作成、NFS Exportなど。
 ## Remotely managed cloudflare tunnelの作成
 [このガイド](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/get-started/create-remote-tunnel/)に従い、Remotely managed cloudflare tunnelを作成する。
 
-## kubespray
-
-### venv作成
+## Ansible
 ```shell
-python3 -m venv venv
+z ansible
+ansible-playbook setup_homelab.yaml
 ```
 
-### activate
+## kubespray
+
+### venv作成とactivate
 ```shell
+python3 -m venv venv
 source venv/bin/activate
 ```
 
@@ -32,6 +34,15 @@ python3 -m pip install -r requirements.txt
 
 ```shell
 ansible-playbook -i "../ansible/hosts.yaml" -e "@../kubespray-vars.yaml" kubespray.yaml -b --become-user=root --flush-cache
+```
+
+### `kubectl` without sudo
+controllerで以下を実行する。
+
+```shell
+mkdir -p /home/$USER/.kube
+sudo cp -i /etc/kubernetes/admin.conf /home/$USER/.kube/config
+sudo chown $USER:$USER /home/$USER/.kube/config
 ```
 
 ## NodeLocal DNS
@@ -69,5 +80,4 @@ nfsをmountする時は、`nfs-common`をインストールすること。
 # TODO
 - [ ] ディレクトリ構造の整理
 - [ ] ドキュメントの整理
-- [ ] 1つのtemplateから複数nodeにVMをdeployする方法
-- kubesealを試す https://developer.mamezou-tech.com/blogs/2022/06/05/introduce-sealedsecrets/
+- [ ] Ciliumの Native Routingを使う。podからipv6 internetにもアクセスしたいけど、GUAのprefixが可変なのをどうするか...ULAをNAPTする?もしくはv6を使わない選択肢。
