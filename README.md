@@ -65,7 +65,26 @@ kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
 できたら、argocd/argo-webui.yamlを適用してweb UIにアクセスする。
+```shell
+argocd admin initial-password -n argocd
+```
 Settings/Repositoriesでこのリポジトリを追加し、app-of-appsをDeployして作業完了。
+| Key | Value |
+|:---:|:-----:|
+| via | ssh |
+| name | 適当に (e.g. homelab) |
+| repo url | git@github.com:bqc0n/homelab.git |
+
+```shell
+k apply -f argocd/app-of-apps.yaml
+```
+
+## k8up
+CRDはHelm Chartに含まれていないので、手動でDeployする。
+```shell
+kubectl apply -f https://github.com/k8up-io/k8up/releases/download/k8up-4.8.3/k8up-crd.yaml --server-side
+```
+
 
 # 注意事項
 
@@ -87,3 +106,6 @@ nfsをmountする時は、`nfs-common`をインストールすること。
 - [ ] ディレクトリ構造の整理
 - [ ] ドキュメントの整理
 - [ ] Ciliumの Native Routingを使う。podからipv6 internetにもアクセスしたいけど、GUAのprefixが可変なのをどうするか...ULAをNAPTする?もしくはv6を使わない選択肢。
+- [ ] Ciliumに詳しくなる
+- [ ] NodeLocal DNSを設定すると. NSを大量にクエリしていた問題の原因究明、なぜ急に治ったかの調査
+ 
