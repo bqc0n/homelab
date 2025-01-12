@@ -41,4 +41,4 @@ data:
     
     backend vanilla_minecraft
       mode tcp
-      server mc-vanilla mc-vanilla-svc.mc-vanilla:25565
+      server mc-vanilla mc-vanilla-svc.mc-vanilla.svc.cluster.local.:25565
