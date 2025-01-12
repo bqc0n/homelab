@@ -28,6 +28,8 @@ spec:
           value: Retain
         - name: storageClass.pathPattern
           value: "$${.PVC.namespace}/$${.PVC.name}"
+        - name: storageClass.onDelete
+          value: retain
   sources: []
   project: default
   syncPolicy:

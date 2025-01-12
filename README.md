@@ -37,12 +37,18 @@ ansible-playbook -i "../ansible/hosts.yaml" -e "@../kubespray-vars.yaml" kubespr
 ```
 
 ### `kubectl` without sudo
-controllerで以下を実行する。
+#### Control Plane Node
 
 ```shell
 mkdir -p /home/$USER/.kube
 sudo cp -i /etc/kubernetes/admin.conf /home/$USER/.kube/config
 sudo chown $USER:$USER /home/$USER/.kube/config
+```
+
+#### Local Machine
+
+```shell
+cp ../ansible/artifacts/admin.conf ~/.kube/config
 ```
 
 ## NodeLocal DNS

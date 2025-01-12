@@ -1,4 +1,3 @@
-
 enable_dual_stack_networks: true
 kube_network_plugin: cilium
 # Nodelocaldns is deployed separately
@@ -8,11 +7,13 @@ enable_nodelocaldns: false
 cilium_version: v1.16.5
 cilium_enable_ipv6: true
 
-cilium_kube_proxy_replacement: strict
+cilium_kube_proxy_replacement: true
 cilium_enable_host_legacy_routing: false
 cilium_enable_bpf_masquerade: true
 cilium_l2announcements: true
 cilium_enable_portmap: true
+cilium_memory_limit: 1Gi
+cilium_cpu_limit: 2
 
 cilium_loadbalancer_ip_pools:
   - name: "node-net-pool"

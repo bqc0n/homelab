@@ -2,6 +2,7 @@ locals {
   ssh_public_keys = <<-EOT
   ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE65lCWo/lvkIpk2NEnXuOdmruKsPOZyzgndg7y/0Kgr
   EOT
+  nameserver = "1.1.1.1"
 }
 
 resource "proxmox_lxc" "file_server" {
@@ -12,7 +13,7 @@ resource "proxmox_lxc" "file_server" {
   password        = data.sops_file.secrets.data["password.myself"]
   ssh_public_keys = local.ssh_public_keys
   unprivileged    = true
-  nameserver      = "192.168.1.1"
+  nameserver      = local.nameserver
 
   onboot = true
   start  = true
@@ -58,7 +59,7 @@ resource "proxmox_vm_qemu" "docker-playground" {
   os_type = "cloud-init"
   boot    = "order=scsi0"
 
-  nameserver = "8.8.8.8"
+  nameserver = local.nameserver
   ipconfig0 = "ip=192.168.1.3/24,gw=192.168.1.1"
 
   sshkeys = local.ssh_public_keys
