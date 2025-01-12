@@ -31,7 +31,7 @@
     - role: file_server
 
 - name: kubernetes worker nodes
-  hosts: kube_worker_node
+  hosts: kube_node
   gather_facts: false
   tasks:
     - name: K8s Worker | Install nfs-common
