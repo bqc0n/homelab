@@ -5,6 +5,27 @@ metadata:
   namespace: kube-system
 ---
 apiVersion: v1
+kind: Service
+metadata:
+  name: kube-dns-upstream
+  namespace: kube-system
+  labels:
+    k8s-app: kube-dns
+    kubernetes.io/name: "KubeDNSUpstream"
+spec:
+  ports:
+    - name: dns
+      port: 53
+      protocol: UDP
+      targetPort: 53
+    - name: dns-tcp
+      port: 53
+      protocol: TCP
+      targetPort: 53
+  selector:
+    k8s-app: kube-dns
+---
+apiVersion: v1
 kind: ConfigMap
 metadata:
   name: node-local-dns
@@ -98,7 +119,7 @@ spec:
             requests:
               cpu: 25m
               memory: 5Mi
-          args: [ "-localip", "169.254.20.10,10.233.0.3", "-conf", "/etc/Corefile", "-upstreamsvc", "coredns", "-skipteardown=true", "-setupinterface=false", "-setupiptables=false" ]
+          args: [ "-localip", "169.254.20.10,10.233.0.3", "-conf", "/etc/Corefile", "-upstreamsvc", "kube-dns-upstream", "-skipteardown=true", "-setupinterface=false", "-setupiptables=false" ]
           ports:
             - containerPort: 53
               name: dns
