@@ -28,7 +28,6 @@ spec:
       nodePort: 30001
       protocol: TCP
       name: http
-  externalTrafficPolicy: Local
 ---
 apiVersion: apps/v1
 kind: Deployment
