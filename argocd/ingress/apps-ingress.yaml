@@ -1,47 +1,47 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: apps-ingress
-  namespace: ingresses
-spec:
-  ingressClassName: nginx
-  rules:
-    - host: argocd.home
-      http:
-        paths:
-          - path: /
-            backend:
-              service:
-                name: argocd
-                port:
-                  number: 8080
-            pathType: Prefix
-    - host: grafana.home
-      http:
-        paths:
-          - path: /
-            backend:
-              service:
-                name: grafana
-                port:
-                  number: 3000
-            pathType: Prefix
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: argocd
-  namespace: ingresses
-spec:
-  type: ExternalName
-  externalName: argocd-server-nodeport.argocd.svc.cluster.local.
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: grafana
-  namespace: ingresses
-spec:
-  type: ExternalName
-  externalName: grafana-svc.dash.svc.cluster.local.
----
+#apiVersion: networking.k8s.io/v1
+#kind: Ingress
+#metadata:
+#  name: apps-ingress
+#  namespace: ingresses
+#spec:
+#  ingressClassName: nginx
+#  rules:
+#    - host: argocd.home
+#      http:
+#        paths:
+#          - path: /
+#            backend:
+#              service:
+#                name: argocd
+#                port:
+#                  number: 8080
+#            pathType: Prefix
+#    - host: grafana.home
+#      http:
+#        paths:
+#          - path: /
+#            backend:
+#              service:
+#                name: grafana
+#                port:
+#                  number: 3000
+#            pathType: Prefix
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: argocd
+#  namespace: ingresses
+#spec:
+#  type: ExternalName
+#  externalName: argocd-server-nodeport.argocd.svc.cluster.local.
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: grafana
+#  namespace: ingresses
+#spec:
+#  type: ExternalName
+#  externalName: grafana-svc.dash.svc.cluster.local.
+#---
