@@ -51,10 +51,28 @@ sudo chown $USER:$USER /home/$USER/.kube/config
 cp ../ansible/artifacts/admin.conf ~/.kube/config
 ```
 
+## Cilium
+
+```shell
+helm repo add cilium https://helm.cilium.io/
+helm install cilium cilium/cilium --version 1.16.5 --atomic \
+  --namespace kube-system \
+  --values cilium-values.yaml
+```
+
+If you're getting an error `cp: cannot create regular file '/hostbin/cilium-mount': Permission denied`,
+see [this issue](https://github.com/cilium/cilium/issues/23838).
+TLDR: `sudo chown -R root:root /opt/cni/bin` for all nodes.
+
+
 ## NodeLocal DNS
 [Ciliumの公式ドキュメント](https://docs.cilium.io/en/stable/network/kubernetes/local-redirect-policy/#node-local-dns-cache)に従って作業する。
 ただし、dnsのsvc名は`kube-dns`ではなく`coredns`であることに注意。
 LocalRedirectPolicyも`coredns`にすること。
+
+```shell
+k apply -f node-local-dns.yaml
+```
 
 ## ArgoCD & SealedSecrets
 暗号鍵の入ったファイルを用意して、`kubectl apply -f key.yaml`を実行する。
@@ -69,6 +87,7 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 argocd admin initial-password -n argocd
 ```
 Settings/Repositoriesでこのリポジトリを追加し、app-of-appsをDeployして作業完了。
+
 | Key | Value |
 |:---:|:-----:|
 | via | ssh |

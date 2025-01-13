@@ -1,37 +1,15 @@
+# KubesprayでCiliumをInstallするのは使い勝手が悪いかもしれない
+## これはDocsがHelm Valuesを使うこと前提で書かれているため
+# CNIにCiliumを指定するのではなく、Helm chartをインストールする形でCiliumをインストールするのがいいかもしれない
+# それもkubesprayで実現できるかも
+# https://github.com/kubernetes-sigs/kubespray/tree/master/roles/helm-apps
+# ^^^ kubespray で helm chart を install する方法 ^^^
+
 enable_dual_stack_networks: true
-kube_network_plugin: cilium
+kube_network_plugin: cni # we deploy Cilium with helm later
 # Nodelocaldns is deployed separately
 enable_nodelocaldns: false
-# Cilium Settings
-# Ref. https://github.com/kubernetes-sigs/kubespray/blob/master/roles/network_plugin/cilium/defaults/main.yml
-cilium_version: v1.16.5
-cilium_enable_ipv6: true
-
-cilium_kube_proxy_replacement: true
-cilium_enable_host_legacy_routing: false
-cilium_enable_bpf_masquerade: true
-cilium_l2announcements: true
-cilium_enable_portmap: true
-cilium_memory_limit: 1Gi
-cilium_cpu_limit: 2
-
-cilium_loadbalancer_ip_pools:
-  - name: "node-net-pool"
-    cidrs:
-      - "192.168.1.240/28" # 240 – 255
-cilium_config_extra_vars:
-  enable-local-redirect-policy: true
-cilium_enable_hubble: true
-cilium_hubble_install: true
-cilium_hubble_tls_generate: true
-cilium_enable_hubble_metrics: true
-cilium_hubble_metrics:
-  - dns
-  - drop
-  - tcp
-  - flow
-  - icmp
-  - http
+cilium_kube_proxy_replacement: true # don't install kube-proxy
 
 kubectl_localhost: true
 kubeconfig_localhost: true

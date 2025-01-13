@@ -1,0 +1,28 @@
+encryption:
+  enabled: false
+privileged: true
+localRedirectPolicy: true
+kubeProxyReplacement: true
+kubeProxyReplacementHealthzBindAddr: "0.0.0.0:10256"
+l2announcements:
+  enabled: true
+ipv6:
+  enabled: true
+bpf:
+  hostLegacyRouting: false
+  masquerade: true
+k8sServiceHost: "auto"
+k8sServicePort: "6443"
+hubble:
+  enabled: true
+  metrics.enabled: {"dns", "drop", "tcp", "flow", "icmp", "http"}
+  relay:
+    enabled: true
+  ui:
+    enabled: true
+ipam:
+  operator:
+    clusterPoolIPv4PodCIDRList: ["10.233.64.0/18"]
+    clusterPoolIPv4PodCIDRMaskSize: 24
+    clusterPoolIPv6PodCIDRList: ["fd85:ee78:d8a6:8607::1:0000/112"]
+    clusterPoolIPv6PodCIDRMaskSize: 120

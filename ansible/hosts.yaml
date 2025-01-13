@@ -26,20 +26,24 @@ kube_control_plane:
       ansible_host: 192.168.1.60
       ansible_user: ubuntu
       ip: 192.168.1.60
+      kube_owner: root
 kube_node:
   hosts:
     k8s-worker-01:
       ansible_host: 192.168.1.61
       ansible_user: ubuntu
       ip: 192.168.1.61
+      kube_owner: root
     k8s-worker-02:
       ansible_host: 192.168.1.62
       ansible_user: ubuntu
       ip: 192.168.1.62
+      kube_owner: root
     k8s-worker-03:
       ansible_host: 192.168.1.63
       ansible_user: ubuntu
       ip: 192.168.1.63
+      kube_owner: root
 
 etcd:
   children:
