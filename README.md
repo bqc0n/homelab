@@ -65,22 +65,17 @@ see [this issue](https://github.com/cilium/cilium/issues/23838).
 TLDR: `sudo chown -R root:root /opt/cni/bin` for all nodes.
 
 
-## NodeLocal DNS
-[Ciliumの公式ドキュメント](https://docs.cilium.io/en/stable/network/kubernetes/local-redirect-policy/#node-local-dns-cache)に従って作業する。
-ただし、dnsのsvc名は`kube-dns`ではなく`coredns`であることに注意。
-LocalRedirectPolicyも`coredns`にすること。
-
-```shell
-k apply -f node-local-dns.yaml
-```
-
-## ArgoCD & SealedSecrets
+## After the k8s cluster is up and running
 暗号鍵の入ったファイルを用意して、`kubectl apply -f key.yaml`を実行する。
 Sealed SecretsそのものはArgoCDでDeployする。
 https://argo-cd.readthedocs.io/en/stable/ をみながらArgoCDをDeployする。
+k8upのCRDも適用する(Helm Chartに含まれていないため)。
+
 ```shell
+k apply -f node-local-dns.yaml
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+kubectl apply -f https://github.com/k8up-io/k8up/releases/download/k8up-4.8.3/k8up-crd.yaml --server-side
 ```
 できたら、argocd/argo-webui.yamlを適用してweb UIにアクセスする。
 ```shell
@@ -93,16 +88,6 @@ Settings/Repositoriesでこのリポジトリを追加し、app-of-appsをDeploy
 | via | ssh |
 | name | 適当に (e.g. homelab) |
 | repo url | git@github.com:bqc0n/homelab.git |
-
-```shell
-k apply -f argocd/app-of-apps.yaml
-```
-
-## k8up
-CRDはHelm Chartに含まれていないので、手動でDeployする。
-```shell
-kubectl apply -f https://github.com/k8up-io/k8up/releases/download/k8up-4.8.3/k8up-crd.yaml --server-side
-```
 
 
 # 注意事項
