@@ -6,18 +6,7 @@ metadata:
 spec:
   ingressClassName: cilium
   rules:
-    - host: argocd.home
-      http:
-        paths:
-          - path: /
-            backend:
-              service:
-                name: argocd
-                port:
-                  number: 8080
-            pathType: Prefix
-    - host: grafana.home
-      http:
+    - http:
         paths:
           - path: /
             backend:
@@ -26,6 +15,26 @@ spec:
                 port:
                   number: 3000
             pathType: Prefix
+#    - host: argocd.home
+#      http:
+#        paths:
+#          - path: /
+#            backend:
+#              service:
+#                name: argocd
+#                port:
+#                  number: 8080
+#            pathType: Prefix
+#    - host: grafana.home
+#      http:
+#        paths:
+#          - path: /
+#            backend:
+#              service:
+#                name: grafana
+#                port:
+#                  number: 3000
+#            pathType: Prefix
 ---
 apiVersion: v1
 kind: Service

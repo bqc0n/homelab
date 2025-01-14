@@ -64,6 +64,13 @@ If you're getting an error `cp: cannot create regular file '/hostbin/cilium-moun
 see [this issue](https://github.com/cilium/cilium/issues/23838).
 TLDR: `sudo chown -R root:root /opt/cni/bin` for all nodes.
 
+### Upgrading
+```shell
+helm upgrade cilium cilium/cilium --version 1.16.5 --atomic \
+  --namespace kube-system \
+  --values cilium-values.yaml
+```
+
 
 ## After the k8s cluster is up and running
 暗号鍵の入ったファイルを用意して、`kubectl apply -f key.yaml`を実行する。

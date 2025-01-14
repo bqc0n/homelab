@@ -26,3 +26,7 @@ ipam:
     clusterPoolIPv4PodCIDRMaskSize: 24
     clusterPoolIPv6PodCIDRList: ["fd85:ee78:d8a6:8607::1:0000/112"]
     clusterPoolIPv6PodCIDRMaskSize: 120
+ingressController:
+  enabled: true
+  default: true
+  enforceHttps: false
