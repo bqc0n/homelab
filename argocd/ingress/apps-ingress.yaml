@@ -35,6 +35,9 @@ metadata:
 spec:
   type: ExternalName
   externalName: argocd-server-nodeport.argocd.svc.cluster.local.
+  ports:
+    - port: 8080
+      targetPort: 8080
 ---
 apiVersion: v1
 kind: Service
@@ -44,4 +47,7 @@ metadata:
 spec:
   type: ExternalName
   externalName: grafana-svc.dash.svc.cluster.local.
+  ports:
+    - port: 3000
+      targetPort: 3000
 ---
