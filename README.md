@@ -117,8 +117,8 @@ nfsをmountする時は、`nfs-common`をインストールすること。
 - [ ] ディレクトリ構造の整理
 - [ ] ドキュメントの整理
 - [ ] Ciliumの Native Routingを使う。podからipv6 internetにもアクセスしたいけど、GUAのprefixが可変なのをどうするか...ULAをNAPTする?もしくはv6を使わない選択肢。
-- [ ] Ciliumに詳しくなる
 - [ ] NodeLocal DNSを設定すると. NSを大量にクエリしていた問題の原因究明、なぜ急に治ったかの調査
+- [ ] Ingressが動くようにする
 
 
 - search ip
