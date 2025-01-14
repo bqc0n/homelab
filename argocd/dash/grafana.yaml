@@ -1,22 +1,4 @@
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: grafana-ingress-test
-  namespace: dash
-spec:
-  ingressClassName: cilium
-  rules:
-    - http:
-        paths:
-          - path: /
-            backend:
-              service:
-                name: grafana-svc
-                port:
-                  number: 3000
-            pathType: Prefix
----
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
