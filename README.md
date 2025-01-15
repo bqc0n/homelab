@@ -21,6 +21,12 @@ ansible-playbook setup_homelab.yaml
 
 ## kubespray
 
+```shell
+# at repository root
+cp kubespray.yaml kubespray/kubespray.yaml
+cd kubespray
+```
+
 ### venv作成とactivate
 ```shell
 python3 -m venv venv

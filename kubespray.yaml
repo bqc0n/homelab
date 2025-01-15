@@ -1,0 +1,8 @@
+- name: Prepare Kubespray
+  hosts: kube_cluster
+  tasks:
+    - name: Prepare Kubespray | Set ip6 variable
+      set_fact:
+        ip6: "{{ hostvars[inventory_hostname]['ansible_default_ipv6']['address'] }}"
+- name: Install Kubernetes
+  ansible.builtin.import_playbook: cluster.yml
