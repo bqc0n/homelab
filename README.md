@@ -90,6 +90,23 @@ kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 kubectl apply -f https://github.com/k8up-io/k8up/releases/download/k8up-4.8.3/k8up-crd.yaml --server-side
 ```
+
+To prevent cilium resources from being detected by argoCD, do the following:
+```shell
+k edit cm -n argocd argocd-cm
+```
+and paste this
+```yaml
+data:
+  resource.exclusions: |
+    - apiGroups:
+        - cilium.io
+      kinds:
+        - CiliumIdentity
+      clusters:
+        - "*"
+```
+
 できたら、argocd/argo-webui.yamlを適用してweb UIにアクセスする。
 ```shell
 argocd admin initial-password -n argocd
