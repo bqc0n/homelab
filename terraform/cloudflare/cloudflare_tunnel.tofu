@@ -30,6 +30,10 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "cf_grafana" {
       service = "http://grafana-svc.dash.svc.cluster.local."
     }
     ingress_rule {
+      hostname = "misskey.${local.domain}"
+      service = "http://misskey.misskey.svc.cluster.local."
+    }
+    ingress_rule {
       service  = "http_status:404"
     }
   }
