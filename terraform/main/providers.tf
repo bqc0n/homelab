@@ -8,10 +8,6 @@ terraform {
       source = "carlpett/sops"
       version = "1.1.1"
     }
-    cloudflare = {
-      source = "cloudflare/cloudflare"
-      version = ">= 4.40.0"
-    }
   }
 }
 
@@ -20,8 +16,4 @@ provider "proxmox" {
   pm_api_token_id = data.sops_file.secrets.data["proxmox.token_id"]
   pm_api_token_secret = data.sops_file.secrets.data["proxmox.token_secret"]
   # pm_tls_insecure = true
-}
-
-provider "cloudflare" {
-  api_token = data.sops_file.secrets.data["cloudflare.api_token"]
 }
