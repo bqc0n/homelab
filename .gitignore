@@ -1,4 +1,6 @@
 .secrets/
+# kubespray downloads k8s cluster secrets to this directory
+artifacts/
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,intellij,terraform,ansible
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,intellij,terraform,ansible
 
