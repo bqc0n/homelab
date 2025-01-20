@@ -24,14 +24,3 @@
 |:---------------------------------------------------------------------:|:---------------------------------------------------------------------:|
 | [Proxmox Virtual Environment](https://www.proxmox.com/en/products/proxmox-virtual-environment/overview) | [AGPL-3.0](https://www.gnu.org/licenses/agpl-3.0.html#license-text) |
 | [geraldwuhoo/homelab-iac](https://github.com/geraldwuhoo/homelab-iac) | [MIT](https://github.com/geraldwuhoo/homelab-iac/blob/master/LICENSE) |
-
-- search ip
-```shell
-kubectl api-resources  -oname |while read r;
-do 
-     echo -n "$r ----> ";
-     kubectl get $r -A -o yaml | egrep '\d+\.\d+\.\d+\.\d+';
-     echo "" ;
-done
-```
- 
