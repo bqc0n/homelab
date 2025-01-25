@@ -8,6 +8,7 @@ resource "cloudflare_zero_trust_access_application" "homelab_private" {
   session_duration = "24h"
   type = "self_hosted"
   destinations { uri = "grafana.${local.domain}" }
+  destinations { uri = "argocd.${local.domain}" }
 }
 
 resource "cloudflare_zero_trust_access_policy" "homelab_private" {
@@ -32,6 +33,10 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "cf_grafana" {
     ingress_rule {
       hostname = "misskey.${local.domain}"
       service = "http://misskey.misskey.svc.cluster.local."
+    }
+    ingress_rule {
+      hostname = "argocd.${local.domain}"
+      service = "https://argocd-server.argocd.svc.cluster.local."
     }
     ingress_rule {
       service  = "http_status:404"
