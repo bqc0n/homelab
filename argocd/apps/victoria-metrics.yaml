@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: victoria-metrics
+  namespace: argocd
+spec:
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://victoriametrics.github.io/helm-charts/
+    targetRevision: 0.13.6
+    chart: victoria-metrics-single
+    helm:
+      parameters:
+        - name: server.persistentVolume.size
+          value: 128Gi
+        - name: server.persistentVolume.storageClassName
+          value: nfs-ssd-1
+        - name: server.name
+          value: victoria-metrics
+        - name: server.fullnameOverride
+          value: victoria-metrics
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+    syncOptions:
+      - CreateNamespace=true
