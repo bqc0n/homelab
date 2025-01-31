@@ -13,6 +13,7 @@ spec:
     chart: victoria-metrics-k8s-stack
     helm:
       valuesObject:
+        fullnameOverride: victoria-metrics
         vmsingle.spec:
           storage:
             storageClassName: nfs-ssd-1
