@@ -9,18 +9,19 @@ spec:
     server: https://kubernetes.default.svc
   source:
     repoURL: https://victoriametrics.github.io/helm-charts/
-    targetRevision: 0.13.6
-    chart: victoria-metrics-single
+    targetRevision: 0.35.1
+    chart: victoria-metrics-k8s-stack
     helm:
       parameters:
-        - name: server.persistentVolume.size
-          value: 128Gi
-        - name: server.persistentVolume.storageClassName
-          value: nfs-ssd-1
-        - name: server.name
-          value: victoria-metrics
-        - name: server.fullnameOverride
-          value: victoria-metrics
+        - name: vmsingle.spec
+          value: |
+            storage:
+              storageClassName: nfs-ssd-1
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 128Gi
   sources: []
   project: default
   syncPolicy:
@@ -28,4 +29,5 @@ spec:
       prune: false
       selfHeal: false
     syncOptions:
+      - ServerSideApply=true
       - CreateNamespace=true
