@@ -63,10 +63,13 @@ cp ../ansible/artifacts/admin.conf ~/.kube/config
 ```
 
 ## Cilium
+```shell
+k delete daemonsets.apps -n kube-system kube-proxy
+```
 
 ```shell
 helm repo add cilium https://helm.cilium.io/
-helm install cilium cilium/cilium --version 1.16.5 --atomic \
+helm install cilium cilium/cilium --version 1.16.6 --atomic \
   --namespace kube-system \
   --values cilium-values.yaml
 ```
@@ -81,7 +84,6 @@ helm upgrade cilium cilium/cilium --version 1.16.5 --atomic \
   --namespace kube-system \
   --values cilium-values.yaml
 ```
-
 
 ## After the k8s cluster is up and running
 暗号鍵の入ったファイルを用意して、`kubectl apply -f key.yaml`を実行する。

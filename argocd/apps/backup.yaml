@@ -10,7 +10,7 @@ spec:
     server: https://kubernetes.default.svc
   source:
     path: argocd/backup
-    repoURL: git@github.com:bqc0n/homelab.git
+    repoURL: https://github.com/bqc0n/homelab.git
     targetRevision: HEAD
     directory:
       recurse: true

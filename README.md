@@ -12,7 +12,7 @@
 - [ ] Terraform Remote State
 - [ ] Renovate
 - [ ] HA k8s
-- [ ] https://github.com/actualbudget/actual
+- [ ] Apt cache server
 
 # Requirements
 

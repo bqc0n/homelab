@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   source:
     path: argocd/misskey
-    repoURL: git@github.com:bqc0n/homelab.git
+    repoURL: https://github.com/bqc0n/homelab.git
     targetRevision: HEAD
     directory:
       recurse: true
