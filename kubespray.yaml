@@ -6,3 +6,12 @@
         ip6: "{{ hostvars[inventory_hostname]['ansible_default_ipv6']['address'] }}"
 - name: Install Kubernetes
   ansible.builtin.import_playbook: cluster.yml
+
+- name: chown opt/cni
+  hosts: kube_cluster
+  tasks:
+    - name: chown opt/cni
+      ansible.builtin.file:
+        path: /opt/cni/bin
+        owner: root
+        group: root

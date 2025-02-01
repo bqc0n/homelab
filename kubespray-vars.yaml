@@ -13,3 +13,5 @@ cilium_kube_proxy_replacement: true # don't install kube-proxy
 
 kubectl_localhost: true
 kubeconfig_localhost: true
+
+kube_proxy_deployed: false
