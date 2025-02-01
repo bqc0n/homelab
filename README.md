@@ -2,15 +2,15 @@
 > 工事中 | Under Construction
 
 # TODO
-- [ ] READMEを書く
+- [ ] README を書く
 - [ ] Credits をしっかり書く
 - [ ] ディレクトリ構造の整理
 - [ ] ドキュメントの整理
-- [ ] Ciliumの Native Routing
+- [ ] Cilium の Native Routing
 - [ ] NixOS
 - [ ] 全貌がわかる図
 - [ ] Terraform Remote State
-- [ ] Renovate
+- [ ] Renovate Bot
 - [ ] HA k8s
 - [ ] Apt cache server
 

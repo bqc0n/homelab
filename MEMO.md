@@ -93,9 +93,9 @@ k8upのCRDも適用する(Helm Chartに含まれていないため)。
 
 ```shell
 k apply -f node-local-dns.yaml
-kubectl create namespace argocd
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-kubectl apply -f https://github.com/k8up-io/k8up/releases/download/k8up-4.8.3/k8up-crd.yaml --server-side
+k create namespace argocd
+k apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+k apply -f https://github.com/k8up-io/k8up/releases/download/k8up-4.8.3/k8up-crd.yaml --server-side
 ```
 
 To prevent cilium resources from being detected by argoCD, edit the argocd configmap:
@@ -114,11 +114,15 @@ data:
         - "*"
 ```
 
-できたら、argocd/argo-webui.yamlを適用してweb UIにアクセスする。
+できたら `argo-webui.yaml`を適用してweb UIにアクセスする。
+```shell
+k apply -f argocd/apps/argo-webui.yaml
+```
 
 初期パスワードは以下のコマンドで取得できる:
 ```shell
-argocd admin initial-password -n argocd
+aargocd admin initial-password -n argocd
+rgocd admin initial-password -n argocd
 ```
 Settings/Repositoriesでこのリポジトリを追加し、app-of-appsをDeployして作業完了。
 
