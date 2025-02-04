@@ -1,6 +1,30 @@
 > [!NOTE]
 > 工事中 | Under Construction
 
+# Homelab
+
+#### Hardware
+There are 3 nodes.
+
+| Node |            CPU            | RAM  |
+|:----:|:-------------------------:|:----:|
+| pve01 |   4C/4T (Core i3-8100)    | 32GB |
+| pve02 | 8C/16T (Xeon Silver 4108) | 64GB |
+| pve03 |   6C/6T (Ryzen 5 3500)    | 32GB |
+
+#### Virtualization
+[Proxmox Virtual Environment](https://www.proxmox.com/en/products/proxmox-virtual-environment/overview)
+
+#### VM/LXC Management
+[Terraform](https://github.com/hashicorp/terraform)/[opentofu](https://github.com/opentofu/opentofu) and [Telmate/terraform-provider-proxmox](https://github.com/Telmate/terraform-provider-proxmox)
+
+#### Software Management
+[Ansible](https://github.com/ansible/ansible). Playbooks are located in [`ansible/`](ansible/).
+
+#### Application Deployment
+[Kubernetes](https://kubernetes.io), and [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) for GitOps.
+manifests are located in [`argocd/`](argocd/).
+
 # TODO
 - [ ] README を書く
 - [ ] Credits をしっかり書く
