@@ -44,6 +44,11 @@ data:
       mode tcp
       default_backend mc_tob_server
       
+    frontend mc_tob_building
+      bind 0.0.0.0:25567
+      mode tcp
+      default_backend mc_tob_server_building
+      
     frontend mc_tob_sftp
       bind 0.0.0.0:2222
       mode tcp
@@ -56,6 +61,10 @@ data:
     backend mc_tob_server
       mode tcp
       server mc-tob-server mc-tob-svc.mc-tob.svc.cluster.local.:25565
+      
+    backend mc_tob_server_building
+      mode tcp
+      server mc-tob-server mc-tob-building-svc.mc-tob.svc.cluster.local.:25565
     
     backend mc_tob_sftp  
       mode tcp

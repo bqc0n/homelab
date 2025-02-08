@@ -46,14 +46,19 @@ spec:
             - name: SFTP_USERS
               value: "sftp::1001:1000"
           volumeMounts:
-            - mountPath: /home/sftp/share
-              name: mc-tob-sftp-share
+            - mountPath: /home/sftp/production
+              name: mc-tob-sftp-production
+            - mountPath: /home/sftp/building
+              name: mc-tob-sftp-building
             - mountPath: /home/sftp/.ssh/keys/
               name: mc-tob-sftp-pubkey
       volumes:
         - name: mc-tob-sftp-share
           persistentVolumeClaim:
             claimName: mc-tob-data
+        - name: mc-tob-sftp-share
+          persistentVolumeClaim:
+            claimName: mc-tob-data-building
         - name: mc-tob-sftp-pubkey
           configMap:
             name: mc-tob-sftp-pubkey

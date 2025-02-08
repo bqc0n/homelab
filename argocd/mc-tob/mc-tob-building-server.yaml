@@ -1,0 +1,63 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: mc-tob
+  name: mc-tob-building-svc
+spec:
+  selector:
+      app: mc-tob-building-server
+  ports:
+    - protocol: TCP
+      port: 25565
+      targetPort: 25565
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mc-tob-data-building
+  namespace: mc-tob
+spec:
+  storageClassName: nfs-ssd-1
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: mc-tob
+  name: mc-tob-building-server
+spec:
+  podManagementPolicy: OrderedReady
+  selector:
+    matchLabels:
+      app: mc-tob-building-server
+  serviceName: mc-tob-building-server
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mc-tob-building-server
+    spec:
+      containers:
+      - name: mc-tob-building-server
+        image: itzg/minecraft-server:java8-graalvm
+        resources:
+          requests:
+            memory: "4Gi"
+        volumeMounts:
+          - mountPath: /data
+            name: mc-tob-data
+        ports:
+        - containerPort: 25565
+        envFrom:
+          - configMapRef:
+              name: mc-tob-config
+      volumes:
+        - name: mc-tob-data-building
+          persistentVolumeClaim:
+            claimName: mc-tob-data-building
+---
