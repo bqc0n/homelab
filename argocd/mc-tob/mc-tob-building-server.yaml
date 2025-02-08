@@ -50,7 +50,7 @@ spec:
             memory: "4Gi"
         volumeMounts:
           - mountPath: /data
-            name: mc-tob-data
+            name: mc-tob-data-building
         ports:
         - containerPort: 25565
         envFrom:
