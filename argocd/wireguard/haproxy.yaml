@@ -43,6 +43,11 @@ data:
       bind [::]:25566
       mode tcp
       default_backend mc_tob_server
+      
+    frontend mc_tob_sftp
+      bind [::]:2222
+      mode tcp
+      default_backend mc_tob_sftp
     
     backend vanilla_minecraft
       mode tcp
@@ -51,3 +56,7 @@ data:
     backend mc_tob_server
       mode tcp
       server mc-tob-server mc-tob-svc.mc-tob.svc.cluster.local.:25565
+    
+    backend mc_tob_sftp  
+      mode tcp
+      server mc-tob-sftp mc-tob-sftp-svc.mc-tob.svc.cluster.local.:22
