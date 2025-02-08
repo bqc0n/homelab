@@ -5,6 +5,7 @@ metadata:
   name: mc-tob-config
   namespace: mc-tob
 data:
+  LEVEL_TYPE: "minecraft:flat"
   TYPE: "paper"
   EULA: "true"
   LOG_TIMESTAMP: "true"
