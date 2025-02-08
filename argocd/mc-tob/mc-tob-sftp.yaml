@@ -58,7 +58,7 @@ spec:
               name: mc-tob-sftp-share
             - mountPath: /home/sftp/.ssh/keys/
               name: mc-tob-sftp-pubkey
-            - mountPath: /etc/subgid
+            - mountPath: /etc/
               name: subgid
               readOnly: true
       volumes:
