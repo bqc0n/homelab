@@ -35,12 +35,12 @@ data:
       maxconn                 3000
     
     frontend minecraft
-      bind *:25565
+      bind [::]:25565
       mode tcp
       default_backend vanilla_minecraft
        
     frontend mc_tob
-      bind *:25566
+      bind [::]:25566
       mode tcp
       default_backend mc_tob_server
     
