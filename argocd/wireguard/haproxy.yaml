@@ -77,4 +77,4 @@ data:
 
     backend chikoke_server
       mode http
-      server chikoke api-server-svc.chikoke.svc.cluster.local.:5000
+      server chikoke api-server-svc.chikoke.svc.cluster.local.:80
