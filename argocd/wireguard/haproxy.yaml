@@ -32,7 +32,12 @@ data:
       timeout server          1m
       timeout http-keep-alive 10s
       timeout check           10s
-      maxconn                 3000
+      maxconn                 3000    
+              
+    frontend chikoke
+      bind 0.0.0.0:5000
+      mode http
+      default_backend chikoke_server
     
     frontend minecraft
       bind 0.0.0.0:25565
@@ -69,3 +74,7 @@ data:
     backend mc_tob_sftp  
       mode tcp
       server mc-tob-sftp mc-tob-sftp-svc.mc-tob.svc.cluster.local.:22
+
+    backend chikoke_server
+      mode http
+      server chikoke http://api-server-svc.chikoke.svc.cluster.local.:5000
