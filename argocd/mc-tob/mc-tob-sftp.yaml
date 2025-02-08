@@ -60,7 +60,6 @@ spec:
               name: mc-tob-sftp-pubkey
             - mountPath: /etc/
               name: subgid
-              readOnly: true
       volumes:
         - name: mc-tob-sftp-share
           persistentVolumeClaim:
