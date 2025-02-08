@@ -121,8 +121,7 @@ k apply -f argocd/apps/argo-webui.yaml
 
 初期パスワードは以下のコマンドで取得できる:
 ```shell
-aargocd admin initial-password -n argocd
-rgocd admin initial-password -n argocd
+argocd admin initial-password -n argocd
 ```
 Settings/Repositoriesでこのリポジトリを追加し、app-of-appsをDeployして作業完了。
 
