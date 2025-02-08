@@ -51,8 +51,6 @@ spec:
         volumeMounts:
           - mountPath: /data
             name: mc-tob-data
-          - mountPath: /data/extras
-            name: mc-tob-plugins
         ports:
         - containerPort: 25565
         envFrom:
@@ -62,6 +60,3 @@ spec:
         - name: mc-tob-data
           persistentVolumeClaim:
             claimName: mc-tob-data
-        - name: mc-tob-plugins
-          configMap:
-            name: mc-tob-plugins
