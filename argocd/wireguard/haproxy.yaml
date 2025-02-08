@@ -35,10 +35,19 @@ data:
       maxconn                 3000
     
     frontend minecraft
-      bind *:27135
+      bind *:25565
       mode tcp
       default_backend vanilla_minecraft
+       
+    frontend mc_tob
+      bind *:25566
+      mode tcp
+      default_backend mc_tob_server
     
     backend vanilla_minecraft
       mode tcp
       server mc-vanilla mc-vanilla-svc.mc-vanilla.svc.cluster.local.:25565
+
+    backend mc_tob_server
+      mode tcp
+      server mc-tob-server mc-tob-svc.mc-tob.svc.cluster.local.:25565
