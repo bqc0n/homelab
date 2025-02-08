@@ -11,7 +11,7 @@ data:
   MAX_PLAYERS: "10"
   MEMORY: "4G"
   MOTD: "Tower of Babel"
-  OPS: "bqc0n,soramame_256"
+  OPS: "bqc0n,soramame_256,KURAGON,TashiKani_,IchinoseYuki,urabe03,Malb7mm,HeihoDESU"
   OVERRIDE_WHITELIST: "true"
   PVP: "false"
   SPAWN_PROTECTION: "0"
