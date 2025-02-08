@@ -1,0 +1,59 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mc-tob-sftp-pubkey
+  namespace: mc-tob
+data:
+  key.pub: |
+    ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIChEEaY7O2dX+vxT90f5JHV92H/uZu3uynJtTCcnau3L
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mc-tob-sftp-svc
+  namespace: mc-tob
+spec:
+  selector:
+    app: mc-tob-sftp
+  ports:
+    - protocol: TCP
+      port: 22
+      targetPort: 22
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mc-tob-sftp
+  namespace: mc-tob
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mc-tob-sftp
+  template:
+    metadata:
+      labels:
+          app: mc-tob-sftp
+    spec:
+      containers:
+        - name: mc-tob-sftp
+          image: atmoz/sftp
+          ports:
+            - containerPort: 22
+          env:
+            - name: SFTP_USERS
+              value: "sftp::1001"
+          volumeMounts:
+            - mountPath: /home/sftp/share
+              name: mc-tob-sftp-share
+            - mountPath: /home/sftp/.ssh/keys/
+              name: mc-tob-sftp-pubkey
+      volumes:
+        - name: mc-tob-sftp-share
+          persistentVolumeClaim:
+            claimName: mc-tob-data
+        - name: mc-tob-sftp-pubkey
+          configMap:
+              name: mc-tob-sftp-pubkey
+---
