@@ -53,7 +53,7 @@ spec:
             - mountPath: /home/sftp/.ssh/keys/
               name: mc-tob-sftp-pubkey
       volumes:
-        - name: mc-tob-sftp-share
+        - name: mc-tob-sftp-production
           persistentVolumeClaim:
             claimName: mc-tob-data
         - name: mc-tob-sftp-share
