@@ -5,7 +5,6 @@ metadata:
   name: mc-tob-config
   namespace: mc-tob
 data:
-  PLUGINS_FILE: "/data/extras/plugins.ini"
   TYPE: "paper"
   EULA: "true"
   LOG_TIMESTAMP: "true"
