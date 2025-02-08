@@ -64,7 +64,7 @@ data:
       
     backend mc_tob_server_building
       mode tcp
-      server mc-tob-server mc-tob-building-svc.mc-tob.svc.cluster.local.:25565
+      server mc-tob-server-building mc-tob-building-svc.mc-tob.svc.cluster.local.:25565
     
     backend mc_tob_sftp  
       mode tcp
