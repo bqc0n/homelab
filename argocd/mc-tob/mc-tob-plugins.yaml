@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mc-tob-plugins
+  namespace: mc-tob
+data:
+  plugins.ini: |
+    # ProtocolLib
+    https://github.com/dmulloy2/ProtocolLib/releases/download/5.3.0/ProtocolLib.jar
+    
+    # Skript 2.6.4
+    https://github.com/SkriptLang/Skript/releases/download/2.6.4/Skript-2.6.4.jar
+    # SkQuery
+    https://github.com/SkQuery/SkQuery/releases/download/4.1.4/SkQuery-4.1.4.jar
+    # SkRayFall has space character in file name, so fails to download
+    # skdragon, downloaded via spiget
+    # SkBee 1.10.3
+    https://github.com/ShaneBeee/SkBee/releases/download/1.10.3/SkBee-1.10.3.jar
+    # SkRage 2.5.0
+    https://github.com/akon1248/SkRage/releases/download/2.5.0/SkRage-2.5.0.jar
+    
+    # MythicMobs
+    https://dev.bukkit.org/projects/mythicmobs/files/2840724/download
+    # libs-disguises-free, via spiget
+    
+    # Building
+    https://dev.bukkit.org/projects/worldedit/files/2431372/download
+    https://ci.athion.net/job/FastAsyncWorldEdit-Legacy/lastSuccessfulBuild/artifact/target/FastAsyncVoxelSniper-favs-21.03.26-5ff3a9b-1286-22.3.9.jar
+    https://ci.athion.net/job/FastAsyncWorldEdit-Legacy/lastSuccessfulBuild/artifact/target/FastAsyncWorldEdit-bukkit-21.03.26-5ff3a9b-1286-22.3.9.jar
+    # BuildersUtilities is only available in spigot and we use older version, so add jar to VCS directory
+    #GB
+    # Go paint is only available in spigot (ry

@@ -1,0 +1,22 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mc-tob-config
+  namespace: mc-tob
+data:
+  PLUGINS_FILE: "/data/extras/plugins.ini"
+  TYPE: "paper"
+  EULA: "true"
+  LOG_TIMESTAMP: "true"
+  MAX_PLAYERS: "10"
+  MEMORY: "4G"
+  MOTD: "Tower of Babel"
+  OPS: "bqc0n,soramame_256"
+  OVERRIDE_WHITELIST: "true"
+  PVP: "false"
+  SPAWN_PROTECTION: "0"
+  TZ: "Asia/Tokyo"
+  USE_AIKAR_FLAGS: "true"
+  VERSION: "1.12.2"
+  WHITELIST: "bqc0n,soramame_256"
