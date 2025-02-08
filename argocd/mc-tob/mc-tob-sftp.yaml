@@ -44,7 +44,7 @@ spec:
             - containerPort: 22
           env:
             - name: SFTP_USERS
-              value: "sftp::1001:0"
+              value: "sftp::1001:1000"
           volumeMounts:
             - mountPath: /home/sftp/share
               name: mc-tob-sftp-share
