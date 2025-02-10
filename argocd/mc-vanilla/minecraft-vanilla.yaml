@@ -1,4 +1,18 @@
 ---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: wireguard-privatekey
+  namespace: mc-vanilla
+spec:
+  encryptedData:
+    privatekey: AgAtQEn3emDsAdW+qYQ6NcFb2Bop8IR+95yIaJ6JaPBBNyK2IE13pEv4FnGZWOuWMHUzI7kvf8VmSGPNI0OMToWcTmWQgjQWxoTzwBVWYhQtXKkLPIPa3YhCdpLflroUDKBXoO8xShd3lET6taVZVL2Oe9CLdFo+iuxUfoaayJDNpa8OROU09Ri5FxvMGUqRFb0SWqEdIAZjjNKSj4Twnef0BRkuMHo1hpdwJfyYOTpE08zHUiM5iJ2cXXidSgdiS35p9ZC3e93gCYBkTpr0pgOUS1NtlD6YwpYeuNC9DZk8Xvo9sLmffX1oU61LEEpqAPsXPgcaT51b+t4koRaPLNQde6YNVVAwTh9UFjCLgTsmHJ+29Tuplu3xo4RxaAfiFEIIShEgfPhnWkOYlJaeE7A6WX/1QvWgg9PcmJIDZwpZ+YJUPezIGj9Sg6In/UTMk6O+FSCXQ7r6yYsg0Vc6OSLfHXj8XmkV8ncHD90o4d61VbeK+UQbxFn/BaY7RUig6sdqzvR3AzcvCDojXGiDbKBc+Jl7m009U5iO9K/R+oBJl2QMJXgPkgZa4eqg/G5utI7E0PLXRQr/LTIeD+qC5YA32GckJw5b89d0TAML5vt3Wt+kO2twsE13ZsGcAvheAQpHLKZmhQ0SApufTa3b6Qib16sOPYujTPn6RoOcfKwD3hWOPUaDsNZ+Tn4/XcA3zDfBWnkLBLgtsl2lB8n8LPzKXxCe0cXC/FHdBKubF2Z3OxpK034MtRfHyvZ3lQ==
+  template:
+    metadata:
+      name: wireguard-privatekey
+      namespace: mc-vanilla
+    type: Opaque
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -45,12 +59,23 @@ spec:
       containers:
       - name: mc-vanilla-server
         image: itzg/minecraft-server:java17-graalvm
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            apk add --no-cache wireguard-tools
+            ip link add dev wg0 type wireguard
+            ip address add dev wg0 $WIREGUARD_IP
+            wg set wg0 private-key /wg-key/privatekey peer Rybuqf4c2TJt8X/ns/b8ApGgnu9pAtD9zArmlrIf2Hk= allowed-ips 10.9.9.1/32 endpoint minecraft.bqc0n.com:51820 persistent-keepalive 25
+            ip link set up dev wg0
+            /start
         resources:
           requests:
             memory: "3Gi"
         volumeMounts:
           - mountPath: /data
             name: mc-vanilla-data
+          - mountPath: /wg-key
+            name: wireguard-privatekey
         ports:
         - containerPort: 25565
         envFrom:
@@ -62,3 +87,6 @@ spec:
         - name: mc-vanilla-data
           persistentVolumeClaim:
             claimName: mc-vanilla-data
+        - name: wireguard-privatekey
+          secret:
+            secretName: wireguard-privatekey
