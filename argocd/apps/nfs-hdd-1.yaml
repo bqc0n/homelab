@@ -5,11 +5,9 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    name: ''
     namespace: nfs-provisioner-hdd-1
     server: https://kubernetes.default.svc
   source:
-    path: ''
     repoURL: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
     targetRevision: 4.0.18
     chart: nfs-subdir-external-provisioner
@@ -28,7 +26,6 @@ spec:
           value: Retain
         - name: storageClass.pathPattern
           value: "$${.PVC.namespace}/$${.PVC.name}"
-  sources: []
   project: default
   syncPolicy:
     automated:

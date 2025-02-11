@@ -4,7 +4,6 @@ metadata:
   name: dash
 spec:
   destination:
-    name: ''
     namespace: dash
     server: https://kubernetes.default.svc
   source:
@@ -13,7 +12,6 @@ spec:
     targetRevision: HEAD
     directory:
       recurse: true
-  sources: []
   project: default
   syncPolicy:
     automated:

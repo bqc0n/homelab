@@ -5,7 +5,6 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    name: ''
     namespace: backup
     server: https://kubernetes.default.svc
   source:
@@ -14,7 +13,6 @@ spec:
     targetRevision: HEAD
     directory:
       recurse: true
-  sources: []
   project: default
   syncPolicy:
     automated:

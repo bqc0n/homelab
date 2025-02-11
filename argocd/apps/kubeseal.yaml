@@ -5,7 +5,6 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    name: ''
     namespace: kube-system
     server: https://kubernetes.default.svc
   source:
@@ -20,7 +19,6 @@ spec:
           value: "sealed-secrets-controller"
         - name: keyrenewperiod
           value: "0"
-  sources: []
   project: default
   syncPolicy:
     automated:

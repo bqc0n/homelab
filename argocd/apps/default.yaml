@@ -4,7 +4,6 @@ metadata:
   name: common-apps
 spec:
   destination:
-    name: ''
     namespace: default
     server: https://kubernetes.default.svc
   source:
@@ -13,7 +12,6 @@ spec:
     targetRevision: HEAD
     directory:
       recurse: true
-  sources: []
   project: default
   syncPolicy:
     automated:
