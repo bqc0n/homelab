@@ -24,29 +24,17 @@ argocdReleaseOverride: ""
 
 # -- VictoriaMetrics Operator dependency chart configuration. More values can be found [here](https://docs.victoriametrics.com/helm/victoriametrics-operator#parameters). Also checkout [here](https://docs.victoriametrics.com/operator/vars) possible ENV variables to configure operator behaviour
 victoria-metrics-operator:
-  enabled: true
-  crds:
-    plain: true
-    cleanup:
-      enabled: true
-      image:
-        repository: bitnami/kubectl
-        pullPolicy: IfNotPresent
-  serviceMonitor:
-    enabled: true
-  operator:
-    # -- By default, operator converts prometheus-operator objects.
-    disable_prometheus_converter: false
+  enabled: false
 
 defaultDashboards:
   # -- Enable custom dashboards installation
   enabled: true
-  defaultTimezone: utc
+  defaultTimezone: jst
   labels: {}
   annotations: {}
   grafanaOperator:
     # -- Create dashboards as CRDs (requires grafana-operator to be installed)
-    enabled: false
+    enabled: true
     spec:
       instanceSelector:
         matchLabels:
@@ -279,6 +267,7 @@ vmsingle:
     replicaCount: 1
     extraArgs: {}
     storage:
+      storageClassName: nfs-ssd-1
       accessModes:
         - ReadWriteOnce
       resources:
@@ -323,179 +312,6 @@ vmsingle:
 vmcluster:
   # -- Create VMCluster CR
   enabled: false
-  # -- VMCluster annotations
-  annotations: {}
-  # -- Full spec for VMCluster CRD. Allowed values described [here](https://docs.victoriametrics.com/operator/api#vmclusterspec)
-  spec:
-    # -- Data retention period. Possible units character: h(ours), d(ays), w(eeks), y(ears), if no unit character specified - month. The minimum retention period is 24h. See these [docs](https://docs.victoriametrics.com/single-server-victoriametrics/#retention)
-    retentionPeriod: "1"
-    replicationFactor: 2
-    vmstorage:
-      replicaCount: 2
-      storageDataPath: /vm-data
-      storage:
-        volumeClaimTemplate:
-          spec:
-            resources:
-              requests:
-                storage: 10Gi
-      resources:
-        {}
-        # limits:
-        #   cpu: "1"
-        #   memory: 1500Mi
-    vmselect:
-      port: "8481"
-      replicaCount: 2
-      cacheMountPath: /select-cache
-      extraArgs: {}
-      storage:
-        volumeClaimTemplate:
-          spec:
-            resources:
-              requests:
-                storage: 2Gi
-      resources:
-        {}
-        # limits:
-        #   cpu: "1"
-        #   memory: "1000Mi"
-        # requests:
-        #   cpu: "0.5"
-        #   memory: "500Mi"
-    vminsert:
-      port: "8480"
-      replicaCount: 2
-      extraArgs: {}
-      resources:
-        {}
-        # limits:
-        #   cpu: "1"
-        #   memory: 1000Mi
-        # requests:
-        #   cpu: "0.5"
-        #   memory: "500Mi"
-
-  ingress:
-    storage:
-      # -- Enable deployment of ingress for server component
-      enabled: false
-
-      # -- Ingress annotations
-      annotations: {}
-        # kubernetes.io/ingress.class: nginx
-        # kubernetes.io/tls-acme: "true"
-
-      # -- Ingress extra labels
-      labels: {}
-
-      # -- Ingress controller class name
-      ingressClassName: ""
-
-      # -- Ingress path type
-      pathType: Prefix
-
-      # -- Ingress default path
-      path: ""
-
-      # -- Array of host objects
-      hosts: []
-      #  - vmstorage.domain.com
-
-      # -- Extra paths to prepend to every host configuration. This is useful when working with annotation based services.
-      extraPaths: []
-      # - path: /*
-      #   pathType: Prefix
-      #   backend:
-      #     service:
-      #       name: ssl-redirect
-      #       port:
-      #         name: service
-
-      # -- Array of TLS objects
-      tls: []
-      #  - secretName: vmstorage-ingress-tls
-      #    hosts:
-      #      - vmstorage.domain.com
-    select:
-      # -- Enable deployment of ingress for server component
-      enabled: false
-
-      # -- Ingress annotations
-      annotations: {}
-        # kubernetes.io/ingress.class: nginx
-        # kubernetes.io/tls-acme: "true"
-
-      # -- Ingress extra labels
-      labels: {}
-
-      # -- Ingress controller class name
-      ingressClassName: ""
-
-      # -- Ingress path type
-      pathType: Prefix
-
-      # -- Ingress default path
-      path: '{{ dig "extraArgs" "http.pathPrefix" "/" .Values.vmcluster.spec.vmselect }}'
-
-      # -- Array of host objects
-      hosts: []
-      #  - vmselect.domain.com
-      # -- Extra paths to prepend to every host configuration. This is useful when working with annotation based services.
-      extraPaths: []
-      # - path: /*
-      #   pathType: Prefix
-      #   backend:
-      #     service:
-      #       name: ssl-redirect
-      #       port:
-      #         name: service
-
-      # -- Array of TLS objects
-      tls: []
-      #  - secretName: vmselect-ingress-tls
-      #    hosts:
-      #      - vmselect.domain.com
-    insert:
-      # -- Enable deployment of ingress for server component
-      enabled: false
-
-      # -- Ingress annotations
-      annotations:
-        {}
-        # kubernetes.io/ingress.class: nginx
-        # kubernetes.io/tls-acme: "true"
-
-      # -- Ingress extra labels
-      labels: {}
-
-      # -- Ingress controller class name
-      ingressClassName: ""
-
-      # -- Ingress path type
-      pathType: Prefix
-
-      # -- Ingress default path
-      path: '{{ dig "extraArgs" "http.pathPrefix" "/" .Values.vmcluster.spec.vminsert }}'
-
-      # -- Array of host objects
-      hosts: []
-      #  - vminsert.domain.com
-      # -- Extra paths to prepend to every host configuration. This is useful when working with annotation based services.
-      extraPaths: []
-      # - path: /*
-      #   pathType: Prefix
-      #   backend:
-      #     service:
-      #       name: ssl-redirect
-      #       port:
-      #         name: service
-
-      # -- Array of TLS objects
-      tls: []
-      #  - secretName: vminsert-ingress-tls
-      #    hosts:
-      #      - vminsert.domain.com
 
 alertmanager:
   # -- Create VMAlertmanager CR
@@ -804,7 +620,7 @@ vmagent:
 defaultDatasources:
   grafanaOperator:
     # -- Create datasources as CRDs (requires grafana-operator to be installed)
-    enabled: false
+    enabled: true
     annotations: {}
     spec:
       instanceSelector:
