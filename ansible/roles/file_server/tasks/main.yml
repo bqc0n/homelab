@@ -17,18 +17,20 @@
   ansible.builtin.apt:
     update_cache: yes
 
-- name: Create Share Directory
-  ansible.builtin.file:
-    path: "/mnt/bqc0n"
-    state: directory
-    mode: 0700
-
-- name: Samba - Create Guest User
+- name: Samba - Create User
   ansible.builtin.user:
     name: bqc0n
     password: "{{ sops.smb_bqc0n_password }}"
     state: present
     shell: /bin/bash
+
+- name: Create Share Directory
+  ansible.builtin.file:
+    path: "/mnt/shared/bqc0n"
+    state: directory
+    owner: bqc0n
+    mode: 0700
+
 - name: Group
   ansible.builtin.group:
     name: sftpusers
@@ -46,11 +48,12 @@
     samba_shares:
       - name: bqc0n
         owner: bqc0n
-        create_mode: 0777
-        directory_mode: 0777
+        create_mode: "0700"
+        directory_mode: "0700"
         read_only: false
         writable: true
-        write_list: bqc0n
-        valid_users: bqc0n
+        write_list: +bqc0n
+        valid_users: +bqc0n
         browseable: true
-        path: "/mnt/bqc0n"
+        guest_ok: false
+        path: "/mnt/shared/bqc0n"
