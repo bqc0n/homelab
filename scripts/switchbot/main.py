@@ -20,7 +20,7 @@ client = influxdb_client.InfluxDBClient(
 
 write_api = client.write_api(write_options=ASYNCHRONOUS)
 
-async def main():
+async def scan_and_store():
     stop_event = asyncio.Event()
     def callback(device: bleak.backends.device.BLEDevice, advertising_data: bleak.backends.scanner.AdvertisementData):
         if device.address == MAC:
@@ -45,7 +45,10 @@ async def main():
     async with BleakScanner(callback) as scanner:
         await stop_event.wait()
 
-if __name__ == "__main__":
+async def main():
     while True:
-        asyncio.run(main())
-        time.sleep(600)
+        await scan_and_store()
+        await asyncio.sleep(600)
+
+if __name__ == "__main__":
+    asyncio.run(main())
