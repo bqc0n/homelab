@@ -59,6 +59,10 @@ spec:
       containers:
       - name: mc-tob-server
         image: itzg/minecraft-server:java8-graalvm-ce
+        securityContext:
+          capabilities:
+            add:
+              - NET_ADMIN
         command: ["/bin/sh", "-c"]
         args:
           - |
