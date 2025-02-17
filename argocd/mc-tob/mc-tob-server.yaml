@@ -1,4 +1,18 @@
 ---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: wireguard-privatekey
+  namespace: mc-tob
+spec:
+  encryptedData:
+    privatekey: AgBHvKUJGN6nro3+++70Bz5dzJUWrEeC1AH7bN45fLaxXbr7ReMwpJvaWtrmsQF0b1OJE+6PNSJPEP9Nhrt8I/fTuFl13a5NJmuHIMf+dHSpeRigRq3Rl5DDs/rWozJ9FxXtGE+wKwacSMifHjLgzf87+X1vG2G7zKeREL45iKxni5FzPcLM50bb0w5CsyMJDO58+HfYEqNMJdGJPxhMjI3nVGrT+ex1TJmyGjt2IWR1cS1VVdJgdf+ngYMZJYYpSlGwP4opFc8UdIUmk3aC+JqWdxm2Wc777H7oXvx35oFynTzMTYC/rmx7I6viKDhrvGPQbOXH4XuxSpJpWqgmVCkao2FesyBEb8+QyTGeLOIX/UyqC4IliH+9/NYbQ0cObk9PwLwymgRikYqT9L27HG+BG93hxxWLwkzOJoewNNWt4FAY5SePUUgY25PHvimG6z/KIrx0PMnreZ+h2g75/1NFchM92ogVl2Kyk9RYrrS/8MDAuB9hbB3esFSQ6FvuRCe9dYUFp3/+is4v2gq4OOLVTi1h/sqsk29P34P4MVAKI/JaYiYQ0QGAIGmQ7M0OgObVy4gl4Y1HaGrVOFypEYq6sMncilOlaJe2bqD+xz5lUyYvqNiaSgGXlDTrnJBc76o5B/8aM3Ad8tfp7fkWEBjgx9FFX0BFCrpFp93NFMFlzRC2e97bp1nIdB4f4JiW7leUzUn2ye1w72MrQFyHNnwfS6j1ZCRRSllQdjaFFunVqDPOAj+gvm0e2Vh4CQ==
+  template:
+    metadata:
+      name: wireguard-privatekey
+      namespace: mc-tob
+    type: Opaque
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -45,12 +59,23 @@ spec:
       containers:
       - name: mc-tob-server
         image: itzg/minecraft-server:java8-graalvm-ce
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            dnf install -y iproute wireguard-tools
+            ip link add dev wg0 type wireguard
+            ip address add dev wg0 $WIREGUARD_IP
+            wg set wg0 private-key /wg-key/privatekey peer Rybuqf4c2TJt8X/ns/b8ApGgnu9pAtD9zArmlrIf2Hk= allowed-ips 10.9.9.1/32 endpoint minecraft.bqc0n.com:51820 persistent-keepalive 25
+            ip link set up dev wg0
+            /start
         resources:
           requests:
             memory: "5Gi"
         volumeMounts:
           - mountPath: /data
             name: mc-tob-data
+          - mountPath: /wg-key
+            name: wireguard-privatekey
         ports:
         - containerPort: 25565
         envFrom:
@@ -60,3 +85,6 @@ spec:
         - name: mc-tob-data
           persistentVolumeClaim:
             claimName: mc-tob-data
+        - name: wireguard-privatekey
+          secret:
+            secretName: wireguard-privatekey
