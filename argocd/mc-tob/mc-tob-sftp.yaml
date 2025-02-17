@@ -1,3 +1,18 @@
+# TODO Use SSHPiper
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: wireguard-privatekey-sftp
+  namespace: mc-tob
+spec:
+  encryptedData:
+    privatekey: AgBFI3/tF9zRmiE6z586vBITA9yNJ/8UE8/cWc4z+NL8Q44PGm+69+6zW0ZaGDfLY1QdJSjLF4EN8C6DddTtZwistwF16XkRCAudMlchKn6GyuYsD00Lll8G6RoHn/VkLkDcHFaca3TePt1ffPLKC+3r7+guMuvgk0Pj31LoSUS+b7eIpILvG+cJLhqFKixNS7VWHvi6vv5gWscgRyKkrpZ4kQezYEPMSlxXlTeD9X3Yh1NAfg/gVJRP64aLaYsb5O+eH3+goA5q/HVtpRt6MSF61E5fkRniXlwIPI3khCqXom0xXr4gTQt+3mNC3khLsTUtEdws3NY3XWsAR0L49bwrWS/vIpVqj4nQ0BpTr0orvRZ7ba91NJ3OKpBnSp2A4w/Zln//tv/UVeDSXYCoh4EtgY4/xledki09YhUS6twR7oEc66mvGFA3avakBrzKXSpczAO7aV6y2Was+fwK+WBOuTsuST+3HD4kGIP/M3nbrUUdP/F5yzefA9MpbtwJ0EgK/Mym4Lex/h1lvWI6v0yWvmqCFwYeQddJ2wQr1Ri9HPrZ21P9KTeeYTNCIuGREzZhiZ0sYKb4utus5Gk3B88mvIrN4rwF1XfrKozZsTYHOrQiPMewF/ktaXqSTvBjZakha2ndCtfQNqsruxtKyTLlFZTnaZ/pFJpPx5q8O2GNuvfic0zIdxUIWm5Zb8yG85W/AF5TRjqpKdiA81dxBZOMg3UShYsAj8mwVEJSSxnt3G6Qw/qQLqzibwF84g==
+  template:
+    metadata:
+      name: wireguard-privatekey-sftp
+      namespace: mc-tob
+    type: Opaque
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -38,20 +53,37 @@ spec:
         app: mc-tob-sftp
     spec:
       containers:
-        - name: mc-tob-sftp
-          image: atmoz/sftp:alpine
-          ports:
-            - containerPort: 22
-          env:
-            - name: SFTP_USERS
-              value: "sftp::1000:1000"
-          volumeMounts:
-            - mountPath: /home/sftp/production
-              name: mc-tob-sftp-production
-            - mountPath: /home/sftp/building
-              name: mc-tob-sftp-building
-            - mountPath: /home/sftp/.ssh/keys/
-              name: mc-tob-sftp-pubkey
+      - name: mc-tob-sftp
+        image: atmoz/sftp:alpine
+        securityContext:
+          capabilities:
+            add:
+              - NET_ADMIN
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            dnf install -y iproute wireguard-tools
+            ip link add dev wg0 type wireguard
+            ip address add dev wg0 $WIREGUARD_IP
+            wg set wg0 private-key /wg-key/privatekey peer Rybuqf4c2TJt8X/ns/b8ApGgnu9pAtD9zArmlrIf2Hk= allowed-ips 10.9.9.1/32 endpoint minecraft.bqc0n.com:51820 persistent-keepalive 25
+            ip link set up dev wg0
+            /start
+        ports:
+          - containerPort: 22
+        env:
+          - name: SFTP_USERS
+            value: "sftp::1000:1000"
+          - name: WIREGUARD_IP
+            value: "10.9.9.222/24"
+        volumeMounts:
+          - mountPath: /home/sftp/production
+            name: mc-tob-sftp-production
+          - mountPath: /home/sftp/building
+            name: mc-tob-sftp-building
+          - mountPath: /home/sftp/.ssh/keys/
+            name: mc-tob-sftp-pubkey
+          - mountPath: /wg-key
+            name: wireguard-privatekey-sftp
       volumes:
         - name: mc-tob-sftp-production
           persistentVolumeClaim:
@@ -62,4 +94,7 @@ spec:
         - name: mc-tob-sftp-pubkey
           configMap:
             name: mc-tob-sftp-pubkey
+        - name: wireguard-privatekey-sftp
+          secret:
+            secretName: wireguard-privatekey-sftp
 ---
