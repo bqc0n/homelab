@@ -5,12 +5,12 @@ metadata:
   name: pvc-misskey-files
   namespace: misskey
 spec:
-  storageClassName: nfs-ssd-1
+  storageClassName: ceph-rbd
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 20Gi
+      storage: 10Gi
 ---
 apiVersion: v1
 kind: Service

@@ -5,7 +5,7 @@ metadata:
   name: pvc-misskey-redis
   namespace: misskey
 spec:
-  storageClassName: nfs-ssd-1
+  storageClassName: ceph-rbd
   accessModes:
     - ReadWriteOnce
   resources:

@@ -32,12 +32,12 @@ metadata:
   name: mc-vanilla-data
   namespace: mc-vanilla
 spec:
-  storageClassName: nfs-ssd-1
+  storageClassName: ceph-rbd
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 20Gi
+      storage: 10Gi
 ---
 apiVersion: apps/v1
 kind: StatefulSet

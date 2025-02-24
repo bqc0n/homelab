@@ -6,12 +6,12 @@ metadata:
   name: influxdb-data
   namespace: dash
 spec:
-  storageClassName: nfs-ssd-1
+  storageClassName: ceph-rbd
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: 50Gi
+      storage: 10Gi
 ---
 apiVersion: v1
 kind: Service
