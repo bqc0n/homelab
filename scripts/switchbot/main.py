@@ -2,7 +2,7 @@
 
 import asyncio
 import os
-import time
+import datetime
 
 import bleak.backends.device
 from bleak import BleakScanner
@@ -40,7 +40,7 @@ async def scan_and_store():
                 .field("battery", battery_pct))
             write_api.write(bucket="room_env", record=p)
             stop_event.set()
-            print(f"Temperature: {temperature}°C, Humidity: {humidity}%, Battery: {battery_pct}%")
+            print(f"Temperature: {temperature}°C, Humidity: {humidity}%, Battery: {battery_pct}%, Time: {datetime.datetime.now()}")
 
     async with BleakScanner(callback) as scanner:
         await stop_event.wait()
