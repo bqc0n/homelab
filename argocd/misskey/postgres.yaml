@@ -56,8 +56,11 @@ spec:
       containers:
         - name: psql
           image: postgres:latest
+          env:
+            - name: PGdata
+              value: /var/lib/postgresql/data
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data
+            - mountPath: /var/lib/postgresql
               name: db-volume
           envFrom:
             - secretRef:
@@ -68,6 +71,13 @@ spec:
               cpu: "1"
           ports:
             - containerPort: 5432
+      initContainers:
+        - name: init
+          image: alpine:latest
+          command: ["sh", "-c", "mkdir -p /var/lib/postgresql/data"]
+          volumeMounts:
+              - mountPath: /var/lib/postgresql
+                name: db-volume
       volumes:
         - name: db-volume
           persistentVolumeClaim:
