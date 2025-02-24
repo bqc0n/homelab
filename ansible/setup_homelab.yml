@@ -41,3 +41,21 @@
         cache_valid_time: 3600
         name: nfs-common
         state: latest
+
+- name: Install QEMU Guest Agent to k8s nodes
+  hosts: kube_cluster
+  gather_facts: false
+  tasks:
+    - name: K8s Cluster | Install QEMU Guest Agent
+      become: true
+      ansible.builtin.apt:
+        update_cache: yes
+        cache_valid_time: 3600
+        name: qemu-guest-agent
+        state: latest
+    - name: K8s Cluster | Enable QEMU Guest Agent
+      become: true
+      ansible.builtin.systemd_service:
+        state: started
+        enabled: true
+        name: qemu-guest-agent

@@ -13,7 +13,7 @@ resource "proxmox_vm_qemu" "k8s_node" {
   vmid = var.vmid_start + count.index
   name = var.hosts[count.index].hostname
   vm_state = "running"
-  agent = 0
+  agent = 1
 
   target_node      = var.hosts[count.index].node
   onboot           = true
