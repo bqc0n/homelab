@@ -5,7 +5,7 @@ metadata:
   name: pvc-misskey-files
   namespace: misskey
 spec:
-  storageClassName: ceph-rbd
+  storageClassName: nfs-ceph
   accessModes:
     - ReadWriteOnce
   resources:

@@ -267,7 +267,7 @@ vmsingle:
     replicaCount: 1
     extraArgs: {}
     storage:
-      storageClassName: ceph-rbd
+      storageClassName: nfs-ceph
       accessModes:
         - ReadWriteOnce
       resources:

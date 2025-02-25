@@ -30,7 +30,7 @@ metadata:
   name: pvc-misskey-db
   namespace: misskey
 spec:
-  storageClassName: ceph-rbd
+  storageClassName: nfs-ceph
   accessModes:
   - ReadWriteOnce
   resources:

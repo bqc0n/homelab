@@ -32,7 +32,7 @@ metadata:
   name: mc-tob-data-building
   namespace: mc-tob
 spec:
-  storageClassName: ceph-rbd
+  storageClassName: nfs-ceph
   accessModes:
     - ReadWriteOnce
   resources:

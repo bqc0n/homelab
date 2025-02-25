@@ -32,7 +32,7 @@ metadata:
   name: mc-vanilla-data
   namespace: mc-vanilla
 spec:
-  storageClassName: ceph-rbd
+  storageClassName: nfs-ceph
   accessModes:
     - ReadWriteOnce
   resources:

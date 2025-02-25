@@ -5,7 +5,7 @@ metadata:
   name: grafana-data
   namespace: dash
 spec:
-  storageClassName: ceph-rbd
+  storageClassName: nfs-ceph
   accessModes:
     - ReadWriteMany
   resources:
