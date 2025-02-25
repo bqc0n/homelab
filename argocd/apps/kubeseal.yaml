@@ -14,11 +14,9 @@ spec:
     chart: sealed-secrets
     helm:
       releaseName: sealed-secrets
-      parameters:
-        - name: "fullnameOverride"
-          value: "sealed-secrets-controller"
-        - name: "keyrenewperiod"
-          value: "0"
+      values: |
+        fullnameOverride: sealed-secrets-controller
+        keyrenewperiod: "0"
   project: default
   syncPolicy:
     automated:
