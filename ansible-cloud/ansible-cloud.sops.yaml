@@ -1,0 +1,23 @@
+wireguard_private_key: ENC[AES256_GCM,data:4NwW6W0uZmO9OaEHdup1UosHyGR1LV71ijpY6pEEvlI1QlS4zfQnZaVmavY=,iv:vnoLDjVGeqVUE+7Y5qFY+YMSX8nOe6+4mWwMy1I8Kj4=,tag:vASVn6dswuoCSGxaqGnX9A==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2025-02-26T05:38:27Z"
+    mac: ENC[AES256_GCM,data:etbxtIHzZfGMf+LnblhfbcswnzRqYf9CllNTdeWv5k6LvStO6ZAl9ko9KeMeRyySwAg29eImgIn5TiKYU3TJ21mj5E4tdSgmCngTckLwNT7r6srlHJpzWHW+Kl8/nkbWthcn91Lv6q6sSn/8QRU5opdOWXBnzjpA3mRH12WNq6k=,iv:itlKyX4VAYFoW+os96VrYCIy6aC0XN6iSErAYKebeWk=,tag:qRwnOhmuO2GeNgS2Ax+94A==,type:str]
+    pgp:
+        - created_at: "2025-02-26T05:37:52Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            hF4DTsFBt8cCyq8SAQdAlK0+F5mAtCgxqmPWWVaRBh/Y8Xg1ZFtZvdnknxFB40Aw
+            HzDPjlrV3blJ6IPKlB1Bg0ahGAgbtbRKJJJIfFl6PBB2IeZHZYOPeEvD2NdebMXA
+            0l4BUDSrRAMgtGz+hpFEXTpFgAz65gQc1oo7KN2KvbHzOJuP+FhLVOHVQsC3BZVI
+            5dCtRyI2I2WIj8pIR1MA5fgfXK8om/47pzQoqyvZkPM4f0D/uw6leWCHGgkakktQ
+            =10T6
+            -----END PGP MESSAGE-----
+          fp: C206AD70ABB09ADF05A6C34D4EC141B7C702CAAF
+    unencrypted_suffix: _unencrypted
+    version: 3.9.4
