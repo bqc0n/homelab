@@ -48,6 +48,8 @@ resource "proxmox_vm_qemu" "k8s_master_ha" {
   vm_state = "running"
   agent = 1
 
+  cpu = "x86-64-v2-AES"
+
   target_node = "pve02"
   onboot           = true
   automatic_reboot = true
