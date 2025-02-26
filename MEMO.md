@@ -116,20 +116,14 @@ data:
 
 できたら `argo-webui.yaml`を適用してweb UIにアクセスする。
 ```shell
-k apply -f argocd/apps/argo-webui.yaml
+k apply -f argocd/argo-webui.yaml
 ```
 
 初期パスワードは以下のコマンドで取得できる:
 ```shell
 argocd admin initial-password -n argocd
 ```
-Settings/Repositoriesでこのリポジトリを追加し、app-of-appsをDeployして作業完了。
-
-| Key | Value |
-|:---:|:-----:|
-| via | ssh |
-| name | 適当に (e.g. homelab) |
-| repo url | git@github.com:bqc0n/homelab.git |
+app-of-appsをDeployして作業完了。
 
 - search ip
 ```shell
