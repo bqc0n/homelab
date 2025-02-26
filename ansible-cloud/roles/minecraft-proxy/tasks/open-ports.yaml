@@ -1,0 +1,10 @@
+---
+- name: Firewalld | Open Ports
+  become: true
+  ansible.posix.firewalld:
+    port: "{{ item }}"
+    permanent: true
+    immediate: true
+    zone: public
+    state: enabled
+  with_items: ["27135-27138/tcp", "2222/tcp"]
