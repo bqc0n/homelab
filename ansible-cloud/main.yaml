@@ -1,0 +1,4 @@
+- name: Setup Minecraft Proxy
+  hosts: minecraft_amd_osaka
+  roles:
+    - role: minecraft-proxy

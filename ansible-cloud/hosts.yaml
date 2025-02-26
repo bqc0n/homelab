@@ -1,0 +1,5 @@
+oracle_cloud:
+  hosts:
+    minecraft_amd_osaka:
+      ansible_host: "138.2.40.121"
+      ansible_user: "opc"

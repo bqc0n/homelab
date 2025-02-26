@@ -1,0 +1,19 @@
+# HAProxy
+- name: restart_haproxy
+  become: true
+  ansible.builtin.service:
+    name: haproxy
+    state: restarted
+
+# Wireguard
+- name: Handler | wg0 Down
+  become: true
+  ansible.builtin.command:
+    cmd: "wg-quick down wg0"
+  listen: "reload_wireguard"
+
+- name: Handler | wg0 Up
+  become: true
+  ansible.builtin.command:
+    cmd: "wg-quick up wg0"
+  listen: "reload_wireguard"
