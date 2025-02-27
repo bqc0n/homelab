@@ -15,7 +15,7 @@ resource "oci_core_instance" "minecraft-amd-osaka" {
     assign_public_ip = true
     assign_ipv6ip = true
     ipv6address_ipv6subnet_cidr_pair_details {
-      ipv6subnet_cidr = oci_core_subnet.osaka_minecraft_public.ipv6cidr_block
+      ipv6address = "${replace(oci_core_subnet.osaka_minecraft_public.ipv6cidr_block, "/64", "")}2b"
     }
   }
 
