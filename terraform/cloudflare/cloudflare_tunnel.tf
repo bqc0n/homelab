@@ -1,9 +1,5 @@
-locals {
-  domain = "bqc0n.com"
-}
-
 resource "cloudflare_zero_trust_access_application" "homelab_private" {
-  zone_id = data.sops_file.secrets.data["cloudflare.zone_id"]
+  zone_id = local.zone_id
   name = "Homelab - Private"
   session_duration = "24h"
   type = "self_hosted"
@@ -21,7 +17,7 @@ resource "cloudflare_zero_trust_access_application" "homelab_private" {
 }
 
 resource "cloudflare_zero_trust_access_policy" "homelab_private" {
-  account_id = data.sops_file.secrets.data["cloudflare.account_id"]
+  account_id = local.account_id
   decision = "allow"
   name     = "Homelab | Private"
   include = [{
@@ -30,15 +26,12 @@ resource "cloudflare_zero_trust_access_policy" "homelab_private" {
 }
 
 resource "cloudflare_zero_trust_tunnel_cloudflared_config" "cf_grafana" {
-  account_id = data.sops_file.secrets.data["cloudflare.account_id"]
+  account_id = local.account_id
   tunnel_id  = data.sops_file.secrets.data["cloudflare.homelab_tunnel_id"]
   config = {
     ingress = [{
       hostname = "grafana.${local.domain}"
       service = "http://grafana-svc.dash.svc.cluster.local."
-    }, {
-      hostname = "misskey.${local.domain}"
-      service = "http://misskey.misskey.svc.cluster.local."
     }, {
       hostname = "argocd.${local.domain}"
       service = "https://argocd-server.argocd.svc.cluster.local."
