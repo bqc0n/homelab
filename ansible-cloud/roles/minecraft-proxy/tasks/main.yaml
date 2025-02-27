@@ -49,55 +49,76 @@
     insertafter: EOF
     create: true
     block: |
+      global
+        log         127.0.0.1 local2
+        chroot      /var/lib/haproxy
+        pidfile     /var/run/haproxy.pid
+        maxconn     4000
+        user        haproxy
+        group       haproxy
+        daemon
+        stats socket /var/lib/haproxy/stats
+      defaults
+        log                     global
+        option                  redispatch
+        retries                 3
+        timeout http-request    10s
+        timeout queue           1m
+        timeout connect         10s
+        timeout client          1m
+        timeout server          1m
+        timeout http-keep-alive 10s
+        timeout check           10s
+        maxconn                 3000
       frontend mc_vanilla
-      bind 0.0.0.0:27135
-      bind [::]:27135
-      mode tcp
-      default_backend wg_vanilla_minecraft
+        bind 0.0.0.0:27135
+        bind [::]:27135
+        mode tcp
+        default_backend wg_vanilla_minecraft
       
       frontend mc_tob
-      bind 0.0.0.0:27136
-      bind [::]:27136
-      mode tcp
-      default_backend wg_mc_tob
+        bind 0.0.0.0:27136
+        bind [::]:27136
+        mode tcp
+        default_backend wg_mc_tob
       
       frontend mc_tob_building
-      bind 0.0.0.0:27137
-      bind [::]:27137
-      mode tcp
-      default_backend wg_mc_tob_building
+        bind 0.0.0.0:27137
+        bind [::]:27137
+        mode tcp
+        default_backend wg_mc_tob_building
       
       frontend mc_nomi
-      bind 0.0.0.0:27138
-      bind [::]:27138
-      mode tcp
-      default_backend wg_nomi
+        bind 0.0.0.0:27138
+        bind [::]:27138
+        mode tcp
+        default_backend wg_nomi
       
       frontend mc_tob_sftp
-      bind 0.0.0.0:2222
-      bind [::]:2222
-      mode tcp
-      default_backend wg_mc_tob_sftp
+        bind 0.0.0.0:2222
+        bind [::]:2222
+        mode tcp
+        default_backend wg_mc_tob_sftp
       
       backend wg_vanilla_minecraft
-      mode tcp
-      server home-mc-vanilla 10.9.9.10:25565
+        mode tcp
+        server home-mc-vanilla 10.9.9.10:25565
       
       backend wg_mc_tob
-      mode tcp
-      server home-mc-tob 10.9.9.11:25565
+        mode tcp
+        server home-mc-tob 10.9.9.11:25565
       
       backend wg_mc_tob_building
-      mode tcp
-      server home-mc-tob 10.9.9.2:25567
+        mode tcp
+        server home-mc-tob 10.9.9.2:25567
       
       backend wg_nomi
-      mode tcp
-      server home-nomi 10.9.9.100:25565
+        mode tcp
+        server home-nomi 10.9.9.100:25565
       
       backend wg_mc_tob_sftp
-      mode tcp
-      server home-mc-tob_sftp 10.9.9.2:2222
+        mode tcp
+        server home-mc-tob_sftp 10.9.9.2:2222
 
 - name: Open Ports
   import_tasks: open-ports.yaml
