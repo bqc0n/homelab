@@ -13,6 +13,15 @@
   ansible.builtin.timezone:
     name: Asia/Tokyo
 
+- name: Swap | Is Swapfile exists?
+  ansible.builtin.stat:
+    path: /swapfile2
+  register: swap
+
+- name: Configure 4GB Swap
+  import_tasks: swap.yaml
+  when: swap.stat.exists == False
+
 - name: Install Wireguard-tools & HAProxy
   become: true
   ansible.builtin.dnf:

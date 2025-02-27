@@ -11,6 +11,7 @@
   ansible.builtin.command:
     cmd: "wg-quick down wg0"
   listen: "reload_wireguard"
+  failed_when: false # will fail at the first run
 
 - name: Handler | wg0 Up
   become: true
