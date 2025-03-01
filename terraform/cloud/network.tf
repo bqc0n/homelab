@@ -81,8 +81,8 @@ resource "oci_core_security_list" "osaka_minecraft_public_security_list" {
       description = "Minecraft TOB SFTP"
 
       tcp_options {
-        min = 2222
-        max = 2222
+        min = 12303
+        max = 12303
       }
     }
   }

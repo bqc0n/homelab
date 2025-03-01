@@ -95,8 +95,8 @@
         default_backend wg_nomi
       
       frontend mc_tob_sftp
-        bind 0.0.0.0:2222
-        bind [::]:2222
+        bind 0.0.0.0:12303
+        bind [::]:12303
         mode tcp
         default_backend wg_mc_tob_sftp
       

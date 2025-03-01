@@ -7,4 +7,4 @@
     immediate: true
     zone: public
     state: enabled
-  with_items: ["27135-27138/tcp", "2222/tcp", "51820/udp"]
+  with_items: ["27135-27138/tcp", "12303/tcp", "51820/udp"]
