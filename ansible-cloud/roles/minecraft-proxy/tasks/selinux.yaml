@@ -8,7 +8,7 @@
   failed_when: false
 
 - name: Create Policy for HAProxy
-  when: selinux_policy_loaded.stdout == ""
+  when: selinux_policy_loaded.stdout == "" or selinux_new_policy
   ansible.builtin.blockinfile:
     path: "~/allow_haproxy_bind.te"
     insertafter: EOF
@@ -39,7 +39,7 @@
         checkmodule -M -m -o allow_haproxy_bind.mod allow_haproxy_bind.te 
         && semodule_package -o allow_haproxy_bind.pp -m allow_haproxy_bind.mod 
         && semodule -i allow_haproxy_bind.pp
-  when: selinux_policy_loaded.stdout == ""
+  when: selinux_policy_loaded.stdout == "" or selinux_new_policy
 
 # in most cases, it is the first time to run this playbook when it runs
 - name: remove default haproxy config
