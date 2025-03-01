@@ -34,7 +34,7 @@ spec:
     app: mc-tob-sftp
   ports:
     - protocol: TCP
-      port: 22
+      port: 2222
       targetPort: 22
 ---
 apiVersion: apps/v1
