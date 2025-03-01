@@ -118,7 +118,7 @@
       
       backend wg_mc_tob_sftp
         mode tcp
-        server home-mc-tob_sftp 10.9.9.222:2222
+        server home-mc-tob_sftp 10.9.9.222:22
 
 - name: Open Ports
   import_tasks: open-ports.yaml

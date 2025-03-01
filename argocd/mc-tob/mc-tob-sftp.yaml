@@ -24,19 +24,6 @@ data:
     ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIChEEaY7O2dX+vxT90f5JHV92H/uZu3uynJtTCcnau3L
     ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE65lCWo/lvkIpk2NEnXuOdmruKsPOZyzgndg7y/0Kgr
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: mc-tob-sftp-svc
-  namespace: mc-tob
-spec:
-  selector:
-    app: mc-tob-sftp
-  ports:
-    - protocol: TCP
-      port: 2222
-      targetPort: 22
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
