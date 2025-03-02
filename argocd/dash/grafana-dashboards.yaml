@@ -4,6 +4,8 @@ kind: GrafanaDashboard
 metadata:
   name: proxmox-dashboard
   namespace: dash
+  labels:
+    dashboards: "grafana"
 spec:
   instanceSelector:
     matchLabels:

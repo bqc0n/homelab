@@ -17,6 +17,7 @@ spec:
   datasource:
     name: Influxdb2
     type: influxdb
+    uid: proxmox_influxdb2
     access: proxy
     basicAuth: true
     url: http://influxdb-svc:8086
@@ -27,4 +28,4 @@ spec:
       defaultBucket: proxmox
       tlsSkipVerify: true
     secureJsonData:
-      token: ${PROMETHEUS_PASSWORD}
+      token: ${admin-token}
