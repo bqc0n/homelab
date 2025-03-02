@@ -1,4 +1,19 @@
 ---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: Grafana
+metadata:
+  name: grafana-dashboard
+  namespace: dash
+  labels:
+    dashboards: "grafana"
+spec:
+  config:
+    log:
+      mode: "console"
+    security:
+      admin_user: "admin"
+      admin_password: "admin"
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:

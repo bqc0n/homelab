@@ -20,3 +20,24 @@ spec:
     syncOptions:
       - PrunePropagationPolicy=foreground
       - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana-operator
+spec:
+  destination:
+    namespace: dash
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: ghcr.io/grafana/helm-charts
+    targetRevision: v5.16.0
+    chart: grafana-operator
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+    syncOptions:
+      - ServerSideApply=true
+      - CreateNamespace=true
