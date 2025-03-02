@@ -74,7 +74,7 @@ spec:
             /start
         resources:
           requests:
-            memory: "5Gi"
+            memory: "2Gi"
         volumeMounts:
           - mountPath: /data
             name: mc-tob-data

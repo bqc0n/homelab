@@ -75,7 +75,7 @@ spec:
             /start
         resources:
           requests:
-            memory: "3Gi"
+            memory: "2Gi"
         volumeMounts:
           - mountPath: /data
             name: mc-vanilla-data
