@@ -31,7 +31,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "cf_grafana" {
   config = {
     ingress = [{
       hostname = "grafana.${local.domain}"
-      service = "http://grafana-svc.dash.svc.cluster.local."
+      service = "http://grafana-dashboard-service.dash.svc.cluster.local.:3000"
     }, {
       hostname = "argocd.${local.domain}"
       service = "https://argocd-server.argocd.svc.cluster.local."
