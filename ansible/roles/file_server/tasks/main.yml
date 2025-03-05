@@ -17,6 +17,11 @@
   ansible.builtin.apt:
     update_cache: yes
 
+- name: Setup apt-cacher-ng
+  ansible.builtin.apt:
+    name: apt-cacher-ng
+    state: latest
+
 - name: Samba - Create User
   ansible.builtin.user:
     name: bqc0n

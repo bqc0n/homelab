@@ -1,3 +1,7 @@
+all:
+  vars:
+    apt_cache_server: 192.168.1.5
+
 pves:
   hosts:
     pve01:
