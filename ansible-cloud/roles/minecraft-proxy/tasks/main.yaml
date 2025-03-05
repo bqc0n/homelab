@@ -22,10 +22,16 @@
   import_tasks: swap.yaml
   when: swap.stat.exists == False
 
+- name: Upgrade packages (This may take a while)
+  become: true
+  ansible.builtin.dnf:
+      update_cache: true
+      name: "*"
+      state: latest
+
 - name: Install Wireguard-tools & HAProxy
   become: true
   ansible.builtin.dnf:
-    update_cache: true
     name: ["wireguard-tools", "haproxy"]
     state: latest
 
