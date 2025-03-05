@@ -37,6 +37,9 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "cf_grafana" {
       service = "https://argocd-server.argocd.svc.cluster.local."
       origin_request = { no_tls_verify = true }
     }, {
+      hostname = "misskey.${local.domain}"
+      service = "http://misskey.misskey.svc.cluster.local."
+    }, {
       service = "http_status:404"
     }]
   }

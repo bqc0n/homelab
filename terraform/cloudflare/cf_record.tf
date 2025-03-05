@@ -1,6 +1,6 @@
 locals {
   tunnel_uri = "${data.sops_file.secrets.data["cloudflare.homelab_tunnel_id"]}.cfargotunnel.com"
-  tunneled = ["grafana.${local.domain}", "argocd.${local.domain}"]
+  tunneled = ["grafana.${local.domain}", "argocd.${local.domain}", "misskey.${local.domain}"]
 }
 
 resource "cloudflare_dns_record" "tunneled_records" {
