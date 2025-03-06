@@ -7,6 +7,7 @@ resource "cloudflare_zero_trust_access_application" "homelab_private" {
   destinations = [
     { type = "public", uri = "grafana.${local.domain}" },
     { type = "public", uri = "argocd.${local.domain}" },
+    { type = "public", uri = "homebox.${local.domain}" },
   ]
   auto_redirect_to_identity = true
   policies = [{
@@ -36,6 +37,9 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "cf_grafana" {
       hostname = "argocd.${local.domain}"
       service = "https://argocd-server.argocd.svc.cluster.local."
       origin_request = { no_tls_verify = true }
+    }, {
+      hostname = "homebox.${local.domain}"
+      service = "http://homebox.homebox.svc.cluster.local."
     }, {
       hostname = "misskey.${local.domain}"
       service = "http://misskey.misskey.svc.cluster.local."
