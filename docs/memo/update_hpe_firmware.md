@@ -1,0 +1,1 @@
+- `fwpkg`じゃなくて`signed.flash`をダウンロードしてくる

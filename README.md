@@ -6,8 +6,8 @@
 #### Hardware
 There are 3 nodes.
 
-| Node |            CPU            | RAM  |
-|:----:|:-------------------------:|:----:|
+| Node  |            CPU            | RAM  |
+|:-----:|:-------------------------:|:----:|
 | pve01 |   4C/4T (Core i3-8100)    | 32GB |
 | pve02 | 8C/16T (Xeon Silver 4108) | 64GB |
 | pve03 |   6C/6T (Ryzen 5 3500)    | 32GB |
@@ -33,10 +33,7 @@ manifests are located in [`argocd/`](argocd/).
 - [ ] Cilium の Native Routing
 - [ ] NixOS
 - [ ] 全貌がわかる図
-- [ ] Terraform Remote State
 - [ ] Renovate Bot
-- [ ] HA k8s
-- [ ] Apt cache server
 
 # Requirements
 
