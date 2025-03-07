@@ -29,6 +29,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: pvc-misskey-db
   namespace: misskey
+  annotations:
+    k8up.io/backup: "false"
 spec:
   storageClassName: nfs-ceph
   accessModes:
@@ -51,6 +53,9 @@ spec:
     metadata:
       labels:
         app: misskey-db
+      annotations:
+        k8up.io/backupcommand: sh -c 'PGDATABASE="$POSTGRES_DB" PGUSER="$POSTGRES_USER" PGPASSWORD="$POSTGRES_PASSWORD" pg_dump --clean'
+        k8up.io/file-extension: .sql
     spec:
       restartPolicy: Always
       containers:
