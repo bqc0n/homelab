@@ -8,6 +8,7 @@ resource "cloudflare_zero_trust_access_application" "homelab_private" {
     { type = "public", uri = "grafana.${local.domain}" },
     { type = "public", uri = "argocd.${local.domain}" },
     { type = "public", uri = "homebox.${local.domain}" },
+    { type = "public", uri = "docmost.${local.domain}" }
   ]
   auto_redirect_to_identity = true
   policies = [{
