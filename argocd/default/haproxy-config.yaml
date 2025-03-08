@@ -3,7 +3,15 @@ kind: ConfigMap
 metadata:
   name: haproxy-config
 data:
-  haproxy.conf: |
+  haproxy.cfg: |
+    global
+      maxconn 4096
+    defaults
+      log global
+      retries 3
+      timeout connect 5s
+      timeout client 50s
+      timeout server 50s 
     frontend ceph_rgw 
       bind *:7480
       default_backend ceph_rgw
