@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: haproxy-config
+data:
+  haproxy.conf: |
+    frontend ceph_rgw 
+      bind *:7480
+      default_backend ceph_rgw
+    backend ceph_rgw
+      server pve01 192.168.1.10:7480 check 
+      server pve02 192.168.1.11:7480 check 
+      server pve03 192.168.1.12:7480 check 
