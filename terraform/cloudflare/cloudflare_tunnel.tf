@@ -44,6 +44,12 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "cf_grafana" {
       hostname = "misskey.${local.domain}"
       service = "http://misskey.misskey.svc.cluster.local."
     }, {
+      hostname = "s3.${local.domain}"
+      service = "http://ceph-rgw.default.svc.cluster.local."
+    }, {
+      hostname = "docmost.${local.domain}"
+      service = "http://docmost.docmost.svc.cluster.local."
+    }, {
       service = "http_status:404"
     }]
   }

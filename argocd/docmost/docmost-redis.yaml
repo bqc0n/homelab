@@ -1,0 +1,54 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: docmost
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: redis
+          image: redis:7.4.2-alpine
+          volumeMounts:
+            - mountPath: /data
+              name: redis-volume
+          ports:
+            - containerPort: 6379
+      volumes:
+        - name: redis-volume
+          persistentVolumeClaim:
+            claimName: redis-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-data
+  namespace: docmost
+spec:
+  storageClassName: nfs-ceph
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: docmost
+spec:
+  selector:
+    app: redis
+  ports:
+    - name: http
+      port: 6379

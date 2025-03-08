@@ -1,0 +1,64 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: docmost
+  namespace: docmost
+spec:
+  selector:
+    app: docmost
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docmost
+  namespace: docmost
+  labels:
+      app: docmost
+spec:
+  selector:
+    matchLabels:
+      app: docmost
+  template:
+    metadata:
+      labels:
+          app: docmost
+    spec:
+      containers:
+        - name: docmost
+          image: docmost/docmost:0.8.4
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - mountPath: /app/data/storage
+              name: docmost-data
+          env:
+            - name: APP_URL
+              value: "https://docmost.bqc0n.com"
+            - name: REDIS_URL
+              value: "redis://redis:6379"
+          envFrom:
+            - secretRef:
+                name: docmost-secrets
+      volumes:
+        - name: docmost-data
+          persistentVolumeClaim:
+            claimName: docmost-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: docmost-data
+  namespace: docmost
+spec:
+  storageClassName: nfs-ceph
+  accessModes:
+      - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---

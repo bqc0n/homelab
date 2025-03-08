@@ -5,6 +5,8 @@ locals {
     "argocd.${local.domain}",
     "homebox.${local.domain}",
     "misskey.${local.domain}",
+    "s3.${local.domain}",
+    "docmost.${local.domain}",
   ]
 }
 

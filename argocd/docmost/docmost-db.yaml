@@ -1,0 +1,89 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: postgres-secret
+  namespace: docmost
+spec:
+  encryptedData:
+    POSTGRES_DB: AgBKA37Ox59Cwu25Gr42nJIASHWwQUM+55B1/2FTI7OIEiuOk1SURZg18p8U7txG0eTs+EkFSQ3wECGFNAgD6m+j/8L2kwNI17lN+fbznmNJCp6Cw2494SRR+yw3/k6LAHHsIS3wEp5T+/qqS8MsfaKGNbdufAAmS7SuPu3sroOMsd1q/NxryaehULdi1olZ5OIYSEQgmYUwmMPx54/RgB0adjDmnBrcvVSFM6S3fVn7VjLPcVesyfUhEqvGNyriOFRzBksBLQ4PlBm32+wZ7Cac7KKBl6eEUpzAwcyuI7pX4AH/DUwug1GmVxWapXYjtWTJVs5jxYBPDUcYjD76Y34fmS+l94by3wG4cA/Yk4rtmA1X2Ptw5pCkX+/sR3lMXGxyUSDtu49QJDT/UuvxkS5pwtxZn03YjESj1IUybga2KtmxFz8vayXMZeQHgUWC2TTK5gZlf0tSIiBhNJuQLFHujyJf6zffUFFxkf4oMkYHxu0zNNOGlDLT06w87Gm7h94ho2hmrTDkgrptHOLXcIMh/dmCt161ADpcglD2C/9oDL7lPtkQPH6ptyJt+f07HLcQiSsakIR9HLiLFGZatuXRLPEb7Ga2mlJefU++EA1ZsdMUVpr8ViFZlUgZr57/mS1vBRa252tJppL47avoX/lp+hT0XmtB8XAZtB8jQvK2e2KnVtZKT4IDuK/BKZhNBmcuLJAD60I1
+    POSTGRES_PASSWORD: AgAZd+GHUIuf+zDh/BQPFyXW74tWyvw1gfszGUvWJZ0dwfjfAxuyQuMCz40aCESMO7wyjEdjA4s5W+2n6SsLFsLCuk6FOPoGzwHd3hbnxS+gNWlxPpdc1KzeMcFkftHWjfze5jafl9rApa1C9hN3Xa5wDN7sE87f0IRgP+4/V7UX0Ezkn6CIwepwEdKKnhbs8JH5Qc1aY4/CExRxcEHQfcRenO0jRNxVyJMdly051M2bZywMsAAWttgC2Gt3JgkLZIoovu+A5Dnf57U0BJHrrvpe2EKSwopYAdkCmvvvnJ+Btc1w4FYo4AvCMgwWi8N/hR8RCeIe8tGzab51IanSeE/euDkD4vW43q8dq3ftepJrN65tiVNF9xU32XaZeDvF3Avqsqd02VwLJlc7/DnfNj0BcJ4++n/rn+ijvIw0rUAi1Vlc7wuu+jLo9n/gPG2KKmYonRCWUl6Z7kna1h6rLt7LBXwsBJLwVSoJkQQsRs/f3L4+yK5R2F3WhyZllaQ3fM9vaQdPcaRm6LEqeCC1oofFjaXbc6450EFtPx+LhXAlUrpSRylcuzXDLq6DYvnmU2dL5qax3ZNCw+1FuQG5k9vuOeQGzIXZBvNlNShegbwKd44Jt9TGCGsX9JyZzXgCsv8g7RSSWd+c3tOmFVbmS/3GGgkWeLRiUYPy+HPOYy8CWFtAQwR00FvTxMVvnBP/cy/3RFludKmYYP/qct/Eoizz8gtNWHl8frsiBQa+TfcY4A==
+    POSTGRES_USER: AgBzlGH5aTbV2nWA99MHqbz9l+ze/QHNoMkVU4OHkLh1KRFFlhCH2WnXN2NeVA/otg+yK86QmilYLwmMhnGd9FuwDbYFqg8U718Ge0LZBgIgART7qJP26pcui3kevDjzvLuw32xyzL3+8i3d413B/QrUe/e9Uc88j2XUNeeXuIV6PWgnh+yRRl09VVC6TqusuLZg6AV+2uFCfSIZt86ctrKD6Qs2EOQfF2snCGDHAz8n+UpRB3qNvM6k324B4nxvAgxAfU2T2i7DCc60V4/as2ccDeaT19BVz/KEqnGG70mvKlAp3IF4CWWfLMcCKD9kzsip0TkjbddwYrGKL1GwIdWjWi00dTYSeMSTaNMaFJJJZym/GHL4utfdRBKpT1U/iuBlp0oWpx9Id4sddDK68FrOr+sVCTNhSgUo5RJXrNn1yxCkD2xXljkt+2vqj+LQq0QdcRdRf+OM4xifoKfSvLJ/rYp4gXCuvicJs9X8BCNZTWfjwhXx1jOAtQyPE5eOg4F7B1O/O7Lh1wJ7s1mcHslWBgN10BJ7ji0pwXU682NmBTCihCysoZoF7tDYp7CMnuLhZhMGDmJ2/iy2yq0mcmmKeNSzi/AOscxGvxy9VctJQxzndk47n1A7YGE32ahvJCuDspCRxHMiD+HUF3j6kSpt1xD5KP6TsUIsm4JVaj2t1zs/YHxeGt1NAT/KKDXG1tcPAULWhylB
+  template:
+    metadata:
+      name: postgres-secret
+      namespace: docmost
+    type: Opaque
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+  namespace: docmost
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+      annotations:
+        k8up.io/backupcommand: sh -c 'PGDATABASE="$POSTGRES_DB" PGUSER="$POSTGRES_USER" PGPASSWORD="$POSTGRES_PASSWORD" pg_dump --clean'
+        k8up.io/file-extension: .sql
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: postgresql
+          image: postgres:17.4-alpine
+          volumeMounts:
+            - mountPath: /psql
+              name: postgres-data
+          env:
+            - name: PGDATA
+              value: /psql/data
+          envFrom:
+            - secretRef:
+                name: postgres-secret
+          ports:
+            - containerPort: 5432
+      initContainers:
+        - name: postgres-init
+          image: alpine:3.21.3
+          command: ["sh", "-c", "mkdir -p /psql/data"]
+          volumeMounts:
+            - mountPath: /psql
+              name: postgres-data
+      volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: postgres-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+  namespace: docmost
+spec:
+  selector:
+    app: postgres
+  ports:
+    - name: http
+      port: 5432
+      targetPort: 5432
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-data
+  namespace: docmost
+  annotations:
+    k8up.io/backup: "false"
+spec:
+  storageClassName: nfs-ceph
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
