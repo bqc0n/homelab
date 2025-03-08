@@ -33,7 +33,7 @@ spec:
           ports:
             - containerPort: 7480
           volumeMounts:
-            - mountPath: /usr/local/etc/haproxy/haproxy.cfg
+            - mountPath: /usr/local/etc/haproxy
               name: haproxy-config
       volumes:
         - name: haproxy-config
