@@ -1,7 +1,11 @@
 {
-  "prHourlyLimit": 8,
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
-  ]
+  ],
+  "prConcurrentLimit": 20,
+  "prHourlyLimit": 10,
+  "kubernetes": {
+    "fileMatch": ["argocd/.+\\.yaml$"]
+  }
 }
