@@ -58,7 +58,7 @@ spec:
     spec:
       containers:
       - name: mc-tob-server
-        image: itzg/minecraft-server:java8-graalvm-ce
+        image: itzg/minecraft-server:2025.2.1-java8-graalvm-ce
         securityContext:
           capabilities:
             add:

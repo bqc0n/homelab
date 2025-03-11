@@ -60,7 +60,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: psql
-          image: postgres:latest
+          image: postgres:17.4-alpine
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: db-volume

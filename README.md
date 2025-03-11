@@ -33,7 +33,6 @@ manifests are located in [`argocd/`](argocd/).
 - [ ] Cilium の Native Routing
 - [ ] NixOS
 - [ ] 全貌がわかる図
-- [ ] Renovate Bot
 
 # Requirements
 

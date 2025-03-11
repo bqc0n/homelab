@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: haproxy
-          image: haproxy:lts-alpine
+          image: haproxy:3.0.8-alpine
           ports:
             - containerPort: 7480
           volumeMounts:

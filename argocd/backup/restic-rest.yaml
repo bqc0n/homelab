@@ -56,7 +56,7 @@ spec:
     spec:
       containers:
         - name: restic-rest
-          image: restic/rest-server:latest
+          image: restic/rest-server:0.13.0
           env:
             - name: PASSWORD_FILE
               value: "/restic-auth/.htaccess"

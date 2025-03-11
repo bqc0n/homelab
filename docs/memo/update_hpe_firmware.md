@@ -1,1 +1,3 @@
 - `fwpkg`じゃなくて`signed.flash`をダウンロードしてくる
+- 対応OSというのは、exe、rpm、fwpkgのどれかで圧縮されているかという話
+  - なのでrpmを持ってきて`rpm2cpio firmware.rpm | cpio -idv`でおk

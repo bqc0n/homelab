@@ -58,7 +58,7 @@ spec:
     spec:
       containers:
       - name: mc-vanilla-server
-        image: itzg/minecraft-server:java17-graalvm
+        image: itzg/minecraft-server:2025.2.1-java17-graalvm
         securityContext:
           capabilities:
             add:
