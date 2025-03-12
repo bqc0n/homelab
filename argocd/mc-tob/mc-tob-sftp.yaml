@@ -41,7 +41,8 @@ spec:
     spec:
       containers:
       - name: mc-tob-sftp
-        image: atmoz/sftp:alpine-3.7
+        image: atmoz/sftp:alpine
+        imagePullPolicy: Always
         securityContext:
           capabilities:
             add:
