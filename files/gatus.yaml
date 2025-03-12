@@ -1,0 +1,65 @@
+ui:
+  title: bqc0n.com Health Dashboard | Gatus
+  header: bqc0n.com Health Status
+  buttons:
+    - name: Blog
+      link: https://blog.bqc0n.com
+    - name: Misskey
+      link: https://misskey.bqc0n.com
+endpoints:
+  - name: Blog
+    group: Web
+    url: https://blog.bqc0n.com
+    interval: 5m
+    conditions:
+      - "[STATUS] == 200"
+  - name: Misskey
+    group: Web
+    url: https://misskey.bqc0n.com
+    interval: 5m
+    conditions:
+      - "[STATUS] == 200"
+
+  - name: Minecraft | Vanilla Server
+    group: Game
+    url: "tcp://minecraft.bqc0n.com:27135"
+    interval: 5m
+    ui:
+      hide-hostname: true
+    conditions:
+      - "[CONNECTED] == true"
+  - name: Minecraft | TOB Server
+    group: Game
+    url: "tcp://minecraft.bqc0n.com:27136"
+    interval: 5m
+    ui:
+      hide-hostname: true
+    conditions:
+      - "[CONNECTED] == true"
+  - name: "Minecraft | TOB Build Server"
+    group: Game
+    url: "tcp://minecraft.bqc0n.com:27137"
+    interval: 5m
+    ui:
+      hide-hostname: true
+    conditions:
+      - "[CONNECTED] == true"
+  - name: Minecraft | Nomifactory
+    group: Game
+    url: "tcp://minecraft.bqc0n.com:27138"
+    interval: 5m
+    ui:
+      hide-hostname: true
+    conditions:
+      - "[CONNECTED] == true"
+  - name: "Minecraft | SFTP"
+    group: Game
+    url: "ssh://minecraft.bqc0n.com:12303"
+    ssh:
+      username: ""
+      password: ""
+    interval: 5m
+    ui:
+      hide-hostname: true
+    conditions:
+      - "[CONNECTED] == true"
