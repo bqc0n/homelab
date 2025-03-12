@@ -19,3 +19,8 @@ sudo systemctl enable --now docker
 
 # SELinux TODO: SELinuをちゃんと設定
 sudo setenforce 0
+
+# Gatus
+curl https://raw.githubusercontent.com/bqc0n/homelab/refs/heads/main/files/oci-docker-compose.yaml -o /home/opc/compose.yaml
+sudo curl https://raw.githubusercontent.com/bqc0n/homelab/refs/heads/main/files/gatus.yaml -o /etc/gatus.yaml
+sudo docker compose -f /home/opc/compose.yaml up -d
