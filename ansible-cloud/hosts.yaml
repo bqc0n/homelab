@@ -1,5 +1,8 @@
-oracle_cloud:
+oracle_linux:
   hosts:
     minecraft_amd_osaka:
       ansible_host: "138.2.55.17"
       ansible_user: "opc"
+    osaka_docker:
+      ansible_host: 168.138.47.103
+      ansible_user: opc

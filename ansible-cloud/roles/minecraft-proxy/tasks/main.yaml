@@ -13,27 +13,20 @@
   ansible.builtin.timezone:
     name: Asia/Tokyo
 
-- name: Swap | Is Swapfile exists?
-  ansible.builtin.stat:
-    path: /swapfile2
-  register: swap
-
-- name: Configure 4GB Swap
-  import_tasks: swap.yaml
-  when: swap.stat.exists == False
-
-- name: Upgrade packages (This may take a while)
+- name: Check if wireguard and HAProxy are installed
   become: true
+  check_mode: true
   ansible.builtin.dnf:
-      update_cache: true
-      name: "*"
-      state: latest
+    name: ["wireguard-tools", "haproxy"]
+    state: present
+  register: is_not_installed_wireguard_haproxy
 
 - name: Install Wireguard-tools & HAProxy
   become: true
   ansible.builtin.dnf:
     name: ["wireguard-tools", "haproxy"]
     state: latest
+  when: is_not_installed_wireguard_haproxy.changed
 
 - name: Add SELinux Policy for HAProxy
   import_tasks: selinux.yaml
