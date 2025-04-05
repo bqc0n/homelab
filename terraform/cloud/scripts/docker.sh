@@ -17,7 +17,7 @@ sudo dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker
 sudo dnf -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 sudo systemctl enable --now docker
 
-# SELinux TODO: SELinuをちゃんと設定
+# SELinux TODO: SELinuxをちゃんと設定
 sudo setenforce 0
 
 # Gatus
