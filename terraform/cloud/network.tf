@@ -34,11 +34,10 @@ resource "oci_core_default_route_table" "osaka" {
   }
 
   route_rules {
-    network_entity_id = oci_core_drg.osaka_minecraft_drg.id
-    description = "192.168.1.0/24"
+    network_entity_id = oci_core_drg.osaka.id
+    destination = "192.168.1.0/24"
     destination_type = "CIDR_BLOCK"
   }
-  freeform_tags = { "ManagedBy" = "Terraform" }
 }
 
 resource "oci_core_subnet" "osaka_public" {

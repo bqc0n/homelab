@@ -11,10 +11,10 @@ resource "oci_core_ipsec_connection_tunnel_management" "ipsec_ix2215_config" {
   ike_version = "V2"
   bgp_session_info {
     customer_bgp_asn = "65000"
-    oracle_interface_ip = "10.9.16.${each.key * 2}/31"
-    customer_interface_ip = "10.9.16.${each.key * 2 + 1}/31"
+    customer_interface_ip = "10.9.16.${each.key * 2}/31"
+    oracle_interface_ip = "10.9.16.${each.key * 2 + 1}/31"
   }
   oracle_can_initiate = "RESPONDER_ONLY"
-  phase_one_details { lifetime = 7200 }
+  phase_one_details { lifetime = 28800 }
   phase_two_details { lifetime = 7200 }
 }

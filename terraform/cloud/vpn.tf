@@ -8,7 +8,7 @@ import {
   to = oci_core_ipsec.ipsec_ix2215
 }
 
-resource "oci_core_drg" "osaka_minecraft_drg" {
+resource "oci_core_drg" "osaka" {
   compartment_id = oci_identity_compartment.minecraft.id
 }
 
@@ -18,8 +18,8 @@ resource "oci_core_cpe" "nec_ix_2215_1" {
   display_name = "NEC IX 2215 - 1"
 }
 
-resource "oci_core_drg_attachment" "osaka_minecraft_drg_attachment" {
-  drg_id = oci_core_drg.osaka_minecraft_drg.id
+resource "oci_core_drg_attachment" "osaka" {
+  drg_id = oci_core_drg.osaka.id
   display_name = "Osaka VCN DRG Attachment"
   network_details {
     id = oci_core_vcn.osaka.id
@@ -33,7 +33,7 @@ resource "oci_core_ipsec" "ipsec_ix2215" {
   cpe_local_identifier      = "ix2215-01.bqc0n.internal"
   cpe_local_identifier_type = "HOSTNAME"
   display_name = "NEC IX IPSec"
-  drg_id       = oci_core_drg.osaka_minecraft_drg.id
+  drg_id       = oci_core_drg.osaka.id
   static_routes = []
 }
 
