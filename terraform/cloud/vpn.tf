@@ -1,13 +1,3 @@
-import {
-  id = "ocid1.cpe.oc1.ap-osaka-1.aaaaaaaaly5ffppuxlirgu6ew6juuufvjdu2aiqwaneycxj7pocghwawnaua"
-  to = oci_core_cpe.nec_ix_2215_1
-}
-
-import {
-  id = "ocid1.ipsecconnection.oc1.ap-osaka-1.aaaaaaaafpm5777g2n2msdizvhcibgkwd6gbwzclwd5nx54rhantok6wavra"
-  to = oci_core_ipsec.ipsec_ix2215
-}
-
 resource "oci_core_drg" "osaka" {
   compartment_id = oci_identity_compartment.minecraft.id
 }
