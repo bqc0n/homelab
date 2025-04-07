@@ -33,7 +33,7 @@ resource "proxmox_lxc" "file_server" {
   network {
     name   = "eth0"
     bridge = "vmbr0"
-    ip     = "192.168.1.5/24"
+    ip     = "192.168.1.31/24"
     gw     = "192.168.1.1"
   }
 }

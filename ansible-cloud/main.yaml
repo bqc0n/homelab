@@ -1,4 +1,55 @@
+- name: ALL Instances Jobs
+  hosts: all
+  tasks:
+    - name: Swap | Is Swapfile exists?
+      ansible.builtin.stat:
+        path: /swapfile2
+      register: swap
+    - name: Swap | Create Swapfile
+      when: swap.stat.exists == False
+      become: true
+      ansible.builtin.shell:
+        cmd: >
+          fallocate -l 4G /swapfile2
+          && chmod 600 /swapfile2
+          && mkswap /swapfile2 
+          && swapon /swapfile2
+    - name: Swap | Edit fstab
+      when: swap.stat.exists == False
+      become: true
+      ansible.builtin.lineinfile:
+        path: /etc/fstab
+        line: "/swapfile2 none swap nw 0 0"
+
 - name: Setup Minecraft Proxy
   hosts: minecraft_amd_osaka
   roles:
     - role: minecraft-proxy
+
+# DNF Automatic
+# https://dnf.readthedocs.io/en/latest/automatic.html
+- name: dnf automatic
+  hosts: oracle_linux
+  tasks:
+    - name: dnf automatic | configuration
+      become: true
+      blockinfile:
+        path: /etc/dnf/automatic.conf
+        insertafter: EOF
+        create: true
+        block: |
+          [commands]
+          apply_updates = true
+          download_updates = true
+    - name: dnf-automatic | enable dnf-automatic.timer
+      become: true
+      systemd:
+        name: dnf-automatic.timer
+        state: started
+        enabled: true
+    - name: dnf-automatic | systemd timer configuration
+      become: true
+      lineinfile:
+        path: /etc/systemd/system/timers.target.wants/dnf-automatic.timer
+        regexp: "OnCalendar"
+        line: "OnCalendar=*-*-* 4:00"

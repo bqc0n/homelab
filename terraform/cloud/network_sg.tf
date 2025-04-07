@@ -1,6 +1,6 @@
 resource "oci_core_network_security_group" "wireguard" {
   compartment_id = oci_identity_compartment.minecraft.id
-  vcn_id         = oci_core_vcn.osaka_minecraft.id
+  vcn_id         = oci_core_vcn.osaka.id
   display_name = "Wireguard"
 
   freeform_tags = { "ManagedBy" = "Terraform" }

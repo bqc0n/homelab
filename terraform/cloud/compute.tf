@@ -11,11 +11,11 @@ resource "oci_core_instance" "minecraft-amd-osaka" {
   }
 
   create_vnic_details {
-    subnet_id = oci_core_subnet.osaka_minecraft_public.id
+    subnet_id = oci_core_subnet.osaka_public.id
     assign_public_ip = true
     assign_ipv6ip = true
     ipv6address_ipv6subnet_cidr_pair_details {
-      ipv6address = "${replace(oci_core_subnet.osaka_minecraft_public.ipv6cidr_block, "/64", "")}2b"
+      ipv6address = "${replace(oci_core_subnet.osaka_public.ipv6cidr_block, "/64", "")}2b"
     }
     nsg_ids = [oci_core_network_security_group.wireguard.id]
   }
@@ -44,7 +44,7 @@ resource "oci_core_instance" "osaka_docker" {
   }
 
   create_vnic_details {
-    subnet_id = oci_core_subnet.osaka_minecraft_public.id
+    subnet_id = oci_core_subnet.osaka_public.id
     assign_public_ip = true
     assign_ipv6ip = true
   }
