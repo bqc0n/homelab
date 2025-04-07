@@ -25,7 +25,7 @@ resource "cloudflare_dns_record" "minecraft_proxy_ipv4" {
   ttl     = 3600
   type    = "A"
   zone_id = local.zone_id
-  content = data.terraform_remote_state.cloud.outputs.minecraft-amd-osaka-public-ipv4
+  content = data.terraform_remote_state.cloud.outputs.minecraft_amd_osaka_public_ipv4
 }
 
 resource "cloudflare_dns_record" "minecraft_proxy_ipv6" {
@@ -33,5 +33,5 @@ resource "cloudflare_dns_record" "minecraft_proxy_ipv6" {
   ttl     = 3600
   type    = "AAAA"
   zone_id = local.zone_id
-  content = data.terraform_remote_state.cloud.outputs.minecraft-amd-osaka-ipv6-GUA
+  content = data.terraform_remote_state.cloud.outputs.minecraft_amd_osaka_ipv6_GUA
 }
