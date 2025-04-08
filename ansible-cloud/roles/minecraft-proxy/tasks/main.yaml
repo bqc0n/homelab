@@ -113,7 +113,7 @@
       
       backend wg_nomi
         mode tcp
-        server home-nomi 10.9.9.100:25565
+        server home-nomi 192.168.1.30:25565
       
       backend wg_mc_tob_sftp
         mode tcp

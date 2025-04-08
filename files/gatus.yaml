@@ -46,7 +46,7 @@ endpoints:
       - "[CONNECTED] == true"
   - name: Minecraft | Nomifactory
     group: Game
-    url: "tcp://minecraft.bqc0n.com:27138"
+    url: "tcp://192.168.1.30:25565"
     interval: 5m
     ui:
       hide-hostname: true

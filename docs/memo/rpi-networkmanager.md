@@ -20,3 +20,15 @@ nmcli con modify eth0 ipv4.gateway 192.168.1.1
 sudo nmcli connection reload
 sudo nmcli connection up eth0
 ```
+
+## なんかDeviceが消えた時
+
+con-nameが名前、ifnameがデバイス名
+```shell
+sudo nmcli c add type ethernet con-name eth0 ifname eth0
+```
+これをやったあとはreload, upしなきゃいけない。
+
+sudo nmcli c add type loopback con-name lo2
+sudo nmcli con modify lo2 ipv4.addresses 10.9.0.1/32
+sudo nmcli con modify lo2 ipv4.method manual
