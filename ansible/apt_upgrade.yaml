@@ -22,10 +22,14 @@
         state: present
     - name: Configure unattended-upgrades
       become: true
-      lineinfile:
-        path: /etc/apt/apt.conf.d/50unattended-upgrades
-        regexp: '//	"${distro_id}:${distro_codename}-updates";'
-        line: '	"${distro_id}:${distro_codename}-updates";'
+      blockinfile:
+        create: true
+        path: /etc/apt/apt.conf.d/52unattended-upgrades-local
+        insertafter: EOF
+        block: |
+          Unattended-Upgrade::Origins-Pattern {
+            "origin=*";
+          };
     - name: Timezone to JST
       become: true
       community.general.timezone:
