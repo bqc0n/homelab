@@ -1,0 +1,17 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: paperless-ngx
+  namespace: cnpg-system
+spec:
+  instances: 1 # Ceph already has resilience in terms of storage
+  primaryUpdateStrategy: unsupervised
+  bootstrap:
+    initdb:
+      database: paperless-ngx
+      owner: paperless-ngx
+      secret:
+        name: paperless-ngx
+  storage:
+    storageClass: nfs-ceph
+    size: 10Gi

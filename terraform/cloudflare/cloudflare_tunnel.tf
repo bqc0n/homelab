@@ -8,7 +8,8 @@ resource "cloudflare_zero_trust_access_application" "homelab_private" {
     { type = "public", uri = "grafana.${local.domain}" },
     { type = "public", uri = "argocd.${local.domain}" },
     { type = "public", uri = "homebox.${local.domain}" },
-    { type = "public", uri = "docmost.${local.domain}" }
+    { type = "public", uri = "docmost.${local.domain}" },
+    { type = "public", uri = "paperless.${local.domain}" },
   ]
   auto_redirect_to_identity = true
   policies = [{
@@ -50,6 +51,9 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "cf_grafana" {
     }, {
       hostname = "docmost.${local.domain}"
       service = "http://docmost.docmost.svc.cluster.local."
+    }, {
+      hostname = "paperless.${local.domain}"
+      service = "http://server.paperless-ngx.svc.cluster.local."
     }, {
       service = "http_status:404"
     }]

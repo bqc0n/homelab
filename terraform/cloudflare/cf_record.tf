@@ -7,6 +7,7 @@ locals {
     "misskey.${local.domain}",
     "s3.${local.domain}",
     "docmost.${local.domain}",
+    "paperless.${local.domain}",
   ]
 }
 

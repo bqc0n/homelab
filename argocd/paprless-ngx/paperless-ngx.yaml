@@ -1,0 +1,96 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: server
+  namespace: paperless-ngx
+spec:
+  selector:
+    app: paperless-ngx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paperless-ngx-server
+  namespace: paperless-ngx
+  labels:
+    app: paperless-ngx
+spec:
+  selector:
+    matchLabels:
+      app: paperless-ngx
+  template:
+    metadata:
+      labels:
+        app: paperless-ngx
+    spec:
+      containers:
+        - name: paperless-ngx
+          image: "ghcr.io/paperless-ngx/paperless-ngx:2.15.0"
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - mountPath: /data/consume
+              name: paperless-ngx-consume
+            - mountPath: /data/paperless
+              name: paperless-ngx-data
+            - mountPath: /data/media
+              name: paperless-ngx-media
+          envFrom:
+            - configMapRef:
+                name: paperless-ngx-config
+            - secretRef:
+                name: paperless-ngx
+      volumes:
+        - name: paperless-ngx-consume
+          persistentVolumeClaim:
+            claimName: paperless-ngx-consume
+        - name: paperless-ngx-data
+          persistentVolumeClaim:
+              claimName: paperless-ngx-data
+        - name: paperless-ngx-media
+          persistentVolumeClaim:
+              claimName: paperless-ngx-media
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: paperless-ngx-consume
+  namespace: paperless-ngx
+spec:
+  storageClassName: nfs-ceph
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: paperless-ngx-data
+  namespace: paperless-ngx
+spec:
+  storageClassName: nfs-ceph
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: paperless-ngx-media
+  namespace: paperless-ngx
+spec:
+  storageClassName: nfs-ceph
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
