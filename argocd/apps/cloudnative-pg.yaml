@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgres-operator
+  namespace: argocd
+spec:
+  destination:
+    namespace: cnpg-system
+    server: https://kubernetes.default.svc
+  source:
+    path: ''
+    repoURL: https://cloudnative-pg.github.io/charts
+    targetRevision: 0.23.2
+    chart: cloudnative-pg
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      # Some CRDs are quite big
+      - ServerSideApply=true
