@@ -39,7 +39,7 @@ data "terraform_remote_state" "cloud" {
   backend = "s3"
   config = {
     bucket                      = "terraform-backend"
-    key                         = "terraform/cloud/terraform.tfstate"
+    key                         = "terraform/cloud.tfstate"
     region                      = "auto"
     skip_credentials_validation = true
     skip_metadata_api_check     = true
