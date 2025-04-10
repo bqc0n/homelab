@@ -69,7 +69,7 @@ k delete daemonsets.apps -n kube-system kube-proxy
 
 ```shell
 helm repo add cilium https://helm.cilium.io/
-helm install cilium cilium/cilium --version 1.17.1 \
+helm install cilium cilium/cilium --version 1.17.2 \
   --namespace kube-system \
   --values cilium-values.yaml
 ```
@@ -80,7 +80,7 @@ TLDR: `sudo chown -R root:root /opt/cni/bin` for all nodes.
 
 ### Upgrading
 ```shell
-helm upgrade cilium cilium/cilium --version 1.17.1 \
+helm upgrade cilium cilium/cilium --version 1.17.2 \
   --namespace kube-system \
   --values cilium-values.yaml
 ```
@@ -92,6 +92,7 @@ https://argo-cd.readthedocs.io/en/stable/ をみながらArgoCDをDeployする�
 k8upのCRDも適用する(Helm Chartに含まれていないため)。
 
 ```shell
+k label node --all rack=rack0
 k apply -f node-local-dns.yaml
 k create namespace argocd
 k apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml

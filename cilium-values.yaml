@@ -1,3 +1,8 @@
+bpf:
+  hostLegacyRouting: false
+  masquerade: true
+bgpControlPlane:
+  enabled: true
 encryption:
   enabled: false
 privileged: true
@@ -8,9 +13,6 @@ l2announcements:
   enabled: true
 ipv6:
   enabled: true
-bpf:
-  hostLegacyRouting: false
-  masquerade: true
 k8sServiceHost: "192.168.1.60"
 k8sServicePort: "6443"
 k8sClientRateLimit:

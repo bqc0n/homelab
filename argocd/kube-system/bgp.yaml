@@ -1,0 +1,50 @@
+---
+apiVersion: cilium.io/v2alpha1
+kind: CiliumBGPClusterConfig
+metadata:
+  namespace: kube-system
+  name: bgp-cluster
+spec:
+  nodeSelector:
+    matchLabels:
+      rack: rack0
+  bgpInstances:
+    - name: "instance-65005"
+      localASN: 65005
+      peers:
+        - name: "peer-65000-1"
+          peerASN: 65000
+          peerAddress: 192.168.1.5
+          peerConfigRef:
+            name: bgp-peer
+---
+apiVersion: cilium.io/v2alpha1
+kind: CiliumBGPPeerConfig
+metadata:
+  namespace: kube-system
+  name: bgp-peer
+spec:
+  families:
+    - afi: ipv4
+      safi: unicast
+      advertisements:
+        matchLabels:
+          advertise: bgp
+---
+apiVersion: cilium.io/v2alpha1
+kind: CiliumBGPAdvertisement
+metadata:
+  namespace: kube-system
+  name: bgp-advertisement
+  labels:
+    advertise: bgp
+spec:
+  advertisements:
+    - advertisementType: Service
+      service:
+        addresses:
+        - LoadBalancerIP
+      selector:
+        matchExpressions:
+        - { key: hotkey, operator: NotIn, values: ["never-used"] }
+---
