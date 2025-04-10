@@ -26,4 +26,3 @@ resource "oci_core_ipsec" "ipsec_ix2215" {
   drg_id       = oci_core_drg.osaka.id
   static_routes = []
 }
-

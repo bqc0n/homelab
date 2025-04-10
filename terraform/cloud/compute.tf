@@ -1,4 +1,4 @@
-resource "oci_core_instance" "minecraft-amd-osaka" {
+resource "oci_core_instance" "minecraft_amd_osaka" {
   availability_domain = data.oci_identity_availability_domain.ads.name
   compartment_id      = oci_identity_compartment.minecraft.id
 
