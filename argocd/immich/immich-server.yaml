@@ -1,0 +1,45 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: immich
+  name: immich-server
+spec:
+  selector:
+    matchLabels:
+      app: immich-server
+  template:
+    metadata:
+      labels:
+        app: immich-server
+    spec:
+      containers:
+        - name: immich-server
+          image: ghcr.io/immich-app/immich-server:v1.131.3
+          ports:
+            - containerPort: 2283
+          volumeMounts:
+            - mountPath: /usr/src/app/upload
+              name: immich-data
+          envFrom:
+            - configMapRef:
+                name: immich-config
+            - secretRef:
+                name: immich-secrets
+      volumes:
+        - name: immich-data
+          persistentVolumeClaim:
+            claimName: immich-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: immich
+  name: frontend
+spec:
+  selector:
+    app: immich-server
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 2283

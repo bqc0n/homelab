@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: docmost
+  name: immich
   namespace: argocd
 spec:
   destination:
-    namespace: docmost
+    namespace: immich
     server: https://kubernetes.default.svc
   source:
-    path: argocd/docmost
+    path: argocd/immich
     repoURL: https://github.com/bqc0n/homelab.git
     targetRevision: HEAD
     directory:
@@ -20,3 +20,4 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true

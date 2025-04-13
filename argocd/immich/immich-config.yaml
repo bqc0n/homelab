@@ -1,0 +1,25 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: immich
+  name: immich-config
+data:
+  REDIS_PORT: "6379"
+  REDIS_HOSTNAME: "redis.immich.svc.cluster.local."
+  DB_HOSTNAME: "immich-rw.cnpg-system.svc.cluster.local."
+  DB_USERNAME: "postgres"
+  DB_DATABASE_NAME: "postgres"
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: immich-secrets
+  namespace: immich
+spec:
+  encryptedData:
+    DB_PASSWORD: AgCKzg/sM8JAxPqRWGrNJSpki8esVHgb3zZBvIbiOhP8LydMmdE0JJ8JLUidrcE+hjg5tYnEI5/b16z6pJjOajNNaex7lPGZC6BOtPQTdo3u4hATh3Np+ScAD8Os9hoReMREBC+dhqAz0XXl6Qf9S0mrLGTj3uvbzEyNMZQhba4Y+Bl+5bVZ7K5RFYM91i4A9JKwo1QkEfVCs9e4heie1xYNDvvAqpj6asdqogLM/e3O49GVDfIrIH+QKLGkdwgQqQRVvd8WS0BI3O186/s1Ebq6VWh6h5nGu8YeTaoIHta5XvNWT1QD7leXjg9Z9encx2oo/FEfVUYvDDxNsZEXlXGfRasyIrom0k2LXAw27rvGF5NOwCKPBMg8oDtB32EQfj8SeMGvA4DRu3zpIBMEZH8WSLozGIw4xl1odhVY/icJ7+OHMIaomU3AF5zBgyPTi86+2B2yCxylGJCxmoO35WtVT90gPJNPUTE15lDTVReukD87S14h/zjXltGko3Fy+TnkScTqipE5ayF2/VgHeEspkWiKKJhtZ47cod41t9SWP0LohTYj5F9JTPzD2uZluUx2EoMIuhqhfFOw7YsOAlP9m75KL47ekbDnPOVTXcTPNgcnP3SANcVXa6X2liHtf0c4r+x+W+h9BgtDCzr9IXZocvqkeNwHbvOprcFyjfXOVZcvfYecuoWkkJOQpw9XW1bK2uX/Z5kotLuOGBsd9FH29PF3qw8Pyd4iOR/DLZkmzn0ySS5qf4jtjuBZPVTEXa6rnGc8BOW+5KBo0/8NcLxQ
+  template:
+    metadata:
+      name: immich-secrets
+      namespace: immich

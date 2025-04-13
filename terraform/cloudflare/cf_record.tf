@@ -8,6 +8,7 @@ locals {
     "s3.${local.domain}",
     "docmost.${local.domain}",
     "paperless.${local.domain}",
+    "immich.${local.domain}",
   ]
 }
 

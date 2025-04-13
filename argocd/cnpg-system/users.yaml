@@ -13,3 +13,18 @@ spec:
       name: paperless-ngx
       namespace: cnpg-system
     type: kubernetes.io/basic-auth
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: immich
+  namespace: cnpg-system
+spec:
+  encryptedData:
+    password: AgAeTnnzH/d3PFrv24IIo4Ic8nt4NKHy5/F9P2Ku8e0JcCGkLr8r5Rd9s0YIxqU7pw+cSAGGZLyuwLjx0eS/Tso03/P/HR57Bom4TTqcP5T3NtfrzjG+WL/5wfuAIBsJ2/LZLlja3Z5aGddxiqgFx319+zAf/fo5qe97pa2KmFZIRD7vCX/RB1IjW4+sy/Peo9Vi1cEfdg9MZyGFXBbG6Iw4aeLSn0AxpkUkKIPS1t/cwHLUJI6yAx8dgmlC8DD6bG17efGMhUtZIIsq5guN/pfpJjSQp6m6Q3sOUXicpLF3t6HkUjoDPshigmMjBj4hb0CnzMPUt5WjNWSRH1ec93fYDBbhO1+n6QlgtJjrsaOX8oH1ghPv7kYNeug4qSr31gD7+eAa2alrmfOiYpbz/3xRDPybJlGsuL0NWThzaQVf24IW6HYmLFMMvc1IPkCMabm3I4VimvN7aUa2V0fT2MLQDzMJ5u/UwzOaWo4n0l59ifhRVz1moD88hiQgGyJhpsL0ZSNgn5ahHyMP2yVfSeCf2cUzCpl9DXnF6a0PyZRyvq4wTSwDFdmeffZF/BsuxKNh3PaQxEiSIQVoJcoz6hzpzRWoybg2cbfDtV6bveFMc1xOdYRFo+LwaGHI5w0/I7JU+9/ugkyS/V5SYHs/89NwPGj7r+lOgqxJV1DOthH53UzRRa9wwrYjhvoy1emWpeZcNYa9RKA1WFCMGsQi98gIpw6cjtoh6mlR9r2toHlUqrD5brXf3GcDgJ1SzHq+3DPa43L43A02Zs4VyJwPvwoy
+    username: AgCEDDZK59o0CbSh/fbkpNxOfrhFBjyCpq83DGo+HGQFrtQ8JuKnkwvDAZ4tdZ4XWrFm14qJeR82L/3ndeC5KGO9tKzbTlqzJzn7uMBxiuN9iPb7mCMNgU7Z4q94bKN4fDIgdKXxgF1wCl1i9he3unckOSHAWKHsyV5czMtQF5UaAt8tGHLH9C2i/jEmRjS+2b/fVbH0Y6vbY92pxCxjykb8LCFSDu4O0LJCsrF9YZTASAZt1VYRTMqgVjpCfJ09938s24juTQRvOH57cflcsr3R7eBvCR4lpmbuIU26ZvoeiK2EIWUeRENzF7gIE4U+DgWblzDBwMSH4moSufhRYZaZUSUIJT1TLLE9IwcW2T0SBEkL8WTthjX41ohxcA6jHm1buIeqbS9mYy58w2IqRfl08AEQ89yum3fAW9T3GCw2JEibnCM8BKx3fEcRY+BZGCKhRj+Mz80JhlhI9KmJY+QH41wd5WnaHQb87d9TMIC9VmQw48KI7KJi7JszDaVxzglEqn+KW+XfLUPOTCI3g3l6/NkDiBnuVhgm0GNOpyfoi3NEU7EWZLYBLM2oav+8sfNxhEdfPOpgRUY+XdT+XACRQfAqLTccJrmC8m+XaSfU5KPDpjkVr20NtcNPoWrjwRrPjo/PvdhCvV60mLf/k2Y/6B/DnNOMssHL8W57FvFzA1tmFNmmHYeVjvqtm14daSR8zIESixHc/w==
+  template:
+    metadata:
+      name: immich
+      namespace: cnpg-system
+    type: kubernetes.io/basic-auth

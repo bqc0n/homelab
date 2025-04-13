@@ -1,4 +1,5 @@
 .secrets/
+*.pem
 # kubespray downloads k8s cluster secrets to this directory
 artifacts/
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,intellij,terraform,ansible
