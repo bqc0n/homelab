@@ -1,20 +1,21 @@
 locals {
   tunnel_uri = "${data.sops_file.secrets.data["cloudflare.homelab_tunnel_id"]}.cfargotunnel.com"
   tunneled = [
-    "grafana.${local.domain}",
-    "argocd.${local.domain}",
-    "homebox.${local.domain}",
-    "misskey.${local.domain}",
-    "s3.${local.domain}",
-    "docmost.${local.domain}",
-    "paperless.${local.domain}",
-    "immich.${local.domain}",
+    "grafana",
+    "argocd",
+    "homebox",
+    "docmost",
+    "paperless",
+    "files",
+    "misskey",
+    "s3",
+    "immich",
   ]
 }
 
 resource "cloudflare_dns_record" "tunneled_records" {
   for_each = toset(local.tunneled)
-  name    = each.key
+  name    = "${each.key}.${local.domain}"
   type    = "CNAME"
   zone_id = local.zone_id
   content = local.tunnel_uri

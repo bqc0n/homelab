@@ -1,6 +1,6 @@
 resource "cloudflare_zero_trust_access_application" "homelab_private" {
   zone_id = local.zone_id
-  name = "Homelab - Private"
+  name = "Homelab - Private - I"
   session_duration = "24h"
   type = "self_hosted"
   allowed_idps = [data.sops_file.secrets.data["cloudflare.github_idp_id"]]
@@ -10,6 +10,23 @@ resource "cloudflare_zero_trust_access_application" "homelab_private" {
     { type = "public", uri = "homebox.${local.domain}" },
     { type = "public", uri = "docmost.${local.domain}" },
     { type = "public", uri = "paperless.${local.domain}" },
+  ]
+  auto_redirect_to_identity = true
+  policies = [{
+    precedence = 1
+    decision = "allow"
+    id = cloudflare_zero_trust_access_policy.homelab_private.id
+  }]
+}
+
+resource "cloudflare_zero_trust_access_application" "homelab_private_2" {
+  zone_id = local.zone_id
+  name = "Homelab - Private - II"
+  session_duration = "24h"
+  type = "self_hosted"
+  allowed_idps = [data.sops_file.secrets.data["cloudflare.github_idp_id"]]
+  destinations = [
+    { type = "public", uri = "files.${local.domain}" },
   ]
   auto_redirect_to_identity = true
   policies = [{
@@ -57,6 +74,9 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "cf_grafana" {
     }, {
       hostname = "immich.${local.domain}"
       service = "http://frontend.immich.svc.cluster.local."
+    }, {
+      hostname = "files.${local.domain}"
+      service = "http://seafile.seafile.svc.cluster.local."
     }, {
       service = "http_status:404"
     }]

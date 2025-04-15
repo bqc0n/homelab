@@ -1,0 +1,77 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: seafile
+  name: seafile-config
+data:
+  DB_HOST: "mysql.seafile.svc.cluster.local."
+  TIME_ZONE: "Asia/Tokyo"
+  SEAFILE_SERVER_LETSENCRYPT: "false"
+  JWT_PRIVATE_KEY: "dummy63UcZJoWWHF2MVt6iTxhBcyYvR82"
+  SEAFILE_SERVER_HOSTNAME: "https://files.bqc0n.com/"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: seafile
+  name: seafile
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: seafile
+  template:
+    metadata:
+      labels:
+        app: seafile
+    spec:
+      containers:
+        - name: seafile
+          image: seafileltd/seafile-mc:12.0.11
+          volumeMounts:
+            - mountPath: /shared
+              name: seafile-shared
+          ports:
+            - containerPort: 80
+          env:
+            - name: DB_ROOT_PASSWD
+              valueFrom:
+                secretKeyRef:
+                  name: seafile-db-secret
+                  key: MYSQL_ROOT_PASSWORD
+          envFrom:
+            - configMapRef:
+                name: seafile-config
+            - secretRef:
+                name: seafile-secrets
+      volumes:
+        - name: seafile-shared
+          persistentVolumeClaim:
+            claimName: seafile-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: seafile
+  name: seafile-data
+spec:
+  storageClassName: nfs-hdd-1
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: seafile
+  name: seafile
+spec:
+  selector:
+    app: seafile
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
