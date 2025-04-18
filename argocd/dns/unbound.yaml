@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: unbound
+spec:
+  selector:
+    matchLabels:
+      app: unbound
+  template:
+    metadata:
+      labels:
+        app: unbound
+    spec:
+      containers:
+        - name: unbound
+          image: mvance/unbound:1.21.1
+          ports:
+            - containerPort: 53
+              protocol: UDP
+            - containerPort: 53
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /opt/unbound/etc/unbound/
+              name: unbound-config
+              readOnly: false
+      volumes:
+        - name: unbound-config
+          configMap:
+            name: unbound-config
+            items:
+              - key: unbound.conf
+                path: unbound.conf
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: unbound-internal
+  labels:
+    lbipam: fixed
+  annotations:
+    "lbipam.cilium.io/ips": "10.214.1.53"
+spec:
+  selector:
+    app: unbound
+  ports:
+    - name: dns-udp
+      port: 53
+      protocol: UDP
+    - name: dns-tcp
+      port: 53
+      protocol: TCP
+  type: LoadBalancer

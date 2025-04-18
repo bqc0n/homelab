@@ -5,6 +5,7 @@ resource "cloudflare_zero_trust_access_application" "homelab_private" {
   type = "self_hosted"
   allowed_idps = [data.sops_file.secrets.data["cloudflare.github_idp_id"]]
   destinations = [
+    # Add URIs here for protected apps (5 Max per access_app)
     { type = "public", uri = "grafana.${local.domain}" },
     { type = "public", uri = "argocd.${local.domain}" },
     { type = "public", uri = "homebox.${local.domain}" },
@@ -26,6 +27,7 @@ resource "cloudflare_zero_trust_access_application" "homelab_private_2" {
   type = "self_hosted"
   allowed_idps = [data.sops_file.secrets.data["cloudflare.github_idp_id"]]
   destinations = [
+    # Add URIs here for protected apps (5 Max per access_app)
     { type = "public", uri = "files.${local.domain}" },
   ]
   auto_redirect_to_identity = true
@@ -49,6 +51,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "cf_grafana" {
   account_id = local.account_id
   tunnel_id  = data.sops_file.secrets.data["cloudflare.homelab_tunnel_id"]
   config = {
+    # These are forwarding settings for the tunnel
     ingress = [{
       hostname = "grafana.${local.domain}"
       service = "http://grafana-dashboard-service.dash.svc.cluster.local.:3000"

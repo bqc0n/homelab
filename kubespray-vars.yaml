@@ -15,3 +15,10 @@ kubectl_localhost: true
 kubeconfig_localhost: true
 
 kube_proxy_deployed: false
+
+# DNS
+coredns_external_zones:
+- zones:
+  - internal.
+  nameservers:
+  - 10.214.1.54

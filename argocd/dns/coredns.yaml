@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coredns-internal
+spec:
+  selector:
+    matchLabels:
+      app: coredns-internal
+  template:
+    metadata:
+      labels:
+        app: coredns-internal
+    spec:
+      containers:
+        - name: coredns-internal
+          image: coredns/coredns:1.12.1
+          args: ["-conf", "/etc/coredns/Corefile"]
+          ports:
+            - containerPort: 53
+              protocol: UDP
+            - containerPort: 53
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /etc/coredns
+              name: coredns-internal-config
+      volumes:
+        - name: coredns-internal-config
+          configMap:
+            name: coredns-internal-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dns-internal
+  labels:
+    lbipam: fixed
+  annotations:
+    "lbipam.cilium.io/ips": "10.214.1.54"
+spec:
+  selector:
+    app: coredns-internal
+  ports:
+    - name: dns-udp
+      port: 53
+      protocol: UDP
+    - name: dns-tcp
+      port: 53
+      protocol: TCP
+  type: LoadBalancer

@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns-internal-config
+data:
+  Corefile: |
+    internal.:53 {
+      file /etc/coredns/internal.db
+      log
+      errors
+    }
+      
+    bqc0n.internal.:53 {
+      file /etc/coredns/bqc0n.internal.db
+      log
+      errors
+    }
+  internal.db: |
+    $ORIGIN internal.
+    $TTL 3600
+    @ IN SOA ns1.internal. postmaster.internal. (
+      2025041601 ; serial
+      7200       ; refresh
+      3600       ; retry
+      604800     ; expire
+      3600      ; minimum
+    )
+    ;
+    @ IN NS ns1.internal.
+    ;
+    ns1 IN A 10.214.1.53
+  bqc0n.internal.db: |
+    $ORIGIN bqc0n.internal.
+    $TTL 3600
+    @ IN SOA ns1.internal. postmaster.bqc0n.internal. (
+      2025041601 ; serial
+      7200       ; refresh
+      3600       ; retry
+      604800     ; expire
+      3600      ; minimum
+    )
+    ;
+    IN NS ns1.internal.
