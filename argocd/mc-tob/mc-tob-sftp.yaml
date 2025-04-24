@@ -29,6 +29,8 @@ kind: Service
 metadata:
   name: mc-tob-sftp
   namespace: mc-tob
+  labels:
+    lbipam: fixed
   annotations:
     "lbipam.cilium.io/ips": "10.214.1.2"
     "lbipam.cilium.io/sharing-key": "mc-tob"
