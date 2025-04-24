@@ -19,8 +19,8 @@ metadata:
   namespace: mc-tob
   name: mc-tob-building-svc
   annotations:
-    "lbipam.cilium.io/ips": "10.214.1.1"
-    "lbipam.cilium.io/sharing-key": "minecraft"
+    "lbipam.cilium.io/ips": "10.214.1.2"
+    "lbipam.cilium.io/sharing-key": "mc-tob"
 spec:
   type: LoadBalancer
   selector:
