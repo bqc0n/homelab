@@ -9,7 +9,6 @@ locals {
     "files",
     "misskey",
     "s3",
-    "immich",
   ]
 }
 

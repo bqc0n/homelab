@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: immich-ingress
+  namespace: immich
+spec:
+  ingressClassName: cilium
+  rules:
+    - host: immich.bqc0n.internal
+      http:
+        paths:
+          - backend:
+              service:
+                name: frontend
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
+  tls:
+  - hosts:
+    - immich.bqc0n.internal
+    secretName: immich-tls

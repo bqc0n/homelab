@@ -41,3 +41,5 @@ data:
     )
     ;
     IN NS ns1.internal.
+    ;
+    immich IN A 10.214.1.130

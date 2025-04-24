@@ -75,9 +75,6 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "cf_grafana" {
       hostname = "paperless.${local.domain}"
       service = "http://server.paperless-ngx.svc.cluster.local."
     }, {
-      hostname = "immich.${local.domain}"
-      service = "http://frontend.immich.svc.cluster.local."
-    }, {
       hostname = "files.${local.domain}"
       service = "http://seafile.seafile.svc.cluster.local."
     }, {
