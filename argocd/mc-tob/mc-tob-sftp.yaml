@@ -24,6 +24,20 @@ data:
     ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIChEEaY7O2dX+vxT90f5JHV92H/uZu3uynJtTCcnau3L
     ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE65lCWo/lvkIpk2NEnXuOdmruKsPOZyzgndg7y/0Kgr
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mc-tob-sftp
+  namespace: mc-tob
+  annotations:
+    "lbipam.cilium.io/ips": "10.214.1.1"
+    "lbipam.cilium.io/sharing-key": "minecraft"
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 12303
+      targetPort: 22
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -43,27 +57,11 @@ spec:
       - name: mc-tob-sftp
         image: atmoz/sftp:alpine
         imagePullPolicy: Always
-        securityContext:
-          capabilities:
-            add:
-              - NET_ADMIN
-        command: ["/bin/sh", "-c"]
-        args:
-          - |
-            apk update
-            apk add wireguard-tools
-            ip link add dev wg0 type wireguard
-            ip address add dev wg0 $WIREGUARD_IP
-            wg set wg0 private-key /wg-key/privatekey peer Rybuqf4c2TJt8X/ns/b8ApGgnu9pAtD9zArmlrIf2Hk= allowed-ips 10.9.9.1/32 endpoint minecraft.bqc0n.com:51820 persistent-keepalive 25
-            ip link set up dev wg0
-            /entrypoint
         ports:
           - containerPort: 22
         env:
           - name: SFTP_USERS
             value: "sftp::1000:1000"
-          - name: WIREGUARD_IP
-            value: "10.9.9.222/24"
         volumeMounts:
           - mountPath: /home/sftp/production
             name: mc-tob-sftp-production
