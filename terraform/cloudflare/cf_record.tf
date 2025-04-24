@@ -37,3 +37,16 @@ resource "cloudflare_dns_record" "minecraft_proxy_ipv6" {
   zone_id = local.zone_id
   content = data.terraform_remote_state.cloud.outputs.minecraft_amd_osaka_ipv6_GUA
 }
+
+resource "cloudflare_dns_record" "minecraft_tsb" {
+  name    = "_minecraft._tcp.tsb.bqc0n.com"
+  ttl     = 3600
+  type    = "SRV"
+  zone_id = local.zone_id
+  data = {
+    priority = 0
+    port = 27139
+    target = "minecraft.bqc0n.com"
+    weight = 5
+  }
+}

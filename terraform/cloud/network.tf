@@ -38,6 +38,12 @@ resource "oci_core_default_route_table" "osaka" {
     destination = "192.168.1.0/24"
     destination_type = "CIDR_BLOCK"
   }
+
+  route_rules {
+    network_entity_id = oci_core_drg.osaka.id
+    destination = "10.214.1.0/24"
+    destination_type = "CIDR_BLOCK"
+  }
 }
 
 resource "oci_core_subnet" "osaka_public" {
