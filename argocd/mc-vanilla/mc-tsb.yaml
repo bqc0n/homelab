@@ -20,7 +20,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mc-tsb-data
+  name: mc-tsb-data2
   namespace: mc-vanilla
 spec:
   storageClassName: nfs-ceph
@@ -60,4 +60,4 @@ spec:
       volumes:
         - name: mc-tsb-data
           persistentVolumeClaim:
-            claimName: mc-tsb-data
+            claimName: mc-tsb-data2
