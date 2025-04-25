@@ -78,7 +78,7 @@ resource "oci_core_security_list" "osaka_public" {
 
       tcp_options {
         min = 27135
-        max = 27138
+        max = 27139
       }
     }
   }
