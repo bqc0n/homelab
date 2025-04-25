@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: unbound
-          image: mvance/unbound:1.21.1
+          image: mvance/unbound:1.22.0
           ports:
             - containerPort: 53
               protocol: UDP
