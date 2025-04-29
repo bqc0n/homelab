@@ -120,6 +120,8 @@ spec:
             requests:
               cpu: 25m
               memory: 5Mi
+            limits:
+              memory: 50Mi
           args: [ "-localip", "169.254.20.10,10.233.0.3", "-conf", "/etc/Corefile", "-upstreamsvc", "kube-dns-upstream", "-skipteardown=true", "-setupinterface=false", "-setupiptables=false" ]
           ports:
             - containerPort: 53
