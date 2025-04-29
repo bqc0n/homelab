@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mc-tob
+  name: minecraft
 spec:
   destination:
     namespace: minecraft
     server: https://kubernetes.default.svc
   source:
-    path: argocd/mc-tob
+    path: argocd/minecraft
     repoURL: https://github.com/bqc0n/homelab.git
     targetRevision: HEAD
     directory:
