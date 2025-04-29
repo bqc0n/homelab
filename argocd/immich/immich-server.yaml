@@ -16,6 +16,9 @@ spec:
       containers:
         - name: immich-server
           image: ghcr.io/immich-app/immich-server:v1.131.3
+          resources:
+            limits:
+              memory: "2Gi"
           ports:
             - containerPort: 2283
           volumeMounts:
