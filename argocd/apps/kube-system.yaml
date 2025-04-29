@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-system
+spec:
+  destination:
+    namespace: kube-system
+    server: https://kubernetes.default.svc
+  source:
+    path: argocd/kube-system
+    repoURL: https://github.com/bqc0n/homelab.git
+    targetRevision: HEAD
+    directory:
+      recurse: true
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
