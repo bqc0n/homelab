@@ -5,7 +5,7 @@ locals {
       node     = "pve01",
       ipv4     = "192.168.1.61",
       cores    = 4,
-      memoryMi = 24576,
+      memoryMi = 16384,
     },
     {
       hostname = "k8s-worker-02",
@@ -19,7 +19,7 @@ locals {
       node     = "pve03",
       ipv4     = "192.168.1.63",
       cores    = 6,
-      memoryMi = 24576,
+      memoryMi = 16384,
     },
   ]
 }
@@ -31,7 +31,7 @@ module "k8s" {
   ssh_keys = local.ssh_public_keys
 
   gateway    = "192.168.1.1"
-  nameserver = "2606:4700:4700::1112 2606:4700:4700::1002 1.1.1.2 1.0.0.2"
+  nameserver = "192.168.1.1"
   hosts      = local.hosts
   vmid_start = 1001
   specs = {
@@ -55,7 +55,7 @@ resource "proxmox_vm_qemu" "k8s_master_ha" {
   automatic_reboot = true
   cores = 4
   sockets = 1
-  memory = 8192
+  memory = 6144
   tablet  = false
   scsihw  = "virtio-scsi-pci"
 
@@ -63,7 +63,7 @@ resource "proxmox_vm_qemu" "k8s_master_ha" {
   full_clone = false
   os_type = "cloud-init"
   boot    = "order=scsi0"
-  nameserver = "2606:4700:4700::1112 2606:4700:4700::1002 1.1.1.2 1.0.0.2"
+  nameserver = "192.168.1.1"
   ipconfig0 = "ip=192.168.1.60/24,gw=192.168.1.1"
 
   sshkeys = local.ssh_public_keys

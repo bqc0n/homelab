@@ -2,7 +2,7 @@ locals {
   ssh_public_keys = <<-EOT
   ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE65lCWo/lvkIpk2NEnXuOdmruKsPOZyzgndg7y/0Kgr
   EOT
-  nameserver = "1.1.1.1"
+  nameserver = "192.168.1.1"
 }
 
 resource "proxmox_lxc" "file_server" {
@@ -19,7 +19,7 @@ resource "proxmox_lxc" "file_server" {
   start  = true
 
   cores  = 4
-  memory = 8192
+  memory = 4096
 
   features {
     nesting = true
@@ -37,5 +37,3 @@ resource "proxmox_lxc" "file_server" {
     gw     = "192.168.1.1"
   }
 }
-
-
