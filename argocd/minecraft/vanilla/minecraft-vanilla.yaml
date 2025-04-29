@@ -57,8 +57,6 @@ spec:
         volumeMounts:
           - mountPath: /data
             name: mc-vanilla-data
-          - mountPath: /wg-key
-            name: wireguard-privatekey
         ports:
         - containerPort: 25565
         envFrom:
