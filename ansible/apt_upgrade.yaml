@@ -9,6 +9,7 @@
         line: 'Acquire::http::Proxy "http://{{ apt_cache_server }}:3142";'
         path: /etc/apt/apt.conf.d/01proxy
         create: true
+      when: ansible_host != apt_cache_server
     - name: apt upgrade
       become: true
       ansible.builtin.apt:

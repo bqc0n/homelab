@@ -21,6 +21,11 @@
   ansible.builtin.apt:
     name: apt-cacher-ng
     state: latest
+- name: passthrough https
+  notify: restart_apt_cacher_ng
+  ansible.builtin.lineinfile:
+    path: /etc/apt-cacher-ng/acng.conf
+    line: "PassThroughPattern: .*"
 
 - name: Samba - Create User
   ansible.builtin.user:

@@ -10,11 +10,17 @@
     - name: Terraform Apply
       community.general.terraform:
         binary_path: ~/.nix-profile/bin/tofu
-        project_path: ../terraform/main
+        project_path: ../terraform/on-premiss
         state: present
         force_init: yes
 
-- name: Update pkgs
+- name: File & Apt Cache Server
+  hosts: file_server
+  gather_facts: false
+  roles:
+    - role: file_server
+
+- name: All hosts Jobs
   import_playbook: apt_upgrade.yaml
 
 - name: Bind mount
@@ -24,11 +30,6 @@
       ansible.builtin.shell:
         # todo: vmid
         cmd: "pct set 302 -mp0 /shared/Shared,mp=/mnt/shared"
-- name: File Server
-  hosts: file_server
-  gather_facts: false
-  roles:
-    - role: file_server
 
 - name: kubernetes worker nodes
   hosts: kube_node
