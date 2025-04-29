@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mc-vanilla
+  name: web-apps
 spec:
   destination:
-    namespace: mc-vanilla
+    namespace: web-apps
     server: https://kubernetes.default.svc
   source:
-    path: argocd/mc-vanilla
+    path: argocd/web-apps
     repoURL: https://github.com/bqc0n/homelab.git
     targetRevision: HEAD
     directory:

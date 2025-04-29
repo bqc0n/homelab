@@ -3,7 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: misskey-config
-  namespace: misskey
+  namespace: web-apps
 data:
   default.yml: |
     setupPassword: test!1234

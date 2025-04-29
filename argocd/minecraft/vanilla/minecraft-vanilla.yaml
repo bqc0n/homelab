@@ -1,22 +1,8 @@
 ---
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
-metadata:
-  name: wireguard-privatekey
-  namespace: mc-vanilla
-spec:
-  encryptedData:
-    privatekey: AgDm8yPiKfdVizOfFHeAwo3fpdq8UibRZEwozaK3EPfLj+jPwmfprif21BiQqnzsQbPCbqwnaQPohSjQVR5B98QXawNAhxpg+s0YYIlMiJrCrLfTG+4oNixWBztgFRNQHHi5BW+xnUO3yGrlZVawafVFS4Z3G+SVO5tvzKVtXh3Tn+YjQIzfuzxVgUE7pNB1SpfybjqKwLu0aKxhARy+dbegRO83uzim3KJbUhIJo4+WzeFJTTnowISjVTgsaNUZ5OaeEkWnKXb4XOdQ1i/znT4GQYfryi33IDOcu3cbyY90S8e0jzxvp4BNWELIngK1Xk7BvwJgDbOrKc8QEEStSsJlEIx7iBN3BLvwA55q8i3REMw8faCt73XRzPUr9gJrcwT00nmlMuh2WUw8/mbDmV2jrbpVo57RGJYZZHKCoO+IZSUNc4V4c1up6+aXe5wdPlpXE2rRAKKE78yNa0IR9r4AAYn4fQ6BasmP3tJ6GVT06IQvxhOjif4DMQ9Y1DZRQV4sPJLnXKKwemk7CZRwJzzMevWfjsQ314nF1tsOOoy6PCznuWiRQ5I4nYNYqaAOzlD4VKXVg+OHX0sgVP98iWAlEQXt8+6B5pGhP9kG4TQMUYD2hHUJJMkM9FIam9XQR6t81Bd4Vu5dE0c3byBh6FqPaWN2x56pcMAEpUZuLZMz307WitIfp4nwfmfyDqKPpBxkBPZnWSYq5S9quWAK/XOdOg608dm7CB+pDmDgVlrcA2jSIQ5j7FAhrkesqw==
-  template:
-    metadata:
-      name: wireguard-privatekey
-      namespace: mc-vanilla
-    type: Opaque
----
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: mc-vanilla
+  namespace: minecraft
   name: mc-vanilla-svc
   labels:
     lbipam: fixed
@@ -36,7 +22,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: mc-vanilla-data
-  namespace: mc-vanilla
+  namespace: minecraft
 spec:
   storageClassName: nfs-ceph
   accessModes:
@@ -48,7 +34,7 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  namespace: mc-vanilla
+  namespace: minecraft
   name: mc-vanilla-server
 spec:
   podManagementPolicy: OrderedReady
@@ -78,12 +64,7 @@ spec:
         envFrom:
           - configMapRef:
               name: mc-vanilla-config
-          - secretRef:
-              name: mc-vanilla-whitelist
       volumes:
         - name: mc-vanilla-data
           persistentVolumeClaim:
             claimName: mc-vanilla-data
-        - name: wireguard-privatekey
-          secret:
-            secretName: wireguard-privatekey

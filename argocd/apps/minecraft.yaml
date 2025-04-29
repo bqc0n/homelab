@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: misskey
+  name: mc-tob
 spec:
   destination:
-    namespace: misskey
+    namespace: minecraft
     server: https://kubernetes.default.svc
   source:
-    path: argocd/misskey
+    path: argocd/mc-tob
     repoURL: https://github.com/bqc0n/homelab.git
     targetRevision: HEAD
     directory:
@@ -18,5 +18,4 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-      - PrunePropagationPolicy=foreground
       - CreateNamespace=true

@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: mc-vanilla-config
-  namespace: mc-vanilla
+  namespace: minecraft
 data:
   EULA: "true"
   LOG_TIMESTAMP: "true"
@@ -16,5 +16,5 @@ data:
   TZ: "Asia/Tokyo"
   USE_AIKAR_FLAGS: "true"
   VERSION: "1.20.4"
-  # This is not an itzg/minecraft-server's env var
-  WIREGUARD_IP: "10.9.9.10/24"
+  WHITELIST: |
+    bqc0n

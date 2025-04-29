@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: postgres-secret
-  namespace: misskey
+  namespace: web-apps
 #data:
 #  POSTGRES_PASSWORD: "test"
 #type: Opaque
@@ -16,7 +16,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: db-svc
-  namespace: misskey
+  namespace: web-apps
 spec:
   selector:
     app: misskey-db
@@ -28,7 +28,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: pvc-misskey-db
-  namespace: misskey
+  namespace: web-apps
   annotations:
     k8up.io/backup: "false"
 spec:
@@ -43,7 +43,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: misskey-db
-  namespace: misskey
+  namespace: web-apps
 spec:
   replicas: 1
   selector:

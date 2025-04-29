@@ -3,7 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: mc-tob-config
-  namespace: mc-tob
+  namespace: minecraft
 data:
   LEVEL_TYPE: "flat"
   GENERATE_STRUCTURES: "false"
@@ -21,14 +21,12 @@ data:
   USE_AIKAR_FLAGS: "true"
   VERSION: "1.12.2"
   WHITELIST: "bqc0n,soramame_256,KURAGON,TashiKani_,IchinoseYuki,urabe03,Malb7mm,HeihoDESU,yuu50"
-  # This is not an itzg/minecraft-server's env var
-  WIREGUARD_IP: "10.9.9.11/24"
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: mc-tob-build-config
-  namespace: mc-tob
+  namespace: minecraft
 data:
   LEVEL_TYPE: "flat"
   GENERATE_STRUCTURES: "false"
@@ -46,5 +44,3 @@ data:
   USE_AIKAR_FLAGS: "true"
   VERSION: "1.12.2"
   WHITELIST: "bqc0n,soramame_256,KURAGON,TashiKani_,IchinoseYuki,urabe03,Malb7mm,HeihoDESU,yuu50"
-  # This is not an itzg/minecraft-server's env var
-  WIREGUARD_IP: "10.9.9.12/24"

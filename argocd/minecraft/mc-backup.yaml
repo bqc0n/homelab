@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: restic-repo-password
-  namespace: mc-vanilla
+  namespace: minecraft
 type: Opaque
 stringData:
   PASSWORD: "nopass"
@@ -12,7 +12,7 @@ apiVersion: k8up.io/v1
 kind: Schedule
 metadata:
   name: mc-vanilla-backup-schedule
-  namespace: mc-vanilla
+  namespace: minecraft
 spec:
   podSecurityContext:
     runAsUser: 0
@@ -31,7 +31,7 @@ spec:
       keepYearly: 100
   backend:
     rest:
-      url: "http://restic-rest.backup/mc-vanilla/backup"
+      url: "http://restic-rest.default.svc.cluster.local./mc-vanilla/backup"
     repoPasswordSecretRef:
       name: restic-repo-password
       key: PASSWORD
