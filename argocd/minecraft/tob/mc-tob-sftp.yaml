@@ -1,19 +1,5 @@
 # TODO Use SSHPiper
 ---
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
-metadata:
-  name: wireguard-privatekey-sftp
-  namespace: minecraft
-spec:
-  encryptedData:
-    privatekey: AgAcD1M/u8O/y8AX4NNjaHQBsbvK4K/W8UaVtWtOcLOQOqIO/eS5z5dln2U6spa4GOaV7J+obR32ptpMMQHZ6CYY+fpgZi823TRM6fOwVwLmlYPjfz1nA5VGnmPjYNIIWDO+Gkjl5BPMqlqjhfRuQfnmHlvRNx9oz4X3BDujG9rdAaI8K8zUpZDNqTb6J9/t+OLwoTF0iiru89bkNynH394Jz9ZAMy1BwYVP3rpcnm2W0UzMFfOu/0X2SaItKL2ArY9vx/tuTkAlQmN9g4Q9S5jeBvJPtRKrhGNLyPK30HKo8RSx/Cfb/70cSacAFKTintEeXvUSSZb+Xkw3YIy5VE8jWMd+/Naxk+RGK8O5P3wmts8DZO2+wPZ9n+nm/st/xZ/6W3jQw70r6c2KGUlOVKNlsBzpJEmTvqu4wotPoKhNXYEzdma7zgww8kBJETIn+DzaLN9Es6b9Gi72xLxGtaRDdDVR7hLuvnl8Dwl0A05HR/96dKyLezs06SrBnXBWnklkAIgmtRboz2ZyRaZWl6tyQtl3mC8Swq6VY3w24ZcXkthXCB9aFdhnMM0PrvO85GfSfUcR2OFrxURfUph/gFAQlkT2ckONrR31W5bbzTDvMCBoI9+UyFm68wSIDWzF6APN1U1JpD06+zF7EnBClZ49deffnExzTCcZvszM+Tl/ArM5tQ+nChK86t6Gv1yVaDVmJlfXbwFyCRRbr+XgBS26MKU8kuOa1fJ+oagUdd1yzOT6F2j+Ca0MpeAf1Q==
-  template:
-    metadata:
-      name: wireguard-privatekey-sftp
-      namespace: minecraft
-    type: Opaque
----
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -78,8 +64,6 @@ spec:
             name: mc-tob-sftp-building
           - mountPath: /home/sftp/.ssh/keys/
             name: mc-tob-sftp-pubkey
-          - mountPath: /wg-key
-            name: wireguard-privatekey-sftp
       volumes:
         - name: mc-tob-sftp-production
           persistentVolumeClaim:
@@ -90,7 +74,4 @@ spec:
         - name: mc-tob-sftp-pubkey
           configMap:
             name: mc-tob-sftp-pubkey
-        - name: wireguard-privatekey-sftp
-          secret:
-            secretName: wireguard-privatekey-sftp
 ---
