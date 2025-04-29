@@ -1,0 +1,37 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: restic-repo-password
+  namespace: docmost
+type: Opaque
+stringData:
+  PASSWORD: "notasecret"
+---
+apiVersion: k8up.io/v1
+kind: Schedule
+metadata:
+  name: docmost-backup-schedule
+  namespace: docmost
+spec:
+  podSecurityContext:
+    runAsUser: 0
+  failedJobsHistoryLimit: 2
+  successfulJobsHistoryLimit: 2
+  backup:
+    schedule: "0 3 * * *" # 3AM
+    failedJobsHistoryLimit: 2
+    successfulJobsHistoryLimit: 2
+  prune:
+    schedule: "@weekly"
+    activeDeadlineSeconds: 7200
+    retention:
+      keepDaily: 14
+      keepMonthly: 12
+      keepYearly: 100
+  backend:
+    rest:
+      url: "http://restic-rest.default.svc.cluster.local./docmost/backup"
+    repoPasswordSecretRef:
+      name: restic-repo-password
+      key: PASSWORD
