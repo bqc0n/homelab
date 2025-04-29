@@ -6,6 +6,12 @@ output "minecraft_amd_osaka_ipv6_GUA" {
   value = oci_core_instance.minecraft_amd_osaka.create_vnic_details[0].ipv6address_ipv6subnet_cidr_pair_details[0].ipv6address
 }
 
+output "minecraft_amd_osaka_vm2_ips" {
+  value = {
+    ipv4 = oci_core_instance.osaka_docker.public_ip
+  }
+}
+
 output "ipsec_ix2215_1_ip_address" {
   value = [
     oci_core_ipsec_connection_tunnel_management.ipsec_ix2215_config[0].vpn_ip,
