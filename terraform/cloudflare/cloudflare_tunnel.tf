@@ -10,7 +10,6 @@ resource "cloudflare_zero_trust_access_application" "homelab_private" {
     { type = "public", uri = "argocd.${local.domain}" },
     { type = "public", uri = "homebox.${local.domain}" },
     { type = "public", uri = "docmost.${local.domain}" },
-    { type = "public", uri = "paperless.${local.domain}" },
   ]
   auto_redirect_to_identity = true
   policies = [{
@@ -28,7 +27,7 @@ resource "cloudflare_zero_trust_access_application" "homelab_private_2" {
   allowed_idps = [data.sops_file.secrets.data["cloudflare.github_idp_id"]]
   destinations = [
     # Add URIs here for protected apps (5 Max per access_app)
-    { type = "public", uri = "files.${local.domain}" },
+    { type = "public", uri = "paperless.${local.domain}" },
   ]
   auto_redirect_to_identity = true
   policies = [{
