@@ -69,7 +69,7 @@ k delete daemonsets.apps -n kube-system kube-proxy
 
 ```shell
 helm repo add cilium https://helm.cilium.io/
-helm install cilium cilium/cilium --version 1.17.2 \
+helm install cilium cilium/cilium --version 1.17.3 \
   --namespace kube-system \
   --values cilium-values.yaml
 ```
@@ -77,13 +77,6 @@ helm install cilium cilium/cilium --version 1.17.2 \
 If you're getting an error `cp: cannot create regular file '/hostbin/cilium-mount': Permission denied`,
 see [this issue](https://github.com/cilium/cilium/issues/23838).
 TLDR: `sudo chown -R root:root /opt/cni/bin` for all nodes.
-
-### Upgrading
-```shell
-helm upgrade cilium cilium/cilium --version 1.17.2 \
-  --namespace kube-system \
-  --values cilium-values.yaml
-```
 
 ## After the k8s cluster is up and running
 暗号鍵の入ったファイルを用意して、`kubectl apply -f key.yaml`を実行する。
@@ -93,7 +86,7 @@ k8upのCRDも適用する(Helm Chartに含まれていないため)。
 
 ```shell
 k label node --all rack=rack0
-k apply -f node-local-dns.yaml
+k apply -f argocd/kube-system/node-local-dns.yaml
 k create namespace argocd
 k apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 k apply -f https://github.com/k8up-io/k8up/releases/download/k8up-4.8.3/k8up-crd.yaml --server-side
@@ -114,6 +107,7 @@ data:
       clusters:
         - "*"
 ```
+
 
 できたら `argo-webui.yaml`を適用してweb UIにアクセスする。
 ```shell
