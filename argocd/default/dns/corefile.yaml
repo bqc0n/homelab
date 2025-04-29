@@ -42,7 +42,7 @@ data:
     ;
     IN NS ns1.internal.
     ;
-    immich IN A 10.1.0.130
+    immich IN A 10.1.0.100
     router IN A 192.168.1.5
     pve0 IN A 192.168.1.10
     pve1 IN A 192.168.1.11

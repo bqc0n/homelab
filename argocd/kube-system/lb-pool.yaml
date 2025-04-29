@@ -17,6 +17,6 @@ spec:
   blocks:
     - cidr: "10.1.0.0/25"
   serviceSelector:
-    matchLabels:
-      lbipam: fixed
+    matchExpressions:
+      - {key: somekey, operator: NotIn, values: ['never-used-value']}
 
