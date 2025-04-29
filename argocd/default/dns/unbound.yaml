@@ -38,7 +38,7 @@ metadata:
   labels:
     lbipam: fixed
   annotations:
-    "lbipam.cilium.io/ips": "10.214.1.53"
+    "lbipam.cilium.io/ips": "10.1.0.53"
 spec:
   selector:
     app: unbound

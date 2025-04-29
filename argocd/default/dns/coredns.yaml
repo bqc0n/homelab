@@ -36,7 +36,7 @@ metadata:
   labels:
     lbipam: fixed
   annotations:
-    "lbipam.cilium.io/ips": "10.214.1.54"
+    "lbipam.cilium.io/ips": "10.1.0.54"
 spec:
   selector:
     app: coredns-internal

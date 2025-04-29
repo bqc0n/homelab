@@ -12,7 +12,7 @@ data:
   
     stub-zone:
       name: internal.
-      stub-addr: 10.214.1.54
+      stub-addr: 10.1.0.54
   
     forward-zone:
       name: "."

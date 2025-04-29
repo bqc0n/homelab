@@ -21,4 +21,4 @@ coredns_external_zones:
 - zones:
   - internal.
   nameservers:
-  - 10.214.1.54
+  - 10.1.0.53

@@ -6,7 +6,7 @@ metadata:
   namespace: kube-system
 spec:
   blocks:
-    - cidr: "10.214.1.128/25"
+    - cidr: "10.1.0.128/25"
 ---
 apiVersion: "cilium.io/v2alpha1"
 kind: CiliumLoadBalancerIPPool
@@ -15,7 +15,7 @@ metadata:
   namespace: kube-system
 spec:
   blocks:
-    - cidr: "10.214.1.0/25"
+    - cidr: "10.1.0.0/25"
   serviceSelector:
     matchLabels:
       lbipam: fixed

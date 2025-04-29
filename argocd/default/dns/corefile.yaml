@@ -28,7 +28,7 @@ data:
     ;
     @ IN NS ns1.internal.
     ;
-    ns1 IN A 10.214.1.53
+    ns1 IN A 10.1.0.53
   bqc0n.internal.db: |
     $ORIGIN bqc0n.internal.
     $TTL 3600
@@ -42,7 +42,7 @@ data:
     ;
     IN NS ns1.internal.
     ;
-    immich IN A 10.214.1.130
+    immich IN A 10.1.0.130
     router IN A 192.168.1.5
     pve0 IN A 192.168.1.10
     pve1 IN A 192.168.1.11

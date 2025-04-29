@@ -107,15 +107,15 @@
       
       backend mc_vanilla
         mode tcp
-        server home_mc_vanilla 10.214.1.1:27135
+        server home_mc_vanilla 10.1.0.1:27135
       
       backend mc_tob
         mode tcp
-        server home_mc_tob 10.214.1.2:27136
+        server home_mc_tob 10.1.0.2:27136
       
       backend mc_tob_building
         mode tcp
-        server home_mc_tob 10.214.1.2:27137
+        server home_mc_tob 10.1.0.2:27137
       
       backend mc_nomi
         mode tcp
@@ -123,11 +123,11 @@
       
       backend mc_tsb
         mode tcp
-        server home_mc_tsb 10.214.1.1:27139
+        server home_mc_tsb 10.1.0.1:27139
       
       backend mc_tob_sftp
         mode tcp
-        server home-mc-tob_sftp 10.214.1.2:12303
+        server home-mc-tob_sftp 10.1.0.2:12303
 
 - name: Open Ports
   import_tasks: open-ports.yaml
