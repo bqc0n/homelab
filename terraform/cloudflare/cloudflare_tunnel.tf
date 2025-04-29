@@ -60,10 +60,10 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "cf_grafana" {
       origin_request = { no_tls_verify = true }
     }, {
       hostname = "homebox.${local.domain}"
-      service = "http://homebox.homebox.svc.cluster.local."
+      service = "http://homebox.web-apps.svc.cluster.local."
     }, {
       hostname = "misskey.${local.domain}"
-      service = "http://misskey.misskey.svc.cluster.local."
+      service = "http://misskey.web-apps.svc.cluster.local."
     }, {
       hostname = "s3.${local.domain}"
       service = "http://ceph-rgw.default.svc.cluster.local."
