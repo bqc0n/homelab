@@ -22,7 +22,7 @@ endpoints:
 
   - name: Minecraft | Vanilla Server
     group: Game
-    url: "tcp://minecraft.bqc0n.com:27135"
+    url: "tcp://10.1.0.1:27135"
     interval: 5m
     ui:
       hide-hostname: true
@@ -30,7 +30,7 @@ endpoints:
       - "[CONNECTED] == true"
   - name: Minecraft | TOB Server
     group: Game
-    url: "tcp://minecraft.bqc0n.com:27136"
+    url: "tcp://10.1.0.1:27136"
     interval: 5m
     ui:
       hide-hostname: true
@@ -38,7 +38,7 @@ endpoints:
       - "[CONNECTED] == true"
   - name: "Minecraft | TOB Build Server"
     group: Game
-    url: "tcp://minecraft.bqc0n.com:27137"
+    url: "tcp://10.1.0.1:27137"
     interval: 5m
     ui:
       hide-hostname: true
@@ -54,7 +54,7 @@ endpoints:
       - "[CONNECTED] == true"
   - name: "Minecraft | SFTP"
     group: Game
-    url: "ssh://minecraft.bqc0n.com:12303"
+    url: "ssh://10.1.0.1:12303"
     ssh:
       username: ""
       password: ""
