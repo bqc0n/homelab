@@ -3,8 +3,9 @@ resource "oci_core_vcn" "osaka" {
 
   display_name = "vcn-osaka-minecraft-tf"
 
-  cidr_blocks = ["172.16.0.0/16"]
+  cidr_blocks = ["10.2.0.0/22"]
   is_ipv6enabled = true
+  dns_label = "osaka"
 
   freeform_tags = { "ManagedBy" = "Terraform" }
 }
@@ -47,7 +48,7 @@ resource "oci_core_default_route_table" "osaka" {
 }
 
 resource "oci_core_subnet" "osaka_public" {
-  cidr_block     = "172.16.0.0/24"
+  cidr_block     = "10.2.0.0/24"
   compartment_id = oci_identity_compartment.minecraft.id
   vcn_id         = oci_core_vcn.osaka.id
   ipv6cidr_block = replace(oci_core_vcn.osaka.ipv6cidr_blocks[0], "/56", "/64")

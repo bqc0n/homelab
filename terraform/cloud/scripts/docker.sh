@@ -22,5 +22,12 @@ sudo setenforce 0
 
 # Gatus
 curl https://raw.githubusercontent.com/bqc0n/homelab/refs/heads/main/files/oci-docker-compose.yaml -o /home/opc/compose.yaml
-sudo curl https://raw.githubusercontent.com/bqc0n/homelab/refs/heads/main/files/gatus.yaml -o /etc/gatus.yaml
+sudo curl https://raw.githubusercontent.com/bqc0n/homelab/refs/heads/main/files/gatus.yaml -o /etc/gatus/config.yaml
 sudo docker compose -f /home/opc/compose.yaml up -d
+
+# Add cloudflared.repo to /etc/yum.repos.d/
+curl -fsSl https://pkg.cloudflare.com/cloudflared-ascii.repo | sudo tee /etc/yum.repos.d/cloudflared.repo
+#update repo
+sudo yum update
+# install cloudflared
+sudo yum install -y cloudflared

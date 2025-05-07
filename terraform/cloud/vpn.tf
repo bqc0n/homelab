@@ -30,7 +30,7 @@ resource "oci_core_ipsec" "ipsec_ix2215" {
   cpe_local_identifier_type = "HOSTNAME"
   display_name = "NEC IX IPSec - Alpha"
   drg_id       = oci_core_drg.osaka.id
-  static_routes = []
+  static_routes = ["192.168.1.0/24"] # at lease 1 route required, but not used in Dynamic Routing Mode
 }
 
 resource "oci_core_ipsec" "ipsec_ix2105" {
@@ -40,5 +40,5 @@ resource "oci_core_ipsec" "ipsec_ix2105" {
   cpe_local_identifier_type = "HOSTNAME"
   display_name = "NEC IX IPSec - Beta"
   drg_id       = oci_core_drg.osaka.id
-  static_routes = []
+  static_routes = ["192.168.1.0/24"]
 }

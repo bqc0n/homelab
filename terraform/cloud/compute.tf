@@ -17,7 +17,6 @@ resource "oci_core_instance" "minecraft_amd_osaka" {
     ipv6address_ipv6subnet_cidr_pair_details {
       ipv6address = "${replace(oci_core_subnet.osaka_public.ipv6cidr_block, "/64", "")}2b"
     }
-    nsg_ids = [oci_core_network_security_group.wireguard.id]
   }
 
   source_details {
