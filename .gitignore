@@ -1,4 +1,5 @@
 .secrets/
+kubespray/*
 *.pem
 # kubespray downloads k8s cluster secrets to this directory
 artifacts/
