@@ -15,3 +15,18 @@ spec:
   storage:
     storageClass: nfs-ceph
     size: 10Gi
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: redmine
+  namespace: cnpg-system
+spec:
+  instances: 1
+  bootstrap:
+    initdb:
+      secret:
+        name: redmine-db-password
+  storage:
+    storageClass: nfs-ceph
+    size: 10Gi

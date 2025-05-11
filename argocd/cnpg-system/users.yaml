@@ -28,3 +28,18 @@ spec:
       name: immich
       namespace: cnpg-system
     type: kubernetes.io/basic-auth
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: redmine-db-password
+  namespace: cnpg-system
+spec:
+  encryptedData:
+    password: AgA0YO8+XnB17n8zIl2IJb5fcOAuxe4brt1HGAuDpziP2A2QZErrmm2JTuBOa4vkLcmGwecjrnwYZayfRvGac1mFK+zyIRVHfuazAGuUuliMzZsZ2ZnEm/2JtBJlY4WXcKWEIysiToQNkPEZH33DpyBB4lnaTar0tckspBzYGWMFowSyTetE2w9eJPQFjLcDmAYFuNmPSsbJQCcmyWi5LZqlogcAlfYrQPybhVhBeepK3yuD5JDrQTb+1pTAWgnRj98yKi1vdwhyb2+IWW6xnB/I0BY7/bw45++Ztn0+b+eDSu8sseApPeRkEDb+6RHd2CasXa9lsIjH3DQFQjM83f2KEkvgIZ+lyCh8eK+aEP+/1rz8yFl5IoXq++BjDFj/9CTPSe3giIF73n9p6g0X2+sCFDR1U3LM7N/UVkKYveUT459we2NH5sLxPyIYajlyh6RoPV2kEN5T6XTvX+Xpi1RwzGVUkgirhiDPNs456X15coqgI+De95FAj39BXpccdypaTcNs/MxezWgKfMwl0a70pJf5tY5RFY3KBWi1/mllyW+V3bJVWwhXDaXmV3ZvVJ/ALP9H8ak5sdq00FhrhClGC5olULRV08hl0WkJdk9tgcIM0pIzOKggeLM7upbYa/XizcpPHeYWi7syRoH2WVm9dRETJTGfzbCbgwQxp9s3WOij4jCb3SL+MwtKxJ8yqxKON8WmNAnKfaHcFUAVAQpvwAZMTkLgwsk=
+    username: AgC6GGBq0olPn+UaUzS5URPkY3A2KU+PeRj+bvhXP6B3SzZsYBtjwxH5P7eKN/zATeCG+YpT+taDfkHJivJ1AAmgavwxXe588pvmQOI8A4tC8tBQ1ND7DfXrJLeHMd1Kpr7Z1v8qiLwPv4lthtRWmJdxWEnS9OHCBBf0NFsflDOOklxIcIzHiIGLzvlrRzDiBPqV40iut6xdFRbU2U079iBn54WmP1tE3BUJMvCQ+Kjz2rsSOfnwSngN4zkekjHl6FAyhsuGzzOs+HRDn3oWsWEpcilndvmrPy/ETo2GYZAgwdlnmZmeIZxtngugBVDAjUCwaRYVRZCmGLBtGfd11Nt6N9r7S03KOFCD8wS2fMsFeNGzXgvlu40nuaFQoFFdFDIXzqNBBfjVQaXTrMmpkNRDplwKKBJnmnVE4iLs7c0RpXGn7r1FTaA6tsz/Fl+nzGLD6hByH1DZzczNjNHDXxNY0OmL/gglmh9Sk5ZKzqUSlW31zXjuV4xgSebQIAUtK2+2mHjbqN7xyAKnt2OXXF0YO5ElEgGfcx+BOiqn3ZSQtrwFcrG2RJH8Vex9rmRmeVRaA72FDe68V2G6QSb1hXRP8fLoJaV3t5G9CIslHXx9+KHaAtRM4SXhFWTckPm0QNaA0E7INS4U9juoo7di8lSP8/wIfV9+8SDHyV/8tdARuKIFYwg6O5MyBR0ejwTAsR5dfuQ=
+  template:
+    metadata:
+      name: redmine-db-password
+      namespace: cnpg-system
+    type: kubernetes.io/basic-auth

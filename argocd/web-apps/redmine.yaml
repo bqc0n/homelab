@@ -1,0 +1,68 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redmine-files
+  namespace: web-apps
+spec:
+  storageClassName: nfs-ceph
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redmine
+  namespace: web-apps
+spec:
+  selector:
+    matchLabels:
+      app: redmine
+  template:
+    metadata:
+      labels:
+        app: redmine
+    spec:
+      containers:
+        - name: redmine
+          image: redmine:6.0.5-alpine3.21
+          resources:
+            limits:
+              memory: 1Gi
+          volumeMounts:
+            - mountPath: /usr/src/redmine/files
+              name: redmine-files
+          envFrom:
+            - configMapRef:
+                name: redmine-config
+            - secretRef:
+                name: redmine-db-secret
+      volumes:
+        - name: redmine-files
+          persistentVolumeClaim:
+            claimName: redmine-files
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redmine-config
+  namespace: web-apps
+data:
+  REDMINE_DB_POSTGRES: "redmine-rw.cnpg-system.svc.cluster.local."
+  REDMINE_DB_USERNAME: "app"
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: redmine-db-secret
+  namespace: web-apps
+spec:
+  encryptedData:
+    REDMINE_DB_PASSWORD: AgCC5AgOdKmQswIUsyvc8Xgn3mE8TRMZaR7ZrqWqAo7ihjGIA9KwkLA7f9D1gb1kqKOXpiJTaEoZCz/P58V1qYjK8SQ239Kjrv4HUWCpLwR+F/z+gz611nkBtAJQ0IExhLvDEzjyVdP3WzXHmFXUYRRMpWO0LSahFjpdNFEem7g/Ih0ZQkqw51rQet4Za/4zM6foq3Tp/YhaLfzbuHEq4bjqpyUV4MdQarUaWGHk5gPc4g4nIaCujBKa5xw2qRG1VV1e4XsLxuokc7kCBddzl3MRuuNyNfF9gSyJPA3KgjKCrm75gJ/jGOjMV0r0EfULo9Kpc0oqGEV6qwBiuZQLzrT5U5q+2hhRqLkB3O7bwBWrj09ifJymSIKYrOHFG8zS5BDPa+lY56kJujqyiUyjjDvVrjA0esVe/WjduJY0JWXkwTRGexSU0NIoM61rYtMhTWj+MuYXqdXuVGjOUKM1T1hAYIT2R06X3g1CQ5AiD3W2qMB9sI3rBc1SKnOj6E6o9KXyMJ+ueU4L2oiADW365b9slZLoVeoE9qpDWktcK5sM56Nt/UkdmZUC4ejQXr8lxge+8v6J7sJwquC5GegFeD9Y+2X/yUpGQyuVMKn5vEMqV1C+6uvDtYAmWxU8pp1TZwNauwLUk0rSM8fuKku1YDPS+clU3mn0nzLeaWYDnyYxduvtVvDYwdHcNZvCImt/t+ovyO3jmeih+/igkyG9XWnAK2cMbutc/kI=
+  template:
+    metadata:
+      name: redmine-db-secret
+      namespace: web-apps
