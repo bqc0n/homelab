@@ -44,6 +44,8 @@ resource "cloudflare_zero_trust_access_policy" "homelab_private" {
   name     = "Homelab | Private"
   include = [{
     email = { email = data.sops_file.secrets.data["email1"] }
+    email = { email = data.sops_file.secrets.data["email2"] }
+    email = { email = data.sops_file.secrets.data["email3"] }
   }]
 }
 
