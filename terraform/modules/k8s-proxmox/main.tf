@@ -60,7 +60,7 @@ resource "proxmox_vm_qemu" "k8s_node" {
   }
 
   network {
-    # id      = 0
+    id      = 0
     model   = "virtio"
     bridge  = var.specs.bridge
   }

@@ -48,7 +48,7 @@ resource "proxmox_vm_qemu" "k8s_master_ha" {
   vm_state = "running"
   agent = 1
 
-  cpu = "x86-64-v2-AES"
+  cpu_type = "x86-64-v2-AES"
 
   target_node = "pve02"
   onboot           = true
@@ -76,6 +76,12 @@ resource "proxmox_vm_qemu" "k8s_master_ha" {
   serial {
     id   = 0
     type = "socket"
+  }
+
+  network {
+    id    = 0
+    model = "virtio"
+    bridge = "vmbr0"
   }
 
   disks {
