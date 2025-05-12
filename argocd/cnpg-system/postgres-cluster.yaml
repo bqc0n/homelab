@@ -30,3 +30,19 @@ spec:
   storage:
     storageClass: nfs-ceph
     size: 10Gi
+  backup:
+    barmanObjectStore:
+      destinationPath: "postgres/redmine"
+      endpointURL: "https://b10e567bb8146c35a101bec133d4a82f.r2.cloudflarestorage.com/backup"
+      s3Credentials:
+        accessKeyId:
+          key: ACCESS_KEY_ID
+          name: r2-creds
+        secretAccessKey:
+          key: SECRET_KEY
+          name: r2-creds
+      data:
+        compression: bzip2
+      wal:
+        compression: bzip2
+    retentionPolicy: "7d"
