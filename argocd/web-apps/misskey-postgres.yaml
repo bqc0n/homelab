@@ -27,7 +27,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pvc-misskey-db
+  name: pvc-misskey-db2
   namespace: web-apps
   annotations:
     k8up.io/backup: "false"
@@ -72,4 +72,4 @@ spec:
       volumes:
         - name: db-volume
           persistentVolumeClaim:
-            claimName: pvc-misskey-db
+            claimName: pvc-misskey-db2
