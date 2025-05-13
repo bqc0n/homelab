@@ -32,8 +32,8 @@ spec:
     size: 10Gi
   backup:
     barmanObjectStore:
-      destinationPath: "postgres/redmine"
-      endpointURL: "https://b10e567bb8146c35a101bec133d4a82f.r2.cloudflarestorage.com/backup"
+      destinationPath: "s3://backup/postgres"
+      endpointURL: "https://b10e567bb8146c35a101bec133d4a82f.r2.cloudflarestorage.com"
       s3Credentials:
         accessKeyId:
           key: ACCESS_KEY_ID
