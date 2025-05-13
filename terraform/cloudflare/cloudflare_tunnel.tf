@@ -30,6 +30,7 @@ resource "cloudflare_zero_trust_access_application" "homelab_private_2" {
   destinations = [
     # Add URIs here for protected apps (5 Max per access_app)
     { type = "public", uri = "paperless.${local.domain}" },
+    { type = "public", uri = "minio.${local.domain}" },
   ]
   auto_redirect_to_identity = true
   policies = [
@@ -119,6 +120,9 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "cf_grafana" {
       }, {
         hostname = "redmine.${local.domain}"
         service  = "http://redmine.web-apps.svc.cluster.local."
+      }, {
+        hostname = "minio.${local.domain}"
+        service  = "http://minio.bqc0n.internal.:9001"
       }, {
         service = "http_status:404"
       }
