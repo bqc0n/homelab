@@ -30,7 +30,6 @@ resource "cloudflare_zero_trust_access_application" "homelab_private_2" {
   destinations = [
     # Add URIs here for protected apps (5 Max per access_app)
     { type = "public", uri = "paperless.${local.domain}" },
-    { type = "public", uri = "minio.${local.domain}" },
   ]
   auto_redirect_to_identity = true
   policies = [
@@ -82,7 +81,7 @@ resource "cloudflare_zero_trust_access_policy" "homelab_protected_friends" {
     { email = { email = data.sops_file.secrets.data["email2"] } },
     { email = { email = data.sops_file.secrets.data["email3"] } },
     { email = { email = data.sops_file.secrets.data["email4"] } },
-    { email = { email = data.sops_file.secrets.data["email4"] } },
+    { email = { email = data.sops_file.secrets.data["email5"] } },
   ]
 }
 
@@ -122,7 +121,10 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "cf_grafana" {
         service  = "http://redmine.web-apps.svc.cluster.local."
       }, {
         hostname = "minio.${local.domain}"
-        service  = "http://minio.bqc0n.internal.:9001"
+        service  = "http://192.168.1.32:9001"
+      }, {
+        hostname = "s4.${local.domain}"
+        service  = "http://192.168.1.32:9000"
       }, {
         service = "http_status:404"
       }

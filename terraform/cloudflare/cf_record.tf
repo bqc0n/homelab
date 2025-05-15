@@ -11,6 +11,7 @@ locals {
     "s3",
     "redmine",
     "minio",
+    "s4",
   ]
 }
 
