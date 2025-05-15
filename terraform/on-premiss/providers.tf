@@ -16,7 +16,7 @@ terraform {
   required_providers {
     proxmox = {
       source  = "Telmate/proxmox"
-      version = "3.0.1-rc8" # rc6 has a bug in LXC
+      version = "3.0.1-rc9" # rc6 has a bug in LXC
     }
     sops = {
       source = "carlpett/sops"
