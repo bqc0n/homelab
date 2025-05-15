@@ -17,7 +17,7 @@ spec:
     size: 10Gi
   backup:
     barmanObjectStore:
-      destinationPath: "s3://paperless-ngx"
+      destinationPath: "s3://cnpg-backup/paperless-ngx"
       endpointURL: "https://s4.bqc0n.com"
       s3Credentials:
         accessKeyId:
@@ -48,11 +48,11 @@ spec:
     size: 10Gi
   backup:
     barmanObjectStore:
-      destinationPath: "s3://postgres"
+      destinationPath: "s3://cnpg-backup/postgres"
       endpointURL: "https://s4.bqc0n.com"
       s3Credentials:
         accessKeyId:
-          key: ACCESS_KEY
+          key: ACCESS_KEw
           name: s3-creds
         secretAccessKey:
           key: SECRET_KEY
