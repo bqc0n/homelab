@@ -19,7 +19,7 @@ spec:
     size: 10Gi
   backup:
     barmanObjectStore:
-      destinationPath: "s3://cnpg-backup/immich"
+      destinationPath: "s3://cnpg-backup"
       endpointURL: "https://s4.bqc0n.com"
       s3Credentials:
         accessKeyId:

@@ -10,6 +10,28 @@ spec:
   cluster:
     name: redmine
 ---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: redmine
+  namespace: cnpg-system
+spec:
+  schedule: "0 0 4 * * *" # 4 AM every day. Go cron format.
+  backupOwnerReference: self
+  cluster:
+    name: immich
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: redmine
+  namespace: cnpg-system
+spec:
+  schedule: "0 0 4 * * *" # 4 AM every day. Go cron format.
+  backupOwnerReference: self
+  cluster:
+    name: paperless-ngx
+---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
