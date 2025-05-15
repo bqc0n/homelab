@@ -21,7 +21,7 @@ spec:
       endpointURL: "https://s4.bqc0n.com"
       s3Credentials:
         accessKeyId:
-          key: ACCESS_KEY_ID
+          key: ACCESS_KEY
           name: s3-creds
         secretAccessKey:
           key: SECRET_KEY
@@ -52,7 +52,7 @@ spec:
       endpointURL: "https://s4.bqc0n.com"
       s3Credentials:
         accessKeyId:
-          key: ACCESS_KEY_ID
+          key: ACCESS_KEY
           name: s3-creds
         secretAccessKey:
           key: SECRET_KEY
