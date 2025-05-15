@@ -13,7 +13,7 @@ spec:
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
 metadata:
-  name: redmine
+  name: immich
   namespace: cnpg-system
 spec:
   schedule: "0 0 4 * * *" # 4 AM every day. Go cron format.
@@ -24,7 +24,7 @@ spec:
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
 metadata:
-  name: redmine
+  name: paperless-ngx
   namespace: cnpg-system
 spec:
   schedule: "0 0 4 * * *" # 4 AM every day. Go cron format.
