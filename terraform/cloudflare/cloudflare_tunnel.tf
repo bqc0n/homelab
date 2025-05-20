@@ -10,6 +10,7 @@ resource "cloudflare_zero_trust_access_application" "homelab_private" {
     { type = "public", uri = "argocd.${local.domain}" },
     { type = "public", uri = "homebox.${local.domain}" },
     { type = "public", uri = "docmost.${local.domain}" },
+    { type = "public", uri = "wallos.${local.domain}" },
   ]
   auto_redirect_to_identity = true
   policies = [
@@ -125,6 +126,9 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "cf_grafana" {
       }, {
         hostname = "s4.${local.domain}"
         service  = "http://192.168.1.32:9000"
+      }, {
+        hostname = "wallos.${local.domain}"
+        service  = "http://wallos.web-apps.svc.cluster.local."
       }, {
         service = "http_status:404"
       }

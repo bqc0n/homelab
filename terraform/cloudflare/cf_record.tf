@@ -12,6 +12,7 @@ locals {
     "redmine",
     "minio",
     "s4",
+    "wallos",
   ]
 }
 
