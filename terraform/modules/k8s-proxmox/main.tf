@@ -31,6 +31,7 @@ resource "proxmox_vm_qemu" "k8s_node" {
 
   nameserver = var.nameserver
   ipconfig0 = "ip=${var.hosts[count.index].ipv4}/24,gw=${var.gateway}"
+  ipconfig1 = "ip6=${var.hosts[count.index].ipv6_ula}"
 
   sshkeys = var.ssh_keys
 

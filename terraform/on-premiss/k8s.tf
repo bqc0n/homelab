@@ -4,6 +4,7 @@ locals {
       hostname = "k8s-worker-01",
       node     = "pve01",
       ipv4     = "192.168.1.61",
+      ipv6_ula = "fd76:913d:9525::61/64"
       cores    = 4,
       memoryMi = 16384,
     },
@@ -11,6 +12,7 @@ locals {
       hostname = "k8s-worker-02",
       node     = "pve02",
       ipv4     = "192.168.1.62",
+      ipv6_ula = "fd76:913d:9525::62/64"
       cores    = 16,
       memoryMi = 24576,
     },
@@ -18,6 +20,7 @@ locals {
       hostname = "k8s-worker-03",
       node     = "pve03",
       ipv4     = "192.168.1.63",
+      ipv6_ula = "fd76:913d:9525::63/64"
       cores    = 6,
       memoryMi = 16384,
     },
@@ -65,6 +68,7 @@ resource "proxmox_vm_qemu" "k8s_master_ha" {
   boot    = "order=scsi0"
   nameserver = "192.168.1.1"
   ipconfig0 = "ip=192.168.1.60/24,gw=192.168.1.1"
+  ipconfig1 = "ipv6=fd76:913d:9525::60/64"
 
   sshkeys = local.ssh_public_keys
 

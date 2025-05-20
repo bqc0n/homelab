@@ -49,3 +49,4 @@ data:
     pve2 IN A 192.168.1.12
     s3-hdd IN CNAME minio.bqc0n.internal.
     minio IN A 192.168.1.32
+    minio IN AAAA fd76:913d:9525::33
