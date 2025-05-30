@@ -32,6 +32,9 @@ spec:
           volumeMounts:
             - mountPath: /shared
               name: seafile-shared
+          resources:
+            limits:
+              memory: "2Gi"
           ports:
             - containerPort: 80
           env:
