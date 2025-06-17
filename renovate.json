@@ -6,14 +6,21 @@
   "prConcurrentLimit": 20,
   "prHourlyLimit": 10,
   "kubernetes": {
-    "fileMatch": ["argocd/.+\\.yaml$"]
+    "managerFilePatterns": [
+      "/argocd/.+\\.yaml$/"
+    ]
   },
   "argocd": {
-    "fileMatch": ["argocd/apps/.+\\.yaml$"]
+    "managerFilePatterns": [
+      "/argocd/apps/.+\\.yaml$/"
+    ]
   },
   "packageRules": [
     {
-      "matchUpdateTypes": ["minor", "patch"],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
       "matchCurrentVersion": "!/^0/",
       "automerge": true
     }
