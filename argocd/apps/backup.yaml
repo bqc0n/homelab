@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: "https://k8up-io.github.io/k8up"
     chart: k8up
-    targetRevision: "4.8.3"
+    targetRevision: "4.8.4"
     helm:
       parameters:
         - name: "k8up.timezone"
