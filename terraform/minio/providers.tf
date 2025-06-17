@@ -28,7 +28,7 @@ terraform {
 provider "sops" {}
 
 data "sops_file" "secrets" {
-  source_file = "minio-secrets.yaml"
+  source_file = "minio-secrets.sops.yaml"
 }
 
 provider "minio" {

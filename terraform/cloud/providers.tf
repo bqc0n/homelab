@@ -28,7 +28,7 @@ terraform {
 provider "sops" {}
 
 data "sops_file" "secrets" {
-  source_file = "oci-secrets.yaml"
+  source_file = "oci-secrets.sops.yaml"
 }
 
 provider "oci" {

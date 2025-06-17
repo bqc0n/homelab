@@ -32,7 +32,7 @@ locals {
 }
 
 data "sops_file" "secrets" {
-  source_file = "secrets.enc.yaml"
+  source_file = "cf-secrets.sops.yaml"
 }
 
 data "terraform_remote_state" "cloud" {
