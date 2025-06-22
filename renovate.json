@@ -15,6 +15,7 @@
       "/argocd/apps/.+\\.yaml$/"
     ]
   },
+  "addLabels": ["renovate"],
   "packageRules": [
     {
       "matchUpdateTypes": [
