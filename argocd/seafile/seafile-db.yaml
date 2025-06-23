@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: mariadb
-          image: mariadb:10.11.13
+          image: mariadb:11.8.2
           ports:
             - containerPort: 3306
           volumeMounts:
