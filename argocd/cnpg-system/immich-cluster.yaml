@@ -4,7 +4,7 @@ metadata:
   name: immich
   namespace: cnpg-system
 spec:
-  instances: 1 # Ceph already has resilience in terms of storage
+  instances: 2
   primaryUpdateStrategy: unsupervised
   imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs:16.5-v0.3.0
 
