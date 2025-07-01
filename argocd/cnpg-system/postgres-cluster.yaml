@@ -72,7 +72,7 @@ spec:
   instances: 2
   bootstrap:
     initdb:
-      owner: gitea
+      owner: app
       database: gitea
       secret:
         name: gitea-db-creds
