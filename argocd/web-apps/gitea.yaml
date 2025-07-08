@@ -20,12 +20,7 @@ metadata:
   labels:
     app: gitea
 spec:
-  replicas: 2
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: "50%"
-      maxSurge: "50%"
+  replicas: 1
   selector:
     matchLabels:
       app: gitea
