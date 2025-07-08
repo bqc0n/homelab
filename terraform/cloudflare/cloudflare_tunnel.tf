@@ -130,6 +130,9 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "cf_grafana" {
         hostname = "wallos.${local.domain}"
         service  = "http://wallos.web-apps.svc.cluster.local."
       }, {
+        hostname = "git.${local.domain}"
+        service  = "http://git.web-apps.svc.cluster.local."
+      }, {
         service = "http_status:404"
       }
     ]

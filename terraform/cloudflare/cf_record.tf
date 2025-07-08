@@ -13,6 +13,7 @@ locals {
     "minio",
     "s4",
     "wallos",
+    "git",
   ]
 }
 
