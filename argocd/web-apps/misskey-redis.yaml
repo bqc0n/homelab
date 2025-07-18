@@ -45,7 +45,7 @@ spec:
           image: redis:8.0.3-alpine
           resources:
             limits:
-              memory: "256Mi"
+              memory: "512Mi"
               cpu: "250m"
           volumeMounts:
             - mountPath: /data
