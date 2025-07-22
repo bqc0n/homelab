@@ -2,6 +2,21 @@
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
+  name: apps-plane-db-creds
+  namespace: cnpg-system
+spec:
+  encryptedData:
+    password: AgBQQZRonyhDvA92lEsQxPDV9ALB7DvPlVVBHsW3JympMN0IkbqPNco5C+QUiaU2Yh+BOV/oMreFEyg5/e/0GWgu5MwprgIHeaL2M2ZrCe+6qTpNWNqlaBdLjupPeD5/cwF1URPOECiy42f6nGCF2/ay3AVDfbZecXDxWkM3zdQvhH6h3xBCLKkvfcXtxyOMFGkcQwhuWx8ZWRr8EB/s2C8m0PUzpkTcyycGiVsjLJVPCj05PPpKiAzAzf46XKzoxPZcInIpWqS5YfoYsIuhxM3VkBNgl/J6o/0x2cru2Jd0VJF43fK6t2fUCfSGBuEawmgpQXFnE86bTIkqDPtJzld7JP5TTf8tSRV0UrjGELQm81E29cmJsV2s1txXSShX50Sx1sB+0OMPqUN1JAc1k+eVvK/QFQ6NEYFQ5u67UOeL9cRY5fw157Wut/KMelvJ98DRPVTkmtzIPYEhoSDI5ON9OgomtyZn5P9uR98g6L4urAbAz+kFqzavVneOf8h7sMHpbG4rn+gx76WB74VbVE0ZRXzicci9L0777LOszE16HEtADLuoE0jZw+rTxqCCmhYdDNXugz+4ANppJ6Cgzyh4eZb9aFUh+madH10fWFl1lBSxCanyF63HbMREH5c2sra86TJtA/A88hzMoG/dy29bUqp+YRJIQr3tSO44Z8hvniwYi4amquwMCEagk/MAor2VbBxSfgA1QG86bLwklLBtnrjwkIqY0cNiFzjUEx9LRFIBYU8=
+    username: AgAgrqLn1R6iXjPeKOhTIEKqejoVgsUdsvy8E5ljzjCljcx6zF3Yhk50lwwAFmUZ4O+FN3xFNd2Y1lJH9rCkaGu/CXQHV5WLdLfqWGHiUjVH5U8aBVnCqFuQgWpoh3dJATe8fpGvJnDvOFyr1VRYWdAmpHAv+Ey4cru5onOevFUf3gOqCai4AJyHJ/C5w1RQS7/OjxXjl7KhPHOZfQB80T2iAn+HsBsQZu2DYiEU1MR7QMYw57tgFR5Qoq3N+BeB+ZE3Yn0fNed7k9soeyiQj0YifnThc3uESG6b35xm8qu90mXAeGM1j8v2ZIB2eBZJ6XZEy3qhaMeB+SfybMndvX57jAtqEa7WfxWX654X/xtfQPikHX5Lvi1yBsEfT0D56YqMyEe8wqL3P2XBqA/twp9gqrA2RQ2qEhr2QptgOwuwYO2ZppVid2BXfGX3mRub/0kTipXhRSjJGI3IA6iuItry1NvjCIGc1QDhbSBDB4u6ZKYhGhjkjkal2or3SRTOW6gZBWUlWvE6NypWU/QBGfvVaBkRw/fWwvdwS1UO3drZj4HNKjcyAAmci2lu4N/xGUCGRd0lM8uRBXgAuYx2yj5sWpowGuCezy/5R+Qp6ViFxS7BYGI95v7zx4GBcdP+SnS90nlXXvS3WHmztMgLjUrIUSSgU8tWtweA+n3s/odPSDM/2DcVWHHxE66OG4RMr6jnODJ7aIo=
+  template:
+    metadata:
+      name: apps-plane-db-creds
+      namespace: cnpg-system
+    type: kubernetes.io/basic-auth
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
   name: paperless-ngx
   namespace: cnpg-system
 spec:
