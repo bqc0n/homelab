@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: coredns-internal
-          image: coredns/coredns:1.12.2
+          image: coredns/coredns:1.12.3
           args: ["-conf", "/etc/coredns/Corefile"]
           ports:
             - containerPort: 53
