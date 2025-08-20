@@ -37,12 +37,12 @@ metadata:
   namespace: minecraft
   name: mc-vanilla-2-server
 spec:
+  replicas: 1
   podManagementPolicy: OrderedReady
   selector:
     matchLabels:
       app: mc-vanilla-2-server
   serviceName: mc-vanilla-2-server
-  replicas: 0
   template:
     metadata:
       labels:
