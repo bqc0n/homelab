@@ -76,7 +76,7 @@ data:
         reload
         loop
         bind 0.0.0.0
-        forward . __PILLAR__UPSTREAM__SERVERS__
+        forward . 192.168.1.53
         prometheus :9253
         }
 ---
@@ -120,9 +120,12 @@ spec:
             requests:
               cpu: 25m
               memory: 5Mi
-            limits:
-              memory: 50Mi
-          args: [ "-localip", "169.254.20.10,10.233.0.3", "-conf", "/etc/Corefile", "-upstreamsvc", "kube-dns-upstream", "-skipteardown=true", "-setupinterface=false", "-setupiptables=false" ]
+          args: [ "-localip", "169.254.20.10,10.233.0.3",
+                  "-conf", "/etc/Corefile",
+                  "-upstreamsvc", "kube-dns-upstream",
+                  "-skipteardown=true",
+                  "-setupinterface=false",
+                  "-setupiptables=false" ]
           ports:
             - containerPort: 53
               name: dns
@@ -147,7 +150,7 @@ spec:
       volumes:
         - name: kube-dns-config
           configMap:
-            name: kube-dns
+            name: coredns
             optional: true
         - name: config-volume
           configMap:
@@ -166,6 +169,13 @@ spec:
     serviceMatcher:
       serviceName: coredns
       namespace: kube-system
+      toPorts:
+        - port: "53"
+          name: dns
+          protocol: UDP
+        - port: "53"
+          name: dns-tcp
+          protocol: TCP
   redirectBackend:
     localEndpointSelector:
       matchLabels:
