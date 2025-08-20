@@ -18,3 +18,24 @@ data:
   VERSION: "1.20.4"
   WHITELIST: |
     bqc0n
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mc-vanilla-2-config
+  namespace: minecraft
+data:
+  EULA: "true"
+  LOG_TIMESTAMP: "true"
+  MAX_PLAYERS: "10"
+  MEMORY: "2G"
+  MOTD: "Minecraft 1.21.8 Vanilla Server"
+  OPS: "bqc0n"
+  OVERRIDE_WHITELIST: "true"
+  PVP: "false"
+  SPAWN_PROTECTION: "0"
+  TZ: "Asia/Tokyo"
+  USE_AIKAR_FLAGS: "true"
+  VERSION: "1.21.8"
+  WHITELIST: |
+    bqc0n

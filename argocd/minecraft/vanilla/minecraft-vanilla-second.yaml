@@ -1,0 +1,68 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: minecraft
+  name: mc-vanilla-2
+  labels:
+    lbipam: fixed
+  annotations:
+    "lbipam.cilium.io/ips": "10.1.0.1"
+    "lbipam.cilium.io/sharing-key": "minecraft"
+spec:
+  type: LoadBalancer
+  selector:
+      app: mc-vanilla-2-server
+  ports:
+    - protocol: TCP
+      port: 27140
+      targetPort: 25565
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mc-vanilla-2-data
+  namespace: minecraft
+spec:
+  storageClassName: nfs-ceph
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: minecraft
+  name: mc-vanilla-2-server
+spec:
+  podManagementPolicy: OrderedReady
+  selector:
+    matchLabels:
+      app: mc-vanilla-2-server
+  serviceName: mc-vanilla-2-server
+  replicas: 0
+  template:
+    metadata:
+      labels:
+        app: mc-vanilla-2-server
+    spec:
+      containers:
+      - name: mc-vanilla-2-server
+        image: itzg/minecraft-server:2025.8.1-java17-graalvm
+        resources:
+          requests:
+            memory: "2Gi"
+        volumeMounts:
+          - mountPath: /data
+            name: mc-vanilla-2-data
+        ports:
+        - containerPort: 25565
+        envFrom:
+          - configMapRef:
+              name: mc-vanilla-2-config
+      volumes:
+        - name: mc-vanilla-2-data
+          persistentVolumeClaim:
+            claimName: mc-vanilla-2-data
