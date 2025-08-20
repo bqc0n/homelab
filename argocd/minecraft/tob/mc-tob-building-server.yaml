@@ -42,7 +42,7 @@ spec:
     matchLabels:
       app: mc-tob-building-server
   serviceName: mc-tob-building-server
-  replicas: 1
+  replicas: 0
   template:
     metadata:
       labels:

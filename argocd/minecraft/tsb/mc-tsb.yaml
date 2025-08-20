@@ -41,6 +41,7 @@ spec:
     matchLabels:
       app: mc-tsb
   serviceName: mc-tsb
+  replicas: 0
   template:
     metadata:
       labels:

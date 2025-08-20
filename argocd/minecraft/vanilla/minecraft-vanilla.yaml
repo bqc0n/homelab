@@ -42,7 +42,7 @@ spec:
     matchLabels:
       app: mc-vanilla-server
   serviceName: mc-vanilla-server
-  replicas: 1
+  replicas: 0
   template:
     metadata:
       labels:
