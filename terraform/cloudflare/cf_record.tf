@@ -14,6 +14,7 @@ locals {
     "s4",
     "wallos",
     "git",
+    "plane",
   ]
 }
 

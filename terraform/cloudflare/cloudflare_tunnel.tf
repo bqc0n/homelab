@@ -31,6 +31,7 @@ resource "cloudflare_zero_trust_access_application" "homelab_private_2" {
   destinations = [
     # Add URIs here for protected apps (5 Max per access_app)
     { type = "public", uri = "paperless.${local.domain}" },
+    { type = "public", uri = "plane.${local.domain}" },
   ]
   auto_redirect_to_identity = true
   policies = [
@@ -68,8 +69,6 @@ resource "cloudflare_zero_trust_access_policy" "homelab_private" {
   name       = "Homelab | Private"
   include = [
     { email = { email = data.sops_file.secrets.data["email1"] } },
-    { email = { email = data.sops_file.secrets.data["email2"] } },
-    { email = { email = data.sops_file.secrets.data["email3"] } },
   ]
 }
 
@@ -83,6 +82,7 @@ resource "cloudflare_zero_trust_access_policy" "homelab_protected_friends" {
     { email = { email = data.sops_file.secrets.data["email3"] } },
     { email = { email = data.sops_file.secrets.data["email4"] } },
     { email = { email = data.sops_file.secrets.data["email5"] } },
+    { email = { email = data.sops_file.secrets.data["email6"] } },
   ]
 }
 
@@ -133,6 +133,9 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "cf_grafana" {
         hostname = "git.${local.domain}"
         service  = "http://git.web-apps.svc.cluster.local."
       }, {
+        hostname = "plane.${local.domain}"
+        service  = "http://plane-app-web.plane-ce.svc.cluster.local."
+      },{
         service = "http_status:404"
       }
     ]
