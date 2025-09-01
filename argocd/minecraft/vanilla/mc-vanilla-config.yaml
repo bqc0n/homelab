@@ -31,7 +31,7 @@ data:
   MEMORY: "2G"
   MOTD: "Minecraft 1.21.8 Vanilla Server"
   OPS: "bqc0n"
-  OVERRIDE_WHITELIST: "true"
+  OVERRIDE_WHITELIST: "false"
   PVP: "false"
   SPAWN_PROTECTION: "0"
   TZ: "Asia/Tokyo"
