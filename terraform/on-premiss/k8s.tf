@@ -4,7 +4,7 @@ locals {
       hostname = "k8s-worker-01",
       node     = "pve01",
       ipv4     = "192.168.1.61",
-      ipv6_ula = "fd76:913d:9525::61/64"
+      ipv6_ula = "fd76:913d:9525::61/64",
       cores    = 4,
       memoryMi = 16384,
     },
@@ -12,7 +12,7 @@ locals {
       hostname = "k8s-worker-02",
       node     = "pve02",
       ipv4     = "192.168.1.62",
-      ipv6_ula = "fd76:913d:9525::62/64"
+      ipv6_ula = "fd76:913d:9525::62/64",
       cores    = 16,
       memoryMi = 24576,
     },
@@ -20,8 +20,8 @@ locals {
       hostname = "k8s-worker-03",
       node     = "pve03",
       ipv4     = "192.168.1.63",
-      ipv6_ula = "fd76:913d:9525::63/64"
-      cores    = 6,
+      ipv6_ula = "fd76:913d:9525::63/64",
+      cores    = 4,
       memoryMi = 16384,
     },
   ]
@@ -51,18 +51,20 @@ resource "proxmox_vm_qemu" "k8s_master_ha" {
   vm_state = "running"
   agent = 1
 
-  cpu_type = "x86-64-v2-AES"
+  cpu {
+    type = "x86-64-v2-AES"
+    cores = 4
+    sockets = 1
+  }
 
   target_node = "pve02"
   onboot           = true
   automatic_reboot = true
-  cores = 4
-  sockets = 1
   memory = 6144
   tablet  = false
   scsihw  = "virtio-scsi-pci"
 
-  clone = "ubuntu24.04-template-ceph"
+  clone = "ubuntu-24.04-template-ceph"
   full_clone = false
   os_type = "cloud-init"
   boot    = "order=scsi0"

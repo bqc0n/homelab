@@ -13,6 +13,7 @@ variable "hosts" {
     hostname = string,
     node     = string,
     ipv4     = string,
+    ipv6_ula = string,
   }))
 }
 

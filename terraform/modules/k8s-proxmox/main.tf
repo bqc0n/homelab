@@ -2,7 +2,7 @@ terraform {
   required_providers {
     proxmox = {
       source  = "telmate/proxmox"
-      version = "3.0.1-rc9"
+      version = "3.0.2-rc04"
     }
   }
 }
@@ -19,8 +19,11 @@ resource "proxmox_vm_qemu" "k8s_node" {
   onboot           = true
   automatic_reboot = true
 
-  cores   = var.hosts[count.index].cores
-  sockets = var.specs.sockets
+  cpu {
+    cores   = var.hosts[count.index].cores
+    sockets = var.specs.sockets
+  }
+
   memory  = var.hosts[count.index].memoryMi
   tablet  = false
   scsihw  = "virtio-scsi-pci"
