@@ -1,0 +1,32 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: redmine-gen2
+  namespace: cnpg-system
+spec:
+  instances: 1
+  bootstrap:
+    recovery:
+      source: redmineClusterBackup
+      secret:
+        name: redmine-db-password
+  storage:
+    storageClass: nfs-ceph
+    size: 10Gi
+  externalClusters:
+    - name: redmineClusterBackup
+      barmanObjectStore:
+        serverName: "redmine"
+        destinationPath: "s3://cnpg-backup"
+        endpointURL: "http://s4.bqc0n.com"
+        s3Credentials:
+          accessKeyId:
+            key: ACCESS_KEY
+            name: s3-creds
+          secretAccessKey:
+            key: SECRET_KEY
+            name: s3-creds
+        data:
+          compression: bzip2
+        wal:
+          compression: bzip2

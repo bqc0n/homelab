@@ -69,7 +69,7 @@ metadata:
 data:
   GITEA__database__DB_TYPE: postgres
   GITEA__database__HOST: gitea-rw.cnpg-system.svc.cluster.local.:5432
-  GITEA__database__NAME: app
+  GITEA__database__NAME: gitea
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
