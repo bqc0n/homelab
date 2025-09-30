@@ -69,7 +69,7 @@ k delete daemonsets.apps -n kube-system kube-proxy
 
 ```shell
 helm repo add cilium https://helm.cilium.io/
-helm install cilium cilium/cilium --version 1.17.3 \
+helm install cilium cilium/cilium --version 1.18.1 \
   --namespace kube-system \
   --values cilium-values.yaml
 ```
@@ -116,6 +116,7 @@ k apply -f argocd/argo-webui.yaml
 
 初期パスワードは以下のコマンドで取得できる:
 ```shell
+argocd admin initial-password -n argocd
 argocd admin initial-password -n argocd
 ```
 app-of-appsをDeployして作業完了。
