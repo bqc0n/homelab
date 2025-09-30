@@ -1,0 +1,16 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: vmscrape-storj
+  namespace: dash
+spec:
+  path: /metrics
+  staticConfigs:
+    - labels:
+        job: storj
+      targets:
+        - 192.168.1.33:9651
+    - labels:
+        job: storj2
+      targets:
+        - 192.168.1.33:9652
