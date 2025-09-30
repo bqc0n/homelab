@@ -9,7 +9,7 @@
     name: Asia/Tokyo
 - name: Include sops secrets
   community.sops.load_vars:
-    file: "ansible.sops.yml"
+    file: "ansible.sops.yaml"
     name: sops
     expressions: ignore
 - name: apt update

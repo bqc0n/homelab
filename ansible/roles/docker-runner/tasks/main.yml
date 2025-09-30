@@ -9,7 +9,7 @@
     name: Asia/Tokyo
 - name: Include sops secrets
   community.sops.load_vars:
-    file: "secrets.sops.yml"
+    file: "secrets.sops.yaml"
     name: sops
     expressions: ignore
 
