@@ -1,3 +1,29 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: immich-tls-cert
+  namespace: immich
+spec:
+  secretName: immich-tls-cert
+  issuerRef:
+    name: selfsigned
+    kind: ClusterIssuer
+    group: cert-manager.io
+  duration: 8760h # 1 year
+  privateKey:
+    algorithm: RSA
+    size: 2048
+    rotationPolicy: Never
+  renewBefore: 360h # 15 days
+  subject:
+    organizations:
+      - bqc0n
+    countries:
+      - Japan
+  dnsNames:
+    - immich.bqc0n.internal
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -21,4 +47,4 @@ spec:
   tls:
   - hosts:
     - immich.bqc0n.internal
-    secretName: immich-tls
+    secretName: immich-tls-cert
