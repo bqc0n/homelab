@@ -9,6 +9,8 @@ spec:
   configuration:
     destinationPath: s3://cnpg-backups/
     endpointURL: https://s4.bqc0n.com
+    data:
+      compression: bzip2
     s3Credentials:
       accessKeyId:
         name: minio-creds
@@ -17,7 +19,8 @@ spec:
         name: minio-creds
         key: ACCESS_SECRET_KEY
     wal:
-      compression: gzip
+      compression: zstd
+---
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
