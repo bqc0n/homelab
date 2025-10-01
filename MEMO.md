@@ -90,6 +90,8 @@ k apply -f argocd/kube-system/node-local-dns.yaml
 k create namespace argocd
 k apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 k apply -f https://github.com/k8up-io/k8up/releases/download/k8up-4.8.3/k8up-crd.yaml --server-side
+# cert-manager
+k apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.18.2/cert-manager.yaml
 ```
 
 To prevent cilium resources from being detected by argoCD, edit the argocd configmap:
