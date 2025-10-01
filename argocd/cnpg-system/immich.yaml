@@ -1,17 +1,15 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: immich-gen2
+  name: immich
   namespace: cnpg-system
 spec:
   instances: 1
   primaryUpdateStrategy: unsupervised
   imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs:16.5-v0.3.0
-
   bootstrap:
     recovery:
-      source: immichClusterBackup
-
+      source: origin
   enableSuperuserAccess: true
   superuserSecret:
     name: immich
@@ -21,27 +19,16 @@ spec:
   storage:
     storageClass: nfs-ceph
     size: 10Gi
-
-  externalClusters:
-    - name: immichClusterBackup
-      barmanObjectStore:
-        serverName: "immich"
-        destinationPath: "s3://cnpg-backup"
-        endpointURL: "http://s4.bqc0n.com"
-        s3Credentials:
-          accessKeyId:
-            key: ACCESS_KEY
-            name: s3-creds
-          secretAccessKey:
-            key: SECRET_KEY
-            name: s3-creds
-        data:
-          compression: bzip2
-        wal:
-          compression: bzip2
-
   plugins:
     - name: barman-cloud.cloudnative-pg.io
       isWALArchiver: true
       parameters:
         barmanObjectName: minio
+        serverName: immich
+  externalClusters:
+    - name: origin
+      plugin:
+        name: barman-cloud.cloudnative-pg.io
+        parameters:
+          barmanObjectName: minio
+          serverName: immich-gen2
