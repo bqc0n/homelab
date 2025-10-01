@@ -13,6 +13,11 @@ spec:
   storage:
     storageClass: nfs-ceph
     size: 10Gi
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: minio
   externalClusters:
     - name: redmineClusterBackup
       barmanObjectStore:
@@ -30,3 +35,4 @@ spec:
           compression: bzip2
         wal:
           compression: bzip2
+

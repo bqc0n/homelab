@@ -39,3 +39,9 @@ spec:
           compression: bzip2
         wal:
           compression: bzip2
+
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: minio

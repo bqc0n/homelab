@@ -1,3 +1,4 @@
+---
 apiVersion: barmancloud.cnpg.io/v1
 kind: ObjectStore
 metadata:
@@ -10,10 +11,25 @@ spec:
     endpointURL: https://s4.bqc0n.com
     s3Credentials:
       accessKeyId:
-        name: s3-creds
-        key: ACCESS_KEY
+        name: minio-creds
+        key: ACCESS_KEY_ID
       secretAccessKey:
-        name: s3-creds
-        key: SECRET_KEY
+        name: minio-creds
+        key: ACCESS_SECRET_KEY
     wal:
-      compression: bzip2
+      compression: gzip
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: minio-creds
+  namespace: cnpg-system
+spec:
+  encryptedData:
+    ACCESS_KEY_ID: AgAOXwkxp6KAvUIYwlpOZLbK4010E0/g4nQD1mcb47DbnQ4brQu7KaSsT1i10DUkx4ACB8dOqZ6W5Y77nzFoPeZe6ohQzlT3M/h1PbEAzQlPF86EFhh1C+GJyDu273BUAhttadzBgOzrxl87TFuNkiNRJGFcU5tdLx86UEqA7uRsjZ+mpuK7PqKxvNfpA1zaJvvKqHDYHkDfMnQG+vgnbVw3u6iPxwqPimFkA2y195Zx8BOLSkMaWBfCcS5b9sRte4CWQmRMHdbFpcrfS1rJrii9fPoOXgw6TuoprzbrvADB6ItEfhCv5cf3GOhYuNBxwieDCOA8rcJ9FFE/r1IDJ5hLYigHPa0cJAy61vD/fg4u4wgY/XgXrGGOrvGE3TlKjVKAHma/9vFqbTkPWbwOgV6GBRkQOP7xtrHB9FpYE6yWxOcXpvqzXWZ7h6Evqmka8A6WGjNL7V9mJXoAG+v6/CBjDAKrF2ut/q3bsqfKQfOVilcYzXBYad+sEvVh5yF3YRuJUBzNBGMlsOISf9XGaD8g+TTBois8XUiOoN6QSjyRz3kNd0iezRpjtJnCuPDBxvCrP/sv/Gf1Lc3+r9yjTIT6LqbJCUtVXe/kKdotnIB3fi6SXhAZF4+w0e3yiy6ZWKGYfB5WmhBNPF7eFOuT93dLw9IsCSPPXEr6sfa4ueY1XZrGp2GKLdS7wv/1U7b9srDyfhr9DKBuSOFgdozy/SLOZ57Vrw==
+    ACCESS_SECRET_KEY: AgAMUJ7k/JoHLwQQVnEqYSjQ9RCiqGriFTCmDKr1F4ZyBKNEsyG9nOL1Qn+drShZKHqp4o2Gf0K7do0nQ/lmZaPTSI6P1k3prxeAEACjkURXxx4v7s1jnpwSv1LMGAeUjQca+xdLcAM7Wq6ZM0K9Z4naFeYyPwaScxb67jSimbhsRHZG/+CTIxZfmZaIyxsieP8InGamx7yFGHuKt33rrvnIC5sUDmFrol20y1adp4Qf6FR34eB/bwKhf5xPxULVRjSTWNAxs1GYdrdbw1saiypbknMN2SyNrvnpRBcApJN+f9z4nEXTMbEdKqAtVsde5HQt44ZJgCf/xL1Xn2Mu2VNk1I1VizKWHRPmjZMk75sHgzPpzO9X55gUgfmtcE5KOnQACdcv8hKmzUILXB4MtIv3aN+b51/KeLO2YmJk82do7iQ8+VHnc5Wj0B0DEwU1voE/cvaPukT+N4YsgD47T7tG7jlaE+SmVrqdEoXugWibDanIZvFCVdVi2zNPmCtrdC7TOqaxkfCtb6uTGHU0ZiWv4ca+QZMcW/0T/RPNSYB0yNceRquyVDoStlOrBDkg2+kMvak5YHrRZOTIIdoT0m9xc9RWxrA40WmCbdDp8imazzN4cWy3MjJvorrVAFBvOJN10JV8W7T85LDt+dkEOTx6V2pAoMXi/4nIQomCDqETzo0ygb+Ox+wpTKVHrzOaWw5tWJ0xFNRpwj7XEPh0l9u7vHxfFYPogeLnchYEyfkJy/6+6aVyzok7
+  template:
+    metadata:
+      name: minio-creds
+      namespace: cnpg-system
+    type: Opaque
