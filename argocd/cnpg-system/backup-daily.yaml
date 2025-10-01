@@ -9,6 +9,9 @@ spec:
   backupOwnerReference: self
   cluster:
     name: redmine
+  method: plugin
+  pluginConfiguration:
+    name: barman-cloud.cloudnative-pg.io
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
@@ -20,6 +23,9 @@ spec:
   backupOwnerReference: self
   cluster:
     name: immich
+  method: plugin
+  pluginConfiguration:
+    name: barman-cloud.cloudnative-pg.io
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
@@ -31,6 +37,37 @@ spec:
   backupOwnerReference: self
   cluster:
     name: paperless-ngx
+  method: plugin
+  pluginConfiguration:
+    name: barman-cloud.cloudnative-pg.io
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: gitea
+  namespace: cnpg-system
+spec:
+  schedule: "0 0 4 * * *" # 4 AM every day. Go cron format.
+  backupOwnerReference: self
+  cluster:
+    name: gitea
+  method: plugin
+  pluginConfiguration:
+    name: barman-cloud.cloudnative-pg.io
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: apps
+  namespace: cnpg-system
+spec:
+  schedule: "0 0 4 * * *" # 4 AM every day. Go cron format.
+  backupOwnerReference: self
+  cluster:
+    name: apps
+  method: plugin
+  pluginConfiguration:
+    name: barman-cloud.cloudnative-pg.io
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret

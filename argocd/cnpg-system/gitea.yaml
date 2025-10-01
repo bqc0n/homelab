@@ -15,19 +15,8 @@ spec:
   storage:
     storageClass: nfs-ceph
     size: 10Gi
-  backup:
-    barmanObjectStore:
-      destinationPath: "s3://cnpg-backup"
-      endpointURL: "http://s4.bqc0n.com"
-      s3Credentials:
-        accessKeyId:
-          key: ACCESS_KEY
-          name: s3-creds
-        secretAccessKey:
-          key: SECRET_KEY
-          name: s3-creds
-      data:
-        compression: bzip2
-      wal:
-        compression: bzip2
-    retentionPolicy: "7d"
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: minio
