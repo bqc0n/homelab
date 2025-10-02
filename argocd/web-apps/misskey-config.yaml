@@ -10,7 +10,7 @@ data:
     url: https://misskey.bqc0n.com/
     port: 3000
     db:
-      host: db-svc
+      host: misskey-rw.pg-clusters.svc.cluster.local.
       port: 5432
     dbReplications: false
     redis:
@@ -25,3 +25,17 @@ data:
       - challenges.cloudflare.com
     proxyRemoteFiles: true
     signToActivityPubGet: true
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: misskey-db-password
+  namespace: web-apps
+spec:
+  encryptedData:
+    DATABASE_PASSWORD: AgBu08jOjfsWgkTwDlphcm5ExA/PRcU10YNI0zsos28n2xNgpPOZQCfYDJvHfK3NvUhI4m/eMgUFrpRMZa8ayzqn8t0maPt2lwWx5cxdrarz6xU40LBmLjr8hWxzI6qXhMV5JcKPdBqAtYk5exZnCyVNjQH6WPTb00dX5sNSLILqOlqaZkx/pw2IL9dPzr7B0/tJdBUlZxR4GMdf9GLQNxKT/U+yQh+L44f5lDwQKiaZO4wGSes0VZKdNQoBmMN8DQch9LYbOcGKU/crCsPwyTvQrw2oN13vmIWEoH7wheW6i+CGL75ZWUEir5ZQetdWmsHCrLT93qYuPwuK1m/XUBVnDaIzAVqU7l7P2RD9+8dpVkRNSqi8MtqY3j2YnFQ2b6lVW0ZXpGN+itO8p6LdVU/50PF38NjK7ijegF4RUWN/5xBZJYRTe8zUZl6YQXem4sNVu6xvCA4eIFYta1V4aC0IVAqhxhNLnX24CtOp1wRlVkCIrkR9SDrygdmqkiDCFFd2XOn03O7nzS1A26nQWdriMKBxaZqpGV0C3G3MsahiUDDMhTIE19WLjzqyogxd7l26uoRVQMup8wph2r4heIAiEDb4LLqyi2x9BDN3CIVw2ysSVGb962w8gNEdYyr9z9RPVvnySuYspDM3iUJnXdvciNHkk4SwxH8Z/SKEnO/VvOjiNsmA1G1BB9wL/jOYGWWmO9kBPdGX7bfly5NoFFLmAGAu5VcsRcnFd2fnblJllQ==
+  template:
+    metadata:
+      name: misskey-db-password
+      namespace: web-apps
+    type: Opaque

@@ -62,14 +62,15 @@ spec:
               memory: "2Gi"
           command: ["pnpm", "run", "migrateandstart"]
           env:
-            - name: DATABASE_PASSWORD
-              value: "test"
             - name: DATABASE_USER
               value: "misskey"
             - name: DATABASE_DB
               value: "misskey"
             - name: TZ
               value: Asia/Tokyo
+          envFrom:
+            - secretRef:
+                name: misskey-db-password
       volumes:
         - name: misskey-files
           persistentVolumeClaim:
