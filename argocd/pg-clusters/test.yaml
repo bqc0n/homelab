@@ -1,0 +1,10 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: test-cluster
+  namespace: pg-clusters
+spec:
+  instances: 1
+  storage:
+    size: 1Gi
+    storageClass: nfs-ceph

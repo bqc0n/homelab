@@ -1,0 +1,37 @@
+---
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: minio-daily
+  namespace: pg-clusters
+spec:
+  retentionPolicy: "30d"
+  configuration:
+    destinationPath: s3://cnpg-backups/
+    endpointURL: https://s4.bqc0n.com
+    data:
+      compression: bzip2
+    s3Credentials:
+      accessKeyId:
+        name: minio-creds
+        key: ACCESS_KEY_ID
+      secretAccessKey:
+        name: minio-creds
+        key: SECRET_ACCESS_KEY
+    wal:
+      compression: zstd
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: minio-creds
+  namespace: pg-clusters
+spec:
+  encryptedData:
+    ACCESS_KEY_ID: AgCJy+dB908JbpUzngWVEXaLMAOeVnsSK/ggwAv64SALXMvWOB+tAyzmFg1189UeL63kGYPcZ/RmVr/k/y6EYq+kOyxoNHhaFxqkDm+L5M4PXy7Oq2BM4qzDD6/8sV+/YoJC9aCWbjsm3xBZN3lrTMHrpJwl8ji0B/KY4SiTJW7y38+EdalgF0J7mkdvboCgzJb89dMaNljpJhPgVRbOPOhXFY7FreQ95c1ytVLW/B+2cqK7LxR9BUXpwSg1jCzfg2sOAAWpSplfDHtvTqy2Cnqhx88a0NwjEC3ZTPkaWAE5g32UlJZPG8wjynu+ZopFsvqjEj6TICkKjahXr1YxR9GcDWa+96FmZAxflKh/PTo6/UEYw5s2hzCOoVuBcl7tixYfBmT8P1aPH4V8AT/C+Xei2ZLOib+Q5yROAfF/Tku6x3LxH9rgNTYO0d4RdddACmbHPZninGaOCx4Ov7CHiqz0EosB9cnSS5K40hSLfBPRr+/fSZWj/2qB2oyF/6p3g5l9B4pueLas8uNHm6GCvOsS7XZUKEAqFjI6u06AjaUFdMOqpVj17kXrzN9RmdBlt6kXvL6nWXm+VlcImf2ysUNiHpZljkJZev3dEMDO/3AmKsBqQKE0kHnlv1IV6PCt2ey5VxUdks6SOau1TWC46eO8KatUlAnsaXYC6zSjm4vnEr+6pbaeQQUfANrgTZanYLKnNlT6EebqDlwMVJ0MZ2a+xQwzrZQ=
+    SECRET_ACCESS_KEY: AgCne/HQ+HbbyWidPMoq7hWh13GdtF2nLSCAPQIc8xS+/4Wytqlz+ogZuzHxkVYjfYz/fn3SRPRhndD6I2hsK+Tj7cmIlV+AiAPCoErix/WFBBvoPtL+c51tRrR1/v8Q/7Voy4FwiO8I00JzGiox/9Rp5E362FxooPFZSNNhuOoqX4ArLCukXB5Ao1jkCwpu98HT/bNhNOHs2NQXsUEd8HVIIHwxhnDbjG5HAjglVDbegeVXk/NX1dHPQNkVqAwcbEMs9gqVYiC4K0flNO6iU94bStABM6DTElpKEFJR+EJXWC/idsyAjEfNhtUG84woxjEUafbaMxYiLQWdqb7qyjT5dm6kIjUgyQRznUt+269fUB+beZMEyi6ODjsaCyjCuI/Gf1k1nyk3fNn19DSrqeBsOzGz6XhFyPkPKQIqmlCMSWQz65/TxoghyUAHOSayCvzJ3oXke1r0pcssBPDQSGVR+MoVu2jBnrcbbZrZqBiwkPS966TksMEIxTGxKD7nY7qXh9inwLqx1eGq3qNueoXOUZT3DkJocR+kCsQ5N5XAyVKi94IuHJ5Y7bo2jWO4LWISQeylM3/9cimpMCuErfhh0dY0uSd/F6M8KQB11yf6EE/xTE6XigdxD2RvaZULns5GWahOEljv5QB1XCg5eIRg5aZqRX/2AL7htNUnlFYsL2hC3cXl71xAJ4lyLdv8koOmNs8/bndDvICR9dN9hPALE/fDiTWYMyjRpaZN20iPq+plAGUcR6BX
+  template:
+    metadata:
+      name: minio-creds
+      namespace: pg-clusters
+    type: Opaque

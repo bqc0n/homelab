@@ -1,0 +1,59 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: misskey
+  namespace: pg-clusters
+spec:
+  instances: 1
+  bootstrap:
+    initdb:
+      database: misskey
+      owner: misskey
+      secret:
+        name: misskey-db-creds
+      import:
+        databases:
+          - misskey
+        source:
+          externalCluster: origin
+        type: microservice
+  storage:
+    storageClass: nfs-ceph
+    size: 10Gi
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: minio-daily
+  externalClusters:
+    - name: origin
+      connectionParameters:
+        host: db-svc.web-apps.svc.cluster.local.
+        user: misskey
+        dbname: misskey
+      password:
+        key: password
+        name: misskey-old-postgres-secret
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: misskey-old-postgres-secret
+  namespace: pg-clusters
+stringData:
+  password: "test"
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: misskey-db-creds
+  namespace: pg-clusters
+spec:
+  encryptedData:
+    password: AgDt5oTolXmhe/f0xlTKSCWKKGcjW9b1lfIt2JKrNYKxKo6aV3dY4Ir0bOcDM9GUgn9zkhimETywwSCQVKvNnNbLYIOxqr4l9lD0wZ3JYFF+bUY9EQYDk0HVnqnaaEGsW7phJO7ZAuzxZVuiVx/qWE7Q2GeUs3wciKzKPgX5SKa+aNjNV5lbdni2gfMdavwIbDzaI0HWAmd6AjoV3r4qm43Ky2h8S6qkEzcUqGhd008ILQsP8vobSLHIg8OWoarSsvA2BvDx5rJMC06bfjXAOLAZ3xtlbh6y/cdNDSpRRgh4visfpVabU/+eaqXy6A7jKI0lWklkzdl+UKobesNeb9pxkR4awpX7UMftaJnYD8MjHhnvhGO2eivoq5Ucbb09/Ip6pmCIkHugeHV0JE+ZqDwicix4+WiXKqizsN5v5c0O3jM5YwPm1eLJMPk0DVSMIIYuiAdd65quxFBnyaX3i2jhUuObVWF5FEUPq5l7c+ToYf/VWQuK0s+Jq77jHKEGCrxs+Hy+HKd35dWGw0eYt1+RlBsIg427IisHShl+Hmpk4cAUPLf+tAe0bukAXtpB8DgOcCSVXyI+RZnMkB5ZQVeSGJBJobYWaqCJVvcyDaKr7pBz1Lag8DJw57y0JoY4EkwLuRp2Az9o4hO4smfqu7QJGOzJ5JyfvPNvJGAR4NA8hE3TyXuPwK7uS41MjFqpKblmbVuVGfL7SC327Nf2u8PcQJklf8ULYLY+Arx7hHcA8Q==
+    username: AgDK3PdQi3tE+lM8HwCfNF9KP2AXBtTHB0R4T9heCmYNVQEJGo7K0OrNItvo71mhEcTD0sRdKRO4JgF6vjkMnDs3djnJ/GtnLYyJJHv1QNHkxlVBSYHy5AwomOg4/vWVsfdYlIF9UiV5p1bJg4509+8iJb2YAqBgTO8olhL/+iecj/0GX/ttDc7jzySOI12+UxyVtyXuapA5PNTwtiC/cxDotX0pOhj3ZzjnoV4AlrBGIBDDxtg5tYG+CgaS5tLkx6IEjpj5KxRoUS6LX3y1ZeNiIt5G/cMNCKD7jx02BCRg6/11dZ33czsLoWRGtbS2otscfpgQCr+pQj4dDEkpyxg6tK4GvCbJksx3m9NPnbWT6syyPEngQKqqyGhVizwmK1OWO5l3cSkPGXPkfXxUmLoqA6+n3Bh+5oKJ03g7xTKGPDWGIJpAEDsu+c0KboboD6nvCqMPDrGd+U9e4+oiN+zyqcOeLzHdf04rOpM5v7ftNBYOu2PpaaXyvOMGEhm+toSKfyBaTZLWjAdIUUm0CfMPaQIPpkQGqPX5keclCuOPSyMzQ8L9zxDNi4+gp6MZY/9BoeDRGEn80NthyKrENgxq6cMG6f3xuAzZgeN1U1n9+rE6uf8qdv8OLtkGdPlzEvBuAQc3CL0LyMfUqd0ulO1tUzBZ/4bQu8jGfrKCBACm81PX/6c618uElJlLVl/Ngb6BhTWk26Ee
+  template:
+    metadata:
+      name: misskey-db-creds
+      namespace: pg-clusters
+    type: kubernetes.io/basic-auth
