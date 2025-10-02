@@ -63,7 +63,7 @@ metadata:
   name: redmine-config
   namespace: web-apps
 data:
-  REDMINE_DB_POSTGRES: "redmine-gen2-rw.cnpg-system.svc.cluster.local."
+  REDMINE_DB_POSTGRES: "redmine-rw.cnpg-system.svc.cluster.local."
   REDMINE_DB_USERNAME: "app"
 ---
 apiVersion: bitnami.com/v1alpha1
