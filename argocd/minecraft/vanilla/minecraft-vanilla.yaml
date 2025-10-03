@@ -50,7 +50,7 @@ spec:
     spec:
       containers:
       - name: mc-vanilla-server
-        image: itzg/minecraft-server:2025.9.2-java17-graalvm
+        image: itzg/minecraft-server:2025.10.0-java17-graalvm
         resources:
           requests:
             memory: "2Gi"
