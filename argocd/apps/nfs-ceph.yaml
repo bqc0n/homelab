@@ -15,7 +15,7 @@ spec:
       releaseName: nfs-provisioner-ceph
       parameters:
         - name: nfs.server
-          value: 192.168.1.12
+          value: 192.168.1.11
         - name: nfs.path
           value: /k8s
         - name: storageClass.name
