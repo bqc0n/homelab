@@ -6,7 +6,7 @@ locals {
       ipv4     = "192.168.1.61",
       ipv6_ula = "fd76:913d:9525::61/64",
       cores    = 4,
-      memoryMi = 16384,
+      memoryMi = 8192,
     },
     {
       hostname = "k8s-worker-02",
@@ -14,15 +14,15 @@ locals {
       ipv4     = "192.168.1.62",
       ipv6_ula = "fd76:913d:9525::62/64",
       cores    = 16,
-      memoryMi = 24576,
+      memoryMi = 32768,
     },
     {
       hostname = "k8s-worker-03",
       node     = "pve03",
       ipv4     = "192.168.1.63",
       ipv6_ula = "fd76:913d:9525::63/64",
-      cores    = 4,
-      memoryMi = 16384,
+      cores    = 6,
+      memoryMi = 24576,
     },
   ]
 }
