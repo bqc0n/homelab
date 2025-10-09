@@ -1,0 +1,66 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: minio-backups-creds
+  namespace: web-apps
+spec:
+  encryptedData:
+    ACCESS_KEY: AgDPGDVBX0TsxXZ9xZTc6ZpAnB0NinMoKdfCE3A1+ej+KerlJVzkLnpuSaX5g5Q0QjUqnreAjYDj9jTzIl/wMpJLfgKc/X+PHgF9UCIdRPPUCt0FG8hJO+9/Qj0EwZ4VsUhxdc8J1T+xNFQkcl/FUyeD9HTLZINeeuD/n3JD4cgRS30wE0su9PydwhiIXrEvt1nXx52+J2GqY3TNoWuQdptqE+aC2usStfVW1lWu/PVXxCfyCEgLxdDvHMO0fzOFTsEfEWedlascJ8CmphrNJKSBZor1utTV0podPRyxSsYm/agIVMinmjOnWz0rFxqOOs6xALNw0QSI9UGvi++/u+O2NKwlm4mwrjnmhfFUO7//pR/82WhPIz2loilddva/QxiggCuZRBaFNOObUg6zeeUB100bu/a6pYfk+CJgSBjXkdWAFEYo8lQuF6pAETuvPglshVcN/zGVjlDurnFiyJ7L4x7AZ3QiZZT/J71zJiQaLVTet2b3CFcx23fypqwGZn15yTFllqUefi35nBJmavRbZUnXAXlFDu31FqSFE75AXvlybl9Ay04+RC3Cdn04QDY5IEjL1aJgikzdwlPyRZ5kuuPCa3yFJzwGo5bIIJCcU353QfjJUENo2cXJMMwNnouxwwGKQpsB7NkmdngTeJHorkj6gIoOFCJaiZAODH8f+qV3MIzoJGS2vvTPuKIUsiNP/4qwsl8vRkjEoL/3witiwTPTAg==
+    SECRET_KEY: AgAZEggkV43+SOefso2ZQDCJTDIOajvlH0TfTELKuY/nlU5rHkbLSQn4kBvpuydXyDsTsr5Sg9awd6ggI8gjaQXa2oT0NsvG3dXTc5FS0g5rh+XSlJKuVEAfXFx/7brHEuue+NoWRjvkHbYfK+F9B+EeIv/yXzDbOs/fvYoQgcIdBp4yuAy4qhHAGxIt+KgEzO+iRWW3IO9SylDiQ/D46wyI4FjdNDXTwE7rBGVKSzBrUQKfxkHDz3dA1Lm1q41P+bPnPxq3GS1Yl4TNgLI0uthcraIwjGr8s5uPj2Lc3KEXE+e97ZhC21FIK/xNXU0Ac3VockmlpgvNbXVzK0DzTjf8tgdD5Kt4ajjNIH/xn50ZQ1k0oW6CBJmPIUlgMrA2ffFwQC1NhC3GB0OF0z0ZRuL1K4FhV4gV0662NaJsKh48uxAEYOTBlyDipq2piIxRlQRMmXcNQsHh48VPuRYzL+I1PQtq+EOcP9fuAWjmImsa+BMDTc3y8FJpRrS0kpV5ox2G8cOsI8qETBBdiQEzAECxDKrNUASrxVC8jT0xQ+ZyFmi7jlAn5s/4n0l+y5u44W2zr030HHE08+C84YgQKswK7g5Cb3vO34UqugKVzcNUu4GlkNDsUxp9+PUDmh5INczsETCXE/qTZtkVdjQxEapztOQoZIwH68lC0BMrM+7NtthihkGwjxZSTB81N488EyRIY2bjyYG+1j2fjVMS0hJEAb+1RrSK3za/vSKyLdBzhbQ60FuzAp0x
+  template:
+    metadata:
+      name: minio-backups-creds
+      namespace: web-apps
+    type: Opaque
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: restic-repo-password
+  namespace: web-apps
+spec:
+  encryptedData:
+    PASSWORD: AgCXfIaudwitsrPHlY60XOWQeckALzdl/2XQJX1bJk2x3YxbpptcYUlIC6iQRC6Xl9dsBPUdpkoI9wGdXF009WBp42CL2mBVt5eT5sNs3enhubsPYXSFLvEqTxgOauzxi4Tsvl61sXiyHDd0p0nYrdZqAcR8bAvkMUpGF0ooe9tJXn4Fr3USfjUolZ7Hca5IxrBqAAseqdK8bxd6CVYi8+oIDdVCC4uoK/3/DBoA8dtuKoWhZaxAV5SDGodsUKE44xiUqEJwjmp+0ASuT+GDDzavbJdyNRJktqLLLayVidIDYmpxZwJYwAqbzir8R1ncAK+xol3LkYf3MD1v2I7gEf7G5xa4F891QGG3mtsSUV3g5czxTW40QsroEEwx+8GXa7jUcZQ/M/xyNV0qtcXmWPxjrqcHxH9l3sROEp1TITAxcdxye6e/VznEwcn8FAII1DvFIVCxYdyTiP8/m3+l6OUZkUltUFA2DhONS+7qAGtcG5sviJ8c+F0GU1UeOjXQFQPqNbDi4tkli4HCCn04JCMgLl64uCff+qe22mppIzJVMYehJ2IDK5mwfw4a0ju+LGCXLBjiF+3vN78MyfyXGe7kobtWaLjWCSk2ScUnEIk7RRRm7pbUAVlCtJwwk9Sj4TsIlmLKrLna4MAdq2eQqXvs0MAEqQeswHYDNGjQMBoCZATOrGdsHITcG538y0EdPmgSTncvpf3w+x5BAcEdGbxsAslpgAsKYdK6RPCLuFeFWQ==
+  template:
+    metadata:
+      name: restic-repo-password
+      namespace: web-apps
+    type: Opaque
+---
+apiVersion: k8up.io/v1
+kind: Schedule
+metadata:
+  name: web-apps-backup-schedule
+  namespace: web-apps
+spec:
+  backup:
+    schedule: "5 17 * * *" # Daily at 17:05 (UTC), JST 02:05
+    failedJobsHistoryLimit: 1
+    successfulJobsHistoryLimit: 1
+  backend:
+    repoPasswordSecretRef:
+      name: restic-repo-password
+      key: PASSWORD
+    s3:
+      endpoint: https://s4.bqc0n.com
+      bucket: k8s-backups/web-apps
+      accessKeyIDSecretRef:
+        name: minio-backups-creds
+        key: ACCESS_KEY
+      secretAccessKeySecretRef:
+        name: minio-backups-creds
+        key: SECRET_KEY
+  check:
+    schedule: "@weekly-random"
+    failedJobsHistoryLimit: 1
+    successfulJobsHistoryLimit: 1
+  prune:
+    schedule: "@weekly-random"
+    failedJobsHistoryLimit: 1
+    successfulJobsHistoryLimit: 1
+    activeDeadlineSeconds: 7200
+    retention:
+      keepDaily: 7
+      keepMonthly: 12
+      keepYearly: 5

@@ -1,37 +1,66 @@
 ---
-apiVersion: v1
-kind: Secret
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
 metadata:
   name: restic-repo-password
   namespace: minecraft
-type: Opaque
-stringData:
-  PASSWORD: "nopass"
+spec:
+  encryptedData:
+    PASSWORD: AgBIpbnk5upXTYU29zp4OoJlvB0gArF/kGvaTXfE4fHv2Ku94nBnjQjyklpYsUg2NzxARlAdPBRTcF2BE6RCyWlNMLK0KPN2s/23ZIX4IN+po+t9YDRvDVGrWppJl5ZUbuModbE0STlgbzUxv6Qc5BgKz8oxP0soPE8WM1dQCsjyc775AufKhSAukc5eOFXopGC8XZugh/UIJ0Q1e5RxtwblFhDPVYQnLDysHeZHWakbQ8IHg/8BfsQzwv9ZCP80r5FRnQnC+U3ccXXBfU3O+hBCOwQxmjeCLshgdPHCg936Jn2wJwuKIedFv25fKQp9lcZpi+6Kbo2u3d5olX/iPIsSae34dyDB8jI6wYke8PY2IXATah26QPOwQ7xZFp83gVuwxKHagXYwiU1Vphh8SWRbbzwB1ptV7Yx7EmaCP4AJDF+nVQa41J8ra+QdMg4mDxrT1JCa7Tob+Q/igcw7CMX+64PRiKJ4dETa6GnPDyDEOuDpeF1aYfk9/uzhLtZ9MlVUSM6UHWtVA6hpZ3WDcfSl3FoR7BXzakSUI5TXhN/cjb5FG7DO4dFxKTcsbKBxI43hC5Nlt3W+PhDxqwV8SSHZHvj6JLbbCb8kb5ycoNpBABFdtdc6dOFbO85rzdo3en/l8dCFByS7EBueBrAsZXqkduHwHuXfTpKYQiKobnArFritrsjtCl4Ri+bjmsetLsjqRkaApgwU6CYd+KrYdIM3dfW10NyxXGCwj1aTb/MZzg==
+  template:
+    metadata:
+      name: restic-repo-password
+      namespace: minecraft
+    type: Opaque
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: minio-backups-creds
+  namespace: minecraft
+spec:
+  encryptedData:
+    ACCESS_KEY: AgCEcIjjE9wBMY2gDWvCi5CaZYONS4gIj+QjpwRBPgGNDpYVjpVzDXalDJ2HU+ey625YDwljxoffpK7OTA4i7U6es8Iwvc4lcUF9Jd1Yb50skOZD9A+TO7OATUKV3/oF/20ZbtV6QOUmmkgU6ddf3n1x/t2WngKSGkrG5f7Hf32FTOLpYxjuBZVYPlIEOqIfeEEZiq4cL+TDiHlPG01Ol4AmSf6R8UH2WKjwNScEpbuihOQkJS+B4+2g1ghtWytUbt0cwRlpnIZNZOSEVkSTWfX76QlJfRJe+XjWrzlKsIB57+USvbnNG9AMmuB01g9wOubxP6IDSosqVVmr//3TULxfl2niN7+kAx/gcslkdxR5fERUlRlgh7bmJkqmgLrW8ueKpzMoJ4y3PC+hY+ZcecZNfzFrF7MOAT4CGTp4xoRa/4Gtmd2oJASrA28mDLasfXCG+y11BZRNSPt55qvUJPcTnrH23JmWyNwie8s8rcbeMLiQ/Em4YCHxjuCfjhFZL1rEw7nS+Sp5el8Hygk/n7l3zUXqX7j6mCxGQeQnS8brKPK1CjpRmDQDU2hU84ySBXfUfxifHnxANcc6pBnRXjCv83BN1W87fFD1LLfhIAs6K0hP6EFVh/gg5q6v2dWxellfdzCHucZ02HZRjt6gJ59WbWQ8xQTUyJ/jZ71sx0o3pDtFiYvyPWdyWDAJHuv4rb9tNWebmVCqFnMuVWgF0lrI8nx0BQ==
+    SECRET_KEY: AgCTMB023vivD9txVl/tAFQZ5ZCWrj/EHMpYaH3NN8PHFugb3B/YsVqL/eDcawceslBqXGQqbXDY8Nw1puZaGaR3PQP7yxWm70gyoim16U+zXhvWSeSbkB4o4z3eNGEkFvMj2TaxhqvABC01BY/qL7U+LqKCro6UOuTSHfmRFI2UzuQuSPxNca5wOxW94Ha+J0d6hOtC+Sm02i+epoRlSVGXdNgFrdZWkTF6rt2/wxFBBGhTHQQIl8WxY9bl/CESnpF1y3O7lI5TnGLfcfLxuT5TAd47AqfhB4/PVF/IVMAVoVNYNW74rTMfxI+AVth9jcLAZ8/4iZNKszJ3hDTjlD1smyZ0zk0LSe6oxKq7hL1+Y1TI+rKK7ZoyYkHhRmmm2rCTe3CwooRLKYyoLYCToLUt505oiFrisaXTZE0PIo/oK2mr+sdZVt/SA7b8xDKRTIdvV67RlH8JB8Nyu+wCncu0IKMwjiryLA84E4fp6S3m8LOrEg8m9CzLfEQ4LuoeAEwPFRqRl2c0m1Th2CYMlK7w44BxBuiHT/WnfE+HOz+vagnN77yVRk6J/weX4LgnjdRMc9XMzM9v9W6v9VRAF9zinFDEKMrZt/nODjxKDGjIuMSzDIL55GhvyfqdOQf76EaamYEfoyntB1Y3IHJSQffPRcIq4Xk/QinMufS3o5N6e5fGpsvGoFuvKzWZ0v73W2Wn4111U8C4GKv4aHYWgiCsuP2pfIfXWLyfUXmlZa/igBpJFXM6G5is
+  template:
+    metadata:
+      name: minio-backups-creds
+      namespace: minecraft
+    type: Opaque
 ---
 apiVersion: k8up.io/v1
 kind: Schedule
 metadata:
-  name: mc-vanilla-backup-schedule
+  name: minecraft-backup-schedule
   namespace: minecraft
 spec:
-  podSecurityContext:
-    runAsUser: 0
-  failedJobsHistoryLimit: 2
-  successfulJobsHistoryLimit: 2
   backup:
-    schedule: "0 3 * * *" # 3AM
-    failedJobsHistoryLimit: 2
-    successfulJobsHistoryLimit: 2
-  prune:
-    schedule: "@weekly"
-    activeDeadlineSeconds: 7200
-    retention:
-      keepDaily: 14
-      keepMonthly: 12
-      keepYearly: 100
+    schedule: "0 17 * * *" # Daily at 17:00 (UTC), JST 02:05
+    failedJobsHistoryLimit: 1
+    successfulJobsHistoryLimit: 1
   backend:
-    rest:
-      url: "http://restic-rest.default.svc.cluster.local./mc-vanilla/backup"
     repoPasswordSecretRef:
       name: restic-repo-password
       key: PASSWORD
+    s3:
+      endpoint: https://s4.bqc0n.com
+      bucket: k8s-backups/minecraft
+      accessKeyIDSecretRef:
+        name: minio-backups-creds
+        key: ACCESS_KEY
+      secretAccessKeySecretRef:
+        name: minio-backups-creds
+        key: SECRET_KEY
+  check:
+    schedule: "@weekly-random"
+    failedJobsHistoryLimit: 1
+    successfulJobsHistoryLimit: 1
+  prune:
+    schedule: "@weekly-random"
+    failedJobsHistoryLimit: 1
+    successfulJobsHistoryLimit: 1
+    activeDeadlineSeconds: 7200
+    retention:
+      keepDaily: 7
+      keepMonthly: 12
+      keepYearly: 5
