@@ -13,7 +13,6 @@ locals {
     "minio",
     "s4",
     "wallos",
-    "git",
     "plane",
   ]
 }
@@ -55,4 +54,20 @@ resource "cloudflare_dns_record" "minecraft_tsb" {
     target = "minecraft.bqc0n.com"
     weight = 5
   }
+}
+
+resource "cloudflare_dns_record" "gitea_v4" {
+  name    = "git.bqc0n.com"
+  ttl     = 0
+  type    = "A"
+  zone_id = local.zone_id
+  content = data.terraform_remote_state.cloud.outputs.minecraft_amd_a2.ipv4
+}
+
+resource "cloudflare_dns_record" "gitea_v6" {
+  name    = "git.bqc0n.com"
+  ttl     = 0
+  type    = "AAAA"
+  zone_id = local.zone_id
+  content = data.terraform_remote_state.cloud.outputs.minecraft_amd_a2.ipv6
 }

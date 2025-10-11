@@ -16,7 +16,6 @@ resource "cloudflare_zero_trust_access_application" "homelab_private" {
   policies = [
     {
       precedence = 1
-      decision   = "allow"
       id         = cloudflare_zero_trust_access_policy.homelab_private.id
     }
   ]
@@ -37,7 +36,6 @@ resource "cloudflare_zero_trust_access_application" "homelab_private_2" {
   policies = [
     {
       precedence = 1
-      decision   = "allow"
       id         = cloudflare_zero_trust_access_policy.homelab_private.id
     }
   ]
@@ -57,7 +55,6 @@ resource "cloudflare_zero_trust_access_application" "homelab_protected" {
   policies = [
     {
       precedence = 1
-      decision   = "allow"
       id         = cloudflare_zero_trust_access_policy.homelab_protected_friends.id
     }
   ]
@@ -129,9 +126,6 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "cf_grafana" {
       }, {
         hostname = "wallos.${local.domain}"
         service  = "http://wallos.web-apps.svc.cluster.local."
-      }, {
-        hostname = "git.${local.domain}"
-        service  = "http://git.web-apps.svc.cluster.local."
       }, {
         hostname = "plane.${local.domain}"
         service  = "http://plane-app-web.plane-ce.svc.cluster.local."

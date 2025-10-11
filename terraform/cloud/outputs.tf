@@ -6,9 +6,10 @@ output "minecraft_amd_osaka_ipv6_GUA" {
   value = oci_core_instance.minecraft_amd_osaka.create_vnic_details[0].ipv6address_ipv6subnet_cidr_pair_details[0].ipv6address
 }
 
-output "minecraft_amd_a2_public_ipv4" {
+output "minecraft_amd_a2" {
   value = {
     ipv4 = oci_core_instance.a2.public_ip
+    ipv6 = oci_core_instance.a2.create_vnic_details[0].ipv6address_ipv6subnet_cidr_pair_details[0].ipv6address
   }
 }
 
