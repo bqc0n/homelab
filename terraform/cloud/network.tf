@@ -54,48 +54,8 @@ resource "oci_core_subnet" "osaka_public" {
   ipv6cidr_block = replace(oci_core_vcn.osaka.ipv6cidr_blocks[0], "/56", "/64")
   security_list_ids = [
     oci_core_vcn.osaka.default_security_list_id,
-    oci_core_security_list.osaka_public.id,
   ]
 
   display_name = "subnet-osaka-minecraft-public-tf"
   freeform_tags = { "ManagedBy" = "Terraform" }
-}
-
-resource "oci_core_security_list" "osaka_public" {
-  compartment_id = oci_identity_compartment.minecraft.id
-  vcn_id         = oci_core_vcn.osaka.id
-
-  display_name = "Osaka Minecraft Public Security List"
-
-  freeform_tags = { "ManagedBy" = "Terraform" }
-
-  dynamic "ingress_security_rules" {
-    for_each = ["0.0.0.0/0", "::/0"]
-    content {
-      protocol = 6 # TCP
-      source   = ingress_security_rules.value
-      stateless = true
-      description = "Minecraft Server Ports"
-
-      tcp_options {
-        min = 27135
-        max = 27139
-      }
-    }
-  }
-
-  dynamic "ingress_security_rules" {
-    for_each = ["0.0.0.0/0", "::/0"]
-    content {
-      protocol = 6 # TCP
-      source   = ingress_security_rules.value
-      stateless = true
-      description = "Minecraft TOB SFTP"
-
-      tcp_options {
-        min = 12303
-        max = 12303
-      }
-    }
-  }
 }
