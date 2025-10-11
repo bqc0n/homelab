@@ -8,7 +8,7 @@ spec:
   retentionPolicy: "7d"
   configuration:
     destinationPath: s3://cnpg-backups/daily
-    endpointURL: https://s4.bqc0n.com
+    endpointURL: http://minio.bqc0n.internal:9000
     data:
       compression: bzip2
     s3Credentials:
