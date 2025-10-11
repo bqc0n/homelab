@@ -34,11 +34,11 @@ resource "oci_core_instance" "minecraft_amd_osaka" {
 }
 
 
-resource "oci_core_instance" "a2" {
+resource "oci_core_instance" "m2e" {
   availability_domain = data.oci_identity_availability_domain.ads.name
   compartment_id      = oci_identity_compartment.minecraft.id
 
-  display_name = "A2"
+  display_name = "2E"
 
   shape = "VM.Standard.E2.1.Micro"
   shape_config {
@@ -51,7 +51,7 @@ resource "oci_core_instance" "a2" {
     assign_public_ip = true
     assign_ipv6ip = true
     ipv6address_ipv6subnet_cidr_pair_details {
-      ipv6address = "${replace(oci_core_subnet.osaka_public.ipv6cidr_block, "/64", "")}a2"
+      ipv6address = "${replace(oci_core_subnet.osaka_public.ipv6cidr_block, "/64", "")}2e"
     }
 
     nsg_ids = [
