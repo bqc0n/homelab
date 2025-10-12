@@ -1,8 +1,8 @@
-resource "oci_core_instance" "minecraft_amd_osaka" {
+resource "oci_core_instance" "m2b" {
   availability_domain = data.oci_identity_availability_domain.ads.name
   compartment_id      = oci_identity_compartment.minecraft.id
 
-  display_name = "minecraft-amd-osaka"
+  display_name = "2B"
 
   shape = "VM.Standard.E2.1.Micro"
   shape_config {

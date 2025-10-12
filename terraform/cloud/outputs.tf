@@ -1,9 +1,9 @@
 output "minecraft_amd_osaka_public_ipv4" {
-  value = oci_core_instance.minecraft_amd_osaka.public_ip
+  value = oci_core_instance.m2b.public_ip
 }
 
 output "minecraft_amd_osaka_ipv6_GUA" {
-  value = oci_core_instance.minecraft_amd_osaka.create_vnic_details[0].ipv6address_ipv6subnet_cidr_pair_details[0].ipv6address
+  value = oci_core_instance.m2b.create_vnic_details[0].ipv6address_ipv6subnet_cidr_pair_details[0].ipv6address
 }
 
 output "minecraft_amd_2e" {
