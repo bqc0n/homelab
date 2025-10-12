@@ -33,7 +33,7 @@ spec:
   selector:
     app: gitea
   ports:
-    - port: 22
+    - port: 12222
       protocol: TCP
       targetPort: 22
 ---
@@ -95,6 +95,7 @@ data:
   GITEA__database__DB_TYPE: postgres
   GITEA__database__HOST: gitea-rw.cnpg-system.svc.cluster.local.:5432
   GITEA__database__NAME: gitea
+  GITEA__server__START_SSH_SERVER: "true"
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
