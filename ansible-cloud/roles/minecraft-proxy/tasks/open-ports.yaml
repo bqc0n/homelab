@@ -1,4 +1,13 @@
 ---
+- name: Firewalld | Open Service Ports
+  become: true
+  ansible.posix.firewalld:
+    service: "{{ item }}"
+    permanent: true
+    immediate: true
+    zone: public
+    state: enabled
+  with_items: ["ssh", "http", "https"]
 - name: Firewalld | Open Ports
   become: true
   ansible.posix.firewalld:
@@ -7,4 +16,4 @@
     immediate: true
     zone: public
     state: enabled
-  with_items: ["27135-27139/tcp", "12303/tcp", "51820/udp"]
+  with_items: ["2222/tcp", "27135-27141/tcp", "12303/tcp"]
