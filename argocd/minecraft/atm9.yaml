@@ -1,0 +1,101 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: atm9
+  namespace: minecraft
+  labels:
+    lbipam: fixed
+  annotations:
+    "lbipam.cilium.io/ips": "10.1.0.1"
+    "lbipam.cilium.io/sharing-key": "minecraft"
+spec:
+  type: LoadBalancer
+  selector:
+    app: atm9
+  ports:
+    - protocol: TCP
+      port: 27141
+      targetPort: 25565
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: atm9
+  namespace: minecraft
+spec:
+  podManagementPolicy: OrderedReady
+  selector:
+    matchLabels:
+      app: atm9
+  template:
+    metadata:
+      labels:
+        app: atm9
+    spec:
+      containers:
+        - name: atm9
+          image: itzg/minecraft-server:2025.10.1-java21-graalvm
+          resources:
+            requests:
+              memory: "6Gi"
+            limits:
+              memory: "10Gi"
+          volumeMounts:
+            - mountPath: /data
+              name: atm9-data
+            - mountPath: /data/simplebackups
+              name: atm9-backup
+          ports:
+            - containerPort: 25565
+          envFrom:
+            - configMapRef:
+                name: atm9-config
+            - secretRef:
+                name: cf-api-key
+  volumeClaimTemplates:
+    - metadata:
+        name: atm9-data
+      spec:
+        storageClassName: nfs-ceph
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 20Gi
+    - metadata:
+        name: atm9-backup
+      spec:
+        storageClassName: nfs-hdd-1
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 20Gi
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: minecraft
+  name: atm9-config
+data:
+  EULA: "true"
+  LOG_TIMESTAMP: "true"
+  MAX_PLAYERS: "10"
+  MEMORY: "6G"
+  MOTD: "All the Mods 9"
+  OPS: "bqc0n"
+  OVERRIDE_WHITELIST: "false"
+  PVP: "false"
+  SPAWN_PROTECTION: "0"
+  TZ: "Asia/Tokyo"
+  USE_AIKAR_FLAGS: "true"
+  WHITELIST: |
+    bqc0n
+
+  MODPACK_PLATFORM: "AUTO_CURSEFORGE"
+  MOD_PLATFORM: "AUTO_CURSEFORGE"
+  TYPE: "AUTO_CURSEFORGE"
+  CF_SLUG: "all-the-mods-9"
+  CF_FILE_ID: "6985843" # 1.1.0

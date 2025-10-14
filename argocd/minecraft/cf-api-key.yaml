@@ -1,0 +1,14 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: cf-api-key
+  namespace: minecraft
+spec:
+  encryptedData:
+    CF_API_KEY: AgBQTZ9BtWQnRJJncGE3irLTV7OSXXGFaFw3AO423EpT1DrsW3Y4Iz3TnkhtYEsGFHZ4byXgEn0RJs0eFU58ulAh/xpqazDipR7IJeyQjStQ9ii7jGI6fYxJKMe6XuEzaDFsXSozW920EfAiaBUkTAs+ZW3slygFr6DVHcvU7Rrd/t1FgJAvzPmuKK1cgb5W5JEbzxKHHF45ean5irtZ6E5xJiikyGE8+DObzUvtDUz0++jboeGE2GUO/Xo1xBBsEzVMds3Sh7Lv93EGZZr9C4n/5qKSe12bp/RN6G49vu1JFfdtD0T49DOPsPp0ZZcv9o+hc6n627TPaBdIPHqaYnrnUFYCISkzu5SpDyOmzaPTQ/jZIcRXDWYcG4GN7mNCfWoFbro3xkd5KtCneVqA+jw/ZNPZuVAWhRrOmgSwtsq5Kx+QH9Anh0AM/vVJ4AO1ln0yqia6LbU6rMIFTFJQqcDOyNUXfbaEc7QyrY8f8PgXQGkU1JxtOq8Un2yPReXjjiKt0RT0kydR3ximUpFT2XXeNxpmFjgIYsbnW9hoOjPXfNwmzGNhwsH7PEOwLwHH5jdxQZNU848FSsuNBL8kMdUO1nwOwZnfdqG6z/7PqdsDhBir+v6OI/HYCcSeYJgZieMdCnkCH6iyFuHJDO41k+CQDsEgPlmSbzO9rpB6RiRmFYwp7LuAVypDxWhJrCWo2VC1sz1tZqZjDwkSIEdrgBhU/MBB2Hbfh6BZe/O8bZZQG1S9/v/HNJz3cHI6ZnpXK3hsT5WHmEo1RT8bn40=
+  template:
+    metadata:
+      name: cf-api-key
+      namespace: minecraft
+    type: Opaque
