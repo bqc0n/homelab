@@ -15,6 +15,7 @@ resource "oci_core_network_security_group_security_rule" "inbound_http_tcp" {
   direction                 = "INGRESS"
   network_security_group_id = oci_core_network_security_group.inbound_http_https.id
   protocol                  = "6" # TCP
+  stateless = true
 
   source = each.value
   tcp_options {
@@ -30,6 +31,7 @@ resource "oci_core_network_security_group_security_rule" "inbound_https_tcp" {
   direction                 = "INGRESS"
   network_security_group_id = oci_core_network_security_group.inbound_http_https.id
   protocol                  = "6" # TCP
+  stateless = true
 
   source = each.value
   tcp_options {
@@ -45,6 +47,7 @@ resource "oci_core_network_security_group_security_rule" "inbound_https_udp" {
   direction                 = "INGRESS"
   network_security_group_id = oci_core_network_security_group.inbound_http_https.id
   protocol                  = "17" # UDP
+  stateless = true
 
   source = each.value
   udp_options {
@@ -67,6 +70,7 @@ resource "oci_core_network_security_group_security_rule" "inbound_ssh_tcp" {
   direction                 = "INGRESS"
   network_security_group_id = oci_core_network_security_group.inbound_ssh.id
   protocol                  = "6" # TCP
+  stateless = true
 
   source = each.value
   tcp_options {

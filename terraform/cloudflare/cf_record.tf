@@ -61,7 +61,7 @@ resource "cloudflare_dns_record" "gitea_v4" {
   ttl     = 0
   type    = "A"
   zone_id = local.zone_id
-  content = data.terraform_remote_state.cloud.outputs.minecraft_amd_2e.ipv4
+  content = data.terraform_remote_state.cloud.outputs.minecraft_amd_2b.ipv4
 }
 
 resource "cloudflare_dns_record" "gitea_v6" {
@@ -69,5 +69,5 @@ resource "cloudflare_dns_record" "gitea_v6" {
   ttl     = 0
   type    = "AAAA"
   zone_id = local.zone_id
-  content = data.terraform_remote_state.cloud.outputs.minecraft_amd_2e.ipv6
+  content = data.terraform_remote_state.cloud.outputs.minecraft_amd_2b.ipv6
 }
