@@ -99,4 +99,5 @@ data:
   MOD_PLATFORM: "AUTO_CURSEFORGE"
   TYPE: "AUTO_CURSEFORGE"
   CF_SLUG: "all-the-mods-9"
-  CF_FILE_ID: "6985843" # 1.1.0
+  # MAKE SURE you installed the SERVER FILE on CurseForge
+  CF_FILE_ID: "7097957" # 1.1.1
