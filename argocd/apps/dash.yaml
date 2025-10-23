@@ -31,7 +31,7 @@ spec:
     server: https://kubernetes.default.svc
   source:
     repoURL: ghcr.io/grafana/helm-charts
-    targetRevision: v5.19.4
+    targetRevision: v5.20.0
     chart: grafana-operator
   project: default
   syncPolicy:
