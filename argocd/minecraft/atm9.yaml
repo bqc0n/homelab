@@ -65,6 +65,8 @@ spec:
             storage: 20Gi
     - metadata:
         name: atm9-backup
+        annotations:
+          k8up.io/backup: "false"
       spec:
         storageClassName: nfs-hdd-1
         accessModes:
@@ -72,7 +74,6 @@ spec:
         resources:
           requests:
             storage: 20Gi
-
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -99,5 +100,4 @@ data:
   MOD_PLATFORM: "AUTO_CURSEFORGE"
   TYPE: "AUTO_CURSEFORGE"
   CF_SLUG: "all-the-mods-9"
-  # MAKE SURE you installed the SERVER FILE on CurseForge
-  CF_FILE_ID: "7097957" # 1.1.1
+  CF_FILE_ID: "6985843" # 1.1.0
