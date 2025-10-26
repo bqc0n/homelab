@@ -13,7 +13,6 @@ locals {
     "minio",
     "s4",
     "wallos",
-    "plane",
   ]
 }
 
@@ -70,4 +69,19 @@ resource "cloudflare_dns_record" "gitea_v6" {
   type    = "AAAA"
   zone_id = local.zone_id
   content = data.terraform_remote_state.cloud.outputs.minecraft_amd_2b.ipv6
+}
+
+resource "cloudflare_dns_record" "mon3tr_ipv4" {
+  name    = "derp.bqc0n.com"
+  ttl     = 0
+  type    = "A"
+  zone_id = local.zone_id
+  content = data.terraform_remote_state.cloud.outputs.compute_mon3tr.ipv4
+}
+resource "cloudflare_dns_record" "mon3tr_ipv6" {
+  name    = "derp.bqc0n.com"
+  ttl     = 0
+  type    = "AAAA"
+  zone_id = local.zone_id
+  content = data.terraform_remote_state.cloud.outputs.compute_mon3tr.ipv6
 }
