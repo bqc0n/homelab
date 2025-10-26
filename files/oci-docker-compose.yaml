@@ -6,3 +6,12 @@ services:
     restart: always
     volumes:
       - /etc/gatus:/config
+  derp:
+    image: fredliang/derper:v1.88.3
+    ports:
+      - "80:80"
+      - "443:443"
+      - "3478:3478/udp"
+    environment:
+      DERP_DOMAIN: "derp.bqc0n.com"
+

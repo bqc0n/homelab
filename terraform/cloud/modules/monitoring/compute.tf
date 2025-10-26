@@ -20,6 +20,8 @@ resource "oci_core_instance" "mon3tr" {
 
     nsg_ids = [
       oci_core_network_security_group.osakamon_inbound_http_https.id,
+      oci_core_network_security_group.inbound_stun.id,
+      oci_core_network_security_group.inbound_icmp.id,
     ]
   }
 

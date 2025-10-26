@@ -14,6 +14,13 @@ output "minecraft_amd_2b" {
   }
 }
 
+output "compute_mon3tr" {
+  value = {
+    ipv4 = module.monitoring.compute_mon3tr.ipv4
+    ipv6 = module.monitoring.compute_mon3tr.ipv6
+  }
+}
+
 output "ipsec_ix2215_1_ip_address" {
   value = [
     oci_core_ipsec_connection_tunnel_management.ipsec_ix2215_config[0].vpn_ip,
