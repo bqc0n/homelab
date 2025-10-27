@@ -35,7 +35,7 @@ spec:
     spec:
       containers:
         - name: atm9
-          image: itzg/minecraft-server:2025.10.1-java21-graalvm
+          image: itzg/minecraft-server:2025.10.5-java21-graalvm
           resources:
             requests:
               memory: "6Gi"
