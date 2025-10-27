@@ -50,7 +50,7 @@ spec:
     spec:
       containers:
       - name: mc-tob-server
-        image: itzg/minecraft-server:2025.10.2-java8-graalvm-ce
+        image: itzg/minecraft-server:2025.10.5-java8-graalvm-ce
         resources:
           requests:
             memory: "2Gi"
