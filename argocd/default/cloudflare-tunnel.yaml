@@ -34,7 +34,7 @@ spec:
                 secretKeyRef:
                   name: cloudflared-token
                   key: TOKEN
-          image: cloudflare/cloudflared:2025.10.1
+          image: cloudflare/cloudflared:2025.11.1
           livenessProbe:
             httpGet:
               # Cloudflared has a /ready endpoint which returns 200 if and only if
