@@ -48,7 +48,7 @@ spec:
     spec:
       containers:
         - name: web
-          image: misskey/misskey:2025.11.0
+          image: misskey/misskey:2025.11.1
           volumeMounts:
             - mountPath: /misskey/files
               name: misskey-files
