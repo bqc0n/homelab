@@ -14,3 +14,26 @@ spec:
         job: storj2
       targets:
         - 192.168.1.33:9652
+---
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: vmscrape-snmp
+  namespace: dash
+spec:
+  path: /snmp
+  params:
+    auth: [ix2215-O]
+    module: [nec-ix-basic]
+  staticConfigs:
+    - labels:
+        job: snmp
+    - targets:
+        - 192.168.1.5
+  relabelConfigs:
+    - source_labels: [__address__]
+      target_label: __param_target
+    - source_labels: [__param_target]
+      target_label: instance
+    - target_label: __address__
+      replacement: 192.168.1.35:9116

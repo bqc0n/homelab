@@ -1,0 +1,36 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: synapse-matrix
+  namespace: pg-clusters
+spec:
+  instances: 1
+  bootstrap:
+    initdb:
+      database: synapse
+      owner: synapse
+      secret:
+        name: synapse-db-creds
+  storage:
+    storageClass: nfs-ceph
+    size: 10Gi
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: minio-daily
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: synapse-db-creds
+  namespace: pg-clusters
+spec:
+  encryptedData:
+    password: AgCbXz30D82rRQyIlKEyFepDRmsmamwafYbnuR1xNl5VdWpLf2DP5TMw9QF9HOnIEwBxEgDfDNLN+HgffNWvItw/o6j7QbLQ2AsEckbLt1HBfETwG/O1Nuf21sdXNoxHY4YviYKeHW1HRAKumFWtcaOHtDaFuLBNt9sGNFgzMcaQ91EDSMtTQ6gT2dwldJG8EWxC3R0zrk3IPFAwouLMUoYPfbjGKZ6N+DV0UWkmPChXOiRxG+7X56y/Cg8lsprEC7lBIrflXAe1ZT0AOj2kqiK1UlNpoLxh3EgRDnNJL6wDGeTsd0V65m39igGE45CjoErw5FrDvuVt/NTNE+DaVIdX4I91nPL7qGlwS4uOGv/RSnXMXYdL1xKxqnuQRL4G5K+ABWNRPEFPf6On1x+QVS3B1LrggPQUcsVLML5+zP7vHNo0Zo9NQjdtVws+pUx755sm1yil8HpRQ7fjLNLKlegCs5b7UasFOdQRFp15ZogH1KqP54qpxSmsbB8n7sd00AkOLSv7wEpURwZkkCqySSFO0tbrH6bkmozHaIT44Rmir3LNls9RBxbOYuW5wIPJPPuu0/F3DCTsYW+5fXFWmUFH/HsK8BBTbBa2uxfASK8qjvktdLEsaQi8Vzd0dxLmLsW3rCfGZgll4MC/gEXprpCrTwju3sSfOQicacC0AqdTuAGhDFdMrL2yQp4dw4RE2aB0UO0ewSDKBAFPMYOR+lImCfRakqSaLHjQgubkfeO9BWNzPI5Rl7CpaMAS/nfCqQV9CHwofDXSNDXa75GKWRC18D0IP0U4drTYnFcBO3GmDAGC66Og9/kGrIUpFyZSH777t8cm
+    username: AgBuquI7zswFRYMAwVuTbKsH0dja0rTleItQ0FZ2LYMXhm+DWch18cpoQ1XkcGf/xXzjHvP+JOitmLlYWIrEO4ybfI166yAvmte5C11Rht1GwC4344HLztJWHqvYPyPELNtdjKg7dbk1CD7ahPmhFYz01ii4PsBFOOx85HStld7TtTEkQ4yfVYWYLnfQ4ItA4ihLvfEbGz4Ynz66m75dPcZ2CjXUp1FqrkQb9BPGFxv93REZuGKcGJNSlzQi75z3M6rtd4J8hyCkN3SYKHsb7NF4lUDlBCAI88U7MTAz/qdfLLZsWC4p2klUEtuL77JvMtJ7XhQ0/YzJMhDuk2HHJtJGOEb7MHg8bWOJ77yekkKjFb2SWWGCGbtto7mYH9SQX339cGlRdYo9euFWBlQH7PJPe9Y2vT3u+yngj8KLbezVfY5RdO8y870t6RLb1TQl2+FA4NbegPwQXRlniffSTXCnhlf7CKhBIOhnUwQp+rO6uzR747X+cVgVioyrdtVBc0XYXsdNd2gZD4L6cs+kpaAYIMIUJZfxwXzFh43LyWVsF8bK+EVaOlgMCIbvNthTrTbW92cuwaWyUC7fnq7f0q97p4AxAzkzgJsiUbjNSXeHfe2vQ40pRu42cJho7qFW/eTeT0a5Vt8Dt+geFUIgtnjVtu+MiUwFpaznpHUnc0AlIHl8x0F4/ZgBjLkUtZcuvKUfILqpBmtq
+  template:
+    metadata:
+      name: synapse-db-creds
+      namespace: pg-clusters
+    type: kubernetes.io/basic-auth

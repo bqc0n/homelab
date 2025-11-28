@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: web-apps
+  name: synapse
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: synapse
+  template:
+    metadata:
+      labels:
+        app: synapse
+    spec:
+      containers:
+        - name: synapse
+          image: matrixdotorg/synapse:v1.141.0
+          volumeMounts:
+            - mountPath: /data
+              name: synapse-data
+            - mountPath: /data/media
+              name: synapse-media
+          ports:
+            - containerPort: 8008
+          resources:
+            limits:
+              memory: "1Gi"
+      volumes:
+        - name: synapse-data
+          persistentVolumeClaim:
+            claimName: synapse-data
+        - name: synapse-media
+          persistentVolumeClaim:
+            claimName: synapse-media
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: synapse-data
+  namespace: web-apps
+spec:
+  storageClassName: nfs-ceph
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: synapse-media
+  namespace: web-apps
+spec:
+  storageClassName: nfs-hdd-1
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: synapse
+  namespace: web-apps
+spec:
+  selector:
+    app: synapse
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8008
+---

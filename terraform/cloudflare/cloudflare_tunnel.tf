@@ -129,6 +129,9 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "cf_grafana" {
       }, {
         hostname = "plane.${local.domain}"
         service  = "http://plane-app-web.plane-ce.svc.cluster.local."
+      }, {
+        hostname = "matrix.${local.domain}"
+        service  = "http://synapse.web-apps.svc.cluster.local."
       },{
         service = "http_status:404"
       }

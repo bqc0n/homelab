@@ -69,7 +69,7 @@ k delete daemonsets.apps -n kube-system kube-proxy
 
 ```shell
 helm repo add cilium https://helm.cilium.io/
-helm install cilium cilium/cilium --version 1.18.1 \
+helm install cilium cilium/cilium --version 1.18.2 \
   --namespace kube-system \
   --values cilium-values.yaml
 ```

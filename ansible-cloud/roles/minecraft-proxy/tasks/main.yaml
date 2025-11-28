@@ -44,90 +44,43 @@
   become: true
   notify: "restart_haproxy"
   ansible.builtin.blockinfile:
-    path: /etc/haproxy/haproxy.cfg
+    path:
     insertafter: EOF
     create: true
     block: |
-      global
-        log         127.0.0.1 local2
-        chroot      /var/lib/haproxy
-        pidfile     /var/run/haproxy.pid
-        maxconn     4000
-        user        haproxy
-        group       haproxy
-        daemon
-        stats socket /var/lib/haproxy/stats
-      defaults
-        log                     global
-        option                  redispatch
-        retries                 3
-        timeout http-request    10s
-        timeout queue           1m
-        timeout connect         10s
-        timeout client          1m
-        timeout server          1m
-        timeout http-keep-alive 10s
-        timeout check           10s
-        maxconn                 3000
-      frontend mc_vanilla
-        bind 0.0.0.0:27135
-        bind [::]:27135
-        mode tcp
-        default_backend mc_vanilla
+      # [[servers]]
+      # host = "10.1.0.1:27135"
+      # bind = ["[::]:27135"]
+      #
+      # [[servers]]
+      # host = "10.1.0.1:27136"
+      # bind = ["[::]:27136"]
+      #
+      # [[servers]]
+      # host = "10.1.0.1:27137"
+      # bind = ["[::]:27137"]
+      #
+      # [[servers]]
+      # host = "10.1.0.1:27139"
+      # bind = ["[::]:27139"]
+      #
+      [[servers]]
+      host = "10.1.0.1:12303"
+      bind = ["[::]:12303"]
       
-      frontend mc_tob
-        bind 0.0.0.0:27136
-        bind [::]:27136
-        mode tcp
-        default_backend mc_tob
+      [[servers]]
+      host = "10.1.0.1:27140"
+      bind = ["[::]:27140"]
       
-      frontend mc_tob_building
-        bind 0.0.0.0:27137
-        bind [::]:27137
-        mode tcp
-        default_backend mc_tob_building
+      [health_check]
+      enabled = true
+      interval_sec = 5
+      timeout_sec = 3
       
-      frontend mc_nomi
-        bind 0.0.0.0:27138
-        bind [::]:27138
-        mode tcp
-        default_backend mc_nomi
-      
-      frontend mc_tsb
-        bind 0.0.0.0:27139
-        bind [::]:27139
-        mode tcp
-        default_backend mc_tsb
-      
-      frontend mc_tob_sftp
-        bind 0.0.0.0:12303
-        bind [::]:12303
-        mode tcp
-        default_backend mc_tob_sftp
-      
-      backend mc_vanilla
-        mode tcp
-        server home_mc_vanilla 10.1.0.1:27135
-      
-      backend mc_tob
-        mode tcp
-        server home_mc_tob 10.1.0.1:27136
-      
-      backend mc_tob_building
-        mode tcp
-        server home_mc_tob 10.1.0.1:27137
-      
-      backend mc_nomi
-        mode tcp
-        server home_nomi 192.168.1.30:25565
-      
-      backend mc_tsb
-        mode tcp
-        server home_mc_tsb 10.1.0.1:27139
-      
-      backend mc_tob_sftp
-        mode tcp
-        server home-mc-tob_sftp 10.1.0.1:12303
+      [sorry_server]
+      version = "Maintenance"
+      motd = ["§cServer is currently offline.", "§bPlease try again later."]
+      kick_message = ["§cServer is currently offline.", "§bPlease try again later."]
 
 - name: Open Ports
   import_tasks: open-ports.yaml
