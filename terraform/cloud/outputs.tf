@@ -21,6 +21,13 @@ output "compute_mon3tr" {
   }
 }
 
+output "compute_a2" {
+  value = {
+    ipv4 = oci_core_instance.a2.public_ip
+    ipv6 = oci_core_instance.a2.create_vnic_details[0].ipv6address_ipv6subnet_cidr_pair_details[0].ipv6address
+  }
+}
+
 output "ipsec_ix2215_1_ip_address" {
   value = [
     oci_core_ipsec_connection_tunnel_management.ipsec_ix2215_config[0].vpn_ip,
