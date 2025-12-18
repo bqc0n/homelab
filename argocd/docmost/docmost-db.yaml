@@ -50,7 +50,7 @@ spec:
             - containerPort: 5432
       initContainers:
         - name: postgres-init
-          image: alpine:3.23.0
+          image: alpine:3.23.2
           command: ["sh", "-c", "mkdir -p /psql/data"]
           volumeMounts:
             - mountPath: /psql
