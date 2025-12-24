@@ -43,7 +43,36 @@ resource "cloudflare_dns_record" "minecraft_proxy_ipv6" {
   content = data.terraform_remote_state.cloud.outputs.minecraft_amd_osaka_ipv6_GUA
 }
 
+resource "cloudflare_dns_record" "oci_ampere_ipv4" {
+  name    = "ampere.bqc0n.com"
+  ttl     = 3600
+  type    = "A"
+  zone_id = local.zone_id
+  content = data.terraform_remote_state.cloud.outputs.compute_a2.ipv4
+}
+
+resource "cloudflare_dns_record" "oci_ampere_ipv6" {
+  name    = "ampere.bqc0n.com"
+  ttl     = 3600
+  type    = "AAAA"
+  zone_id = local.zone_id
+  content = data.terraform_remote_state.cloud.outputs.compute_a2.ipv6
+}
+
 resource "cloudflare_dns_record" "minecraft_tsb" {
+  name    = "_minecraft._tcp.mcv-12111.bqc0n.com"
+  ttl     = 3600
+  type    = "SRV"
+  zone_id = local.zone_id
+  data = {
+    priority = 0
+    port = 27102
+    target = "ampere.bqc0n.com"
+    weight = 5
+  }
+}
+
+resource "cloudflare_dns_record" "minecraft_vanilla_12111" {
   name    = "_minecraft._tcp.tsb.bqc0n.com"
   ttl     = 3600
   type    = "SRV"
@@ -61,7 +90,7 @@ resource "cloudflare_dns_record" "gitea_v4" {
   ttl     = 0
   type    = "A"
   zone_id = local.zone_id
-  content = data.terraform_remote_state.cloud.outputs.minecraft_amd_2b.ipv4
+  content = data.terraform_remote_state.cloud.outputs.compute_a2.ipv4
 }
 
 resource "cloudflare_dns_record" "gitea_v6" {
@@ -69,20 +98,5 @@ resource "cloudflare_dns_record" "gitea_v6" {
   ttl     = 0
   type    = "AAAA"
   zone_id = local.zone_id
-  content = data.terraform_remote_state.cloud.outputs.minecraft_amd_2b.ipv6
-}
-
-resource "cloudflare_dns_record" "mon3tr_ipv4" {
-  name    = "derp.bqc0n.com"
-  ttl     = 0
-  type    = "A"
-  zone_id = local.zone_id
-  content = data.terraform_remote_state.cloud.outputs.compute_mon3tr.ipv4
-}
-resource "cloudflare_dns_record" "mon3tr_ipv6" {
-  name    = "derp.bqc0n.com"
-  ttl     = 0
-  type    = "AAAA"
-  zone_id = local.zone_id
-  content = data.terraform_remote_state.cloud.outputs.compute_mon3tr.ipv6
+  content = data.terraform_remote_state.cloud.outputs.compute_a2.ipv6
 }
