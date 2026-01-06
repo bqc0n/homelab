@@ -6,7 +6,6 @@ locals {
     "homebox",
     "docmost",
     "paperless",
-    "files",
     "misskey",
     "s3",
     "redmine",
