@@ -36,7 +36,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: postgresql
-          image: postgres:17.9-alpine
+          image: postgres:18.3-alpine
           volumeMounts:
             - mountPath: /psql
               name: postgres-data
