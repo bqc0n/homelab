@@ -48,7 +48,7 @@ spec:
     spec:
       containers:
         - name: influxdb
-          image: influxdb:2.8.0
+          image: influxdb:2.9.0
           volumeMounts:
             - mountPath: /var/lib/influxdb2
               name: influxdb-data
