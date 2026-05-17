@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: wallos
-          image: bellamy/wallos:4.8.4
+          image: bellamy/wallos:4.9.0
           volumeMounts:
             - mountPath: /var/www/html/db
               name: wallos-db
