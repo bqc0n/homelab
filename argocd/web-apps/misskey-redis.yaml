@@ -42,7 +42,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: redis
-          image: redis:8.10.0-alpine
+          image: redis:8.10.1-alpine
           resources:
             limits:
               memory: "512Mi"
