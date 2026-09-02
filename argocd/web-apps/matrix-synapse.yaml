@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: synapse
-          image: matrixdotorg/synapse:v1.159.0
+          image: matrixdotorg/synapse:v1.160.0
           volumeMounts:
             - mountPath: /data
               name: synapse-data
