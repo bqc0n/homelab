@@ -115,12 +115,6 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "cf_grafana" {
         hostname = "redmine.${local.domain}"
         service  = "http://redmine.web-apps.svc.cluster.local."
       }, {
-        hostname = "minio.${local.domain}"
-        service  = "http://192.168.1.32:9001"
-      }, {
-        hostname = "s4.${local.domain}"
-        service  = "http://192.168.1.32:9000"
-      }, {
         hostname = "wallos.${local.domain}"
         service  = "http://wallos.web-apps.svc.cluster.local."
       }, {

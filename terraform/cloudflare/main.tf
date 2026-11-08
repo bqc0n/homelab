@@ -9,8 +9,6 @@ terraform {
     skip_requesting_account_id  = true
     skip_s3_checksum            = true
     use_path_style              = true
-    access_key                  = ""
-    secret_key                  = ""
     endpoints = { s3 = "https://b10e567bb8146c35a101bec133d4a82f.r2.cloudflarestorage.com" }
   }
   required_providers {
@@ -47,12 +45,9 @@ data "terraform_remote_state" "cloud" {
     skip_requesting_account_id  = true
     skip_s3_checksum            = true
     use_path_style              = true
-    access_key                  = data.sops_file.secrets.data["r2_access_key"]
-    secret_key                  = data.sops_file.secrets.data["r2_secret_key"]
     endpoints = { s3 = "https://b10e567bb8146c35a101bec133d4a82f.r2.cloudflarestorage.com" }
   }
 }
 
 provider "cloudflare" {
-  api_token = data.sops_file.secrets.data["cloudflare.api_token"]
 }
