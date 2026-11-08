@@ -3,13 +3,11 @@
   tasks:
     - name: Wait for boot
       ansible.builtin.wait_for_connection:
-    - name: Set Apt cache server
+    - name: Remove obsolete Apt cache proxy
       become: true
-      ansible.builtin.lineinfile:
-        line: 'Acquire::http::Proxy "http://{{ apt_cache_server }}:3142";'
+      ansible.builtin.file:
         path: /etc/apt/apt.conf.d/01proxy
-        create: true
-      when: ansible_host != apt_cache_server
+        state: absent
     - name: apt upgrade
       become: true
       ansible.builtin.apt:

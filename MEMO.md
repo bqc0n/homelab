@@ -62,6 +62,15 @@ sudo chown $USER:$USER /home/$USER/.kube/config
 cp ../ansible/artifacts/admin.conf ~/.kube/config
 ```
 
+### Existing-cluster upgrades
+
+Use Kubespray's `upgrade-cluster.yml` for an existing cluster, upgrading one
+Kubernetes minor version at a time. Pin component versions in `kubespray-vars.yaml`
+and use the Ansible version required by the selected Kubespray release.
+Keep `kube_proxy_remove: true` and the `addon/kube-proxy` skip phase because
+Cilium is installed separately through Helm.
+See https://github.com/kubernetes-sigs/kubespray/blob/master/docs/operations/upgrades.md.
+
 ## Cilium
 ```shell
 k delete daemonsets.apps -n kube-system kube-proxy
@@ -69,7 +78,7 @@ k delete daemonsets.apps -n kube-system kube-proxy
 
 ```shell
 helm repo add cilium https://helm.cilium.io/
-helm install cilium cilium/cilium --version 1.18.2 \
+helm install cilium cilium/cilium --version 1.20.4 \
   --namespace kube-system \
   --values cilium-values.yaml
 ```

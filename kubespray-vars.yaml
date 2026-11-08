@@ -5,7 +5,19 @@
 # https://github.com/kubernetes-sigs/kubespray/tree/master/roles/helm-apps
 # ^^^ kubespray で helm chart を install する方法 ^^^
 
-enable_dual_stack_networks: true
+# Pin cluster components; keep the container runtime unchanged for this upgrade.
+kube_version: "1.36.6"
+containerd_version: "2.1.4"
+etcd_version: "3.5.35"
+
+# Official release checksums for the current linux/amd64 nodes.
+kubeadm_binary_checksum: "sha256:7f33560df02c98e6e6edba88fce2eb9a94bd7411b29bea0efc0712d68db1fc7b"
+kubelet_binary_checksum: "sha256:cf8baae869b810d84338f8c7111e2bb32733e992c0c08107cf6692120f5e229f"
+kubectl_binary_checksum: "sha256:29818b6729dc9262b692307470d0558d027725e738be5dd47c760261868a2634"
+etcd_binary_checksum: "sha256:ca9f94cdc80be66923ef571d82b128819d0f5f3aa9f01522bafd991618ee29d1"
+
+ipv4_stack: true
+ipv6_stack: true
 kube_network_plugin: cni # we deploy Cilium with helm later
 # Nodelocaldns is deployed separately
 enable_nodelocaldns: false
@@ -15,6 +27,11 @@ kubectl_localhost: true
 kubeconfig_localhost: true
 
 kube_proxy_deployed: false
+# Keep kubeadm upgrades from reinstalling kube-proxy beside Cilium.
+kube_proxy_remove: true
+kubeadm_init_phases_skip:
+  - addon/coredns
+  - addon/kube-proxy
 
 # DNS
 coredns_external_zones:

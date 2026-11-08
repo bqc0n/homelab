@@ -1,3 +1,6 @@
+upgradeCompatibility: "1.18"
+authentication:
+  enabled: true
 bpf:
   hostLegacyRouting: false
   masquerade: true
@@ -6,7 +9,8 @@ bgpControlPlane:
 encryption:
   enabled: false
 privileged: true
-localRedirectPolicy: true
+localRedirectPolicies:
+  enabled: true
 kubeProxyReplacement: true
 kubeProxyReplacementHealthzBindAddr: "0.0.0.0:10256"
 l2announcements:
@@ -20,6 +24,9 @@ k8sClientRateLimit:
   burst: 200
 hubble:
   enabled: true
+  tls:
+    auto:
+      method: cronJob
   metrics.enabled: {"dns", "drop", "tcp", "flow", "icmp", "http"}
   relay:
     enabled: true
