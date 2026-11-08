@@ -59,6 +59,9 @@ spec:
             name: mc-vanilla-data
         ports:
         - containerPort: 25565
+        env:
+          - name: EULA
+            value: "TRUE"
         envFrom:
           - configMapRef:
               name: mc-vanilla-config
