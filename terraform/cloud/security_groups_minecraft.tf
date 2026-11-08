@@ -13,7 +13,7 @@ resource "oci_core_network_security_group_security_rule" "inbound_minecraft_tcp"
   source = each.value
   tcp_options {
     destination_port_range {
-      max = 27141
+      max = 27142
       min = 27140
     }
   }
@@ -34,7 +34,7 @@ resource "oci_core_network_security_group_security_rule" "inbound_minecraft_tcp_
   source = each.value
   tcp_options {
     destination_port_range {
-      max = 27102
+      max = 27103
       min = 27100
     }
   }

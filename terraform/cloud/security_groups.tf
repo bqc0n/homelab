@@ -80,3 +80,27 @@ resource "oci_core_network_security_group_security_rule" "inbound_ssh_tcp" {
     }
   }
 }
+
+# Tailscale
+resource "oci_core_network_security_group" "tailscale" {
+  compartment_id = oci_identity_compartment.minecraft.id
+  vcn_id         = oci_core_vcn.osaka.id
+  display_name = "Allow Tailscale 41641"
+}
+
+resource "oci_core_network_security_group_security_rule" "tailscale" {
+  for_each = local.anywhere_cidrs
+
+  direction                 = "INGRESS"
+  network_security_group_id = oci_core_network_security_group.tailscale.id
+  protocol                  = "17" # UDP
+
+  source = each.value
+  udp_options {
+    destination_port_range {
+      max = 51821
+      min = 51820
+    }
+  }
+}
+

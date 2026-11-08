@@ -56,7 +56,8 @@ resource "oci_core_instance" "a2" {
     }
     nsg_ids = [
       oci_core_network_security_group.inbound_http_https.id,
-      oci_core_network_security_group.inbound_minecraft_2.id
+      oci_core_network_security_group.inbound_minecraft_2.id,
+      oci_core_network_security_group.tailscale.id
     ]
   }
 
