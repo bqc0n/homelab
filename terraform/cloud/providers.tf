@@ -32,8 +32,7 @@ data "sops_file" "secrets" {
 }
 
 provider "oci" {
-  private_key = data.sops_file.secrets.data["oci_api_key"]
-  fingerprint      = "91:67:b5:8d:b4:0a:cc:ff:c3:3c:a8:28:d3:82:67:18"
+  fingerprint      = "81:61:57:53:c4:06:8e:5f:6c:bc:c8:c8:87:8f:7a:f6"
   user_ocid        = "ocid1.user.oc1..aaaaaaaaz2ccazsgfufncee7uqjus66ab4mzeo4y6jvlgu7qkmfdlnnjlhka"
   tenancy_ocid     = "ocid1.tenancy.oc1..aaaaaaaa7rskwsyup6km52l5idinwoszkj3l5fxr3x5dvfmmr3lvoe4e3csa"
   region           = "ap-osaka-1"
